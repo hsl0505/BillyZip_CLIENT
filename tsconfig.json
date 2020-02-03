@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    //JavaScript 파일 컴파일 허용합니다
+    "rootDir": "src",
+    // 입력파일의 rootDir 설정
+    // outDir옵션을 사용할때만 사용
+    "outDir": "build",
+    // 출력할 디덱토리
+    "allowSyntheticDefaultImports": true,
+    // export default 를 export 한 값들을 가지는 객체로 설정
+    // export class Foo { member: string; } 을 할시 (b.ts)
+    // export default { Foo } 가 기본으로 설정된다.
+    "jsx": "react-native",
+    // jsx 지원
+    "lib": ["dom", "esnext"],
+    // 컴파일에 포함될 라이브러리 파일 목록
+    "moduleResolution": "node",
+    // 모듈 (검색)해석 방식 설정
+    // "noEmit": true,
+    // 결과파일을 저장하지 않음
+    "skipLibCheck": true,
+    // 모든 선언파일(*.d.ts)의 유형검사를 건너뛸지 여부
+    "resolveJsonModule": true,
+    // json 형태 모듈 import 가능
+
+    /* https://github.com/janaagaard75/expo-and-typescript/blob/master/tsconfig.json*/
+    "esModuleInterop": true,
+    // https://www.zerocho.com/category/TypeScript/post/5bab2086103eac558e45cdd7 참고
+    "experimentalDecorators": true,
+    // ES Decorator에 대한 실험적 기능 사용 여부
+    "forceConsistentCasingInFileNames": true,
+    // 파일명에 대소문자 구분하지 않아도 되는 기능 사용 여부
+    // "importHelpers": true,
+    // tslib에서 helpers (e.g. __extends, __rest, etc..)를 가져온다.
+    // 중복코드를 없애기 위한 최적화용 옵션
+    "isolatedModules": true,
+    // 각 파일을 별도의 모듈로 불리하여 변환합니다 ("ts.transpileModule"과 비슷합니다).
+    "noFallthroughCasesInSwitch": true,
+    // 잘못 적혔다고 판단되는 switch문에 대한 에러 발생
+    // 예를 들어 case문에 break가 없으면 오류 발생
+    // "noEmitHelpers": true,
+    // helpers (e.g. __extends, __rest, etc..)를 결과파일에 포함시키지 않음
+    "noImplicitReturns": true,
+    // 함수의 모든 경로가 값을 반환하지 않으면 에러 발생
+    "noUnusedLocals": true,
+    // 사용안된 지역변수에 대한 오류 보고 여부
+    "noUnusedParameters": true,
+    // 사용안된 파라미터에 대한 오류 보고 여부
+    "strict": true,
+    // 모든 엄격한 타입 검사 옵션을 활성화
+    // noImplicitAny, noImplicitThis, alwaysStrict, strictNullChecks, strictFunctionTypes
+    "target": "esnext"
+    // 코드에서 사용할 ECMAScript 버전 설정
+  },
+  "exclude": [
+    "build",
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    "App.js"
+  ]
+}
