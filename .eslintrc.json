@@ -14,10 +14,21 @@
     "prettier/react",
     "prettier/@typescript-eslint"
   ],
-  "plugins": ["@typescript-eslint", "react", "react-native"],
+  "plugins": ["@typescript-eslint", "react", "react-native", "react-hooks"],
 
   "rules": {
     "import/no-unresolved": 0,
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": 0,
     "react/jsx-filename-extension": [
       1,
       {
