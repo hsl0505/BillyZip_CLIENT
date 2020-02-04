@@ -19,5 +19,5 @@ web-report/
 # package-lock.json
 package-lock.json
 
-# package-lock.json
+# build
 build/*
