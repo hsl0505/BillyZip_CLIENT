@@ -1,8 +1,9 @@
 import React from 'react';
-import TabNav from './screens/TabNav';
+import AuthValideScreen from './screens/AuthValid/AuthValidScreen';
+// import TabNav from './screens/TabNav';
 
 function App(): JSX.Element {
-  return <TabNav />;
+  return <AuthValideScreen />;
 }
 
 export default App;
