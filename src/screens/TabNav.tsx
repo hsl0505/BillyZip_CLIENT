@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { AntDesign } from '@expo/vector-icons';
 
-import MainScreen from './MainScreen';
+import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor';
 import Search from './Search';
 import Chat from './Chat';
@@ -17,7 +17,7 @@ interface IconProps {
 
 const TabNav = createBottomTabNavigator(
   {
-    Home: MainScreen,
+    MainScreenStackNav,
     Favor,
     Search,
     Chat,
@@ -29,7 +29,7 @@ const TabNav = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Home':
+          case 'MainScreenStackNav':
             iconName = 'home';
             break;
           case 'Favor':
