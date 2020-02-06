@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
   },
 });
 
-function MainScreen(): JSX.Element {
+function MoreList(): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text>MAIN SCREEN</Text>
+      <Text>more list !</Text>
     </View>
   );
 }
 
-export default MainScreen;
+export default MoreList;
