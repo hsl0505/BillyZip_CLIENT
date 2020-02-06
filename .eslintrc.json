@@ -17,6 +17,7 @@
   "plugins": ["@typescript-eslint", "react", "react-native", "react-hooks"],
 
   "rules": {
+    "no-console": 0,
     "global-require": 0,
     "import/no-unresolved": 0,
     "import/extensions": [

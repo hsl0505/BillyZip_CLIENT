@@ -35,7 +35,7 @@ function HouseListEntry(props: Partial<NavigationInjectedProps>): JSX.Element {
             titleStyle={{ color: 'purple' }}
             onPress={(): boolean => {
               if (props.navigation) {
-                return props.navigation.navigate('MoreList');
+                props.navigation.navigate('MoreList');
               }
               return false;
             }}
