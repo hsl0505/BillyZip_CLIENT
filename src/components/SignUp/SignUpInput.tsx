@@ -10,7 +10,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
-import axiosConfig from '../../util/axios';
+import axiosConfig from '../../util/axiosConfig';
 
 interface Props {
   mobiletest: string;
