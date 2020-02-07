@@ -1,8 +1,24 @@
 import React from 'react';
 import { View } from 'react-native';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
 import SignUpInput from '../../components/SignUp/SignUpInput';
 
-function SignUpInputScreen(): JSX.Element {
+interface Props {
+  // mobiletest: string;
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
+}
+
+function SignUpInputScreen(props: Props): JSX.Element {
+  const { navigation } = props;
+  const mobiletest = navigation ? navigation.getParam('mobiletest') : undefined;
   return (
     <View
       style={{
@@ -10,9 +26,9 @@ function SignUpInputScreen(): JSX.Element {
         backgroundColor: '#fff',
       }}
     >
-      <SignUpInput />
+      <SignUpInput mobiletest={mobiletest} />
     </View>
   );
 }
 
-export default SignUpInputScreen;
+export default withNavigation(SignUpInputScreen);
