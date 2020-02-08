@@ -5,10 +5,11 @@ import { AxiosRequestConfig } from 'axios';
 import { TEST_IP } from 'react-native-dotenv';
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: TEST_IP,
+  baseURL: `${TEST_IP}`,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 };
 
 export default axiosConfig;
