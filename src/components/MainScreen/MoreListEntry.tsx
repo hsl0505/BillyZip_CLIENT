@@ -1,14 +1,14 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
-import CardComponent from '../MainScreen/CardComponent';
+import { View, FlatList } from 'react-native';
+
+import MoreCardComponent from '../MainScreen/MoreCardComponent';
 
 interface Props {
-  rank: undefined | object[];
+  houses: object[];
 }
 
-function RecommendEntry(props: Props): JSX.Element {
-  const { rank } = props;
-  // fake data
+function MoreListEntry(props: Props): JSX.Element {
+  const { houses } = props;
   const fakedata = [
     {
       id: 1,
@@ -56,7 +56,7 @@ function RecommendEntry(props: Props): JSX.Element {
           isActive: true,
         },
       ],
-      avgRating: 5,
+      avgRating: 0,
     },
     {
       id: 2,
@@ -103,7 +103,7 @@ function RecommendEntry(props: Props): JSX.Element {
           isActive: true,
         },
       ],
-      avgRating: 4.5,
+      avgRating: 0,
     },
     {
       id: 3,
@@ -150,7 +150,7 @@ function RecommendEntry(props: Props): JSX.Element {
           isActive: true,
         },
       ],
-      avgRating: 4,
+      avgRating: 0,
     },
     {
       id: 4,
@@ -197,20 +197,35 @@ function RecommendEntry(props: Props): JSX.Element {
           isActive: true,
         },
       ],
-      avgRating: 3.2,
+      avgRating: 0,
     },
+    // { id: 5 },
+    // { id: 6 },
+    // { id: 7 },
+    // { id: 8 },
+    // { id: 9 },
+    // { id: 10 },
+    // { id: 11 },
+    // { id: 12 },
+    // { id: 13 },
+    // { id: 14 },
+    // { id: 15 },
+    // { id: 16 },
+    // { id: 17 },
+    // { id: 18 },
   ];
-  // const tempArr = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
-  console.log(fakedata);
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {fakedata.map((ele) => (
-          <CardComponent key={ele.id} RecommendOrHouses="R" ele={ele} />
-        ))}
-      </ScrollView>
+    <View>
+      <FlatList
+        data={fakedata}
+        renderItem={({ item }): JSX.Element => (
+          <MoreCardComponent item={item} />
+        )}
+        keyExtractor={(item): string => item.id.toString()}
+        windowSize={3}
+      />
     </View>
   );
 }
 
-export default RecommendEntry;
+export default MoreListEntry;

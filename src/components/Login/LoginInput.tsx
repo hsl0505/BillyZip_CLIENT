@@ -3,8 +3,7 @@ import { Input, Button } from 'react-native-elements';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { View, Text } from 'react-native';
-import axios from 'axios';
-import axiosConfig from '../../util/axiosConfig';
+import axiosInstance from '../../util/axiosInstance';
 import asyncStorageHelper from '../../util/asyncStorageHelper';
 
 function LoginInput(props: Partial<NavigationInjectedProps>): JSX.Element {
@@ -54,15 +53,11 @@ function LoginInput(props: Partial<NavigationInjectedProps>): JSX.Element {
         onPress={(): void => {
           setEmailErr('');
           setPwErr('');
-          axios
-            .post(
-              'users/signin',
-              {
-                email,
-                password,
-              },
-              axiosConfig,
-            )
+          axiosInstance
+            .post('users/signin', {
+              email,
+              password,
+            })
             .then((res) => {
               if (res.status === 200) {
                 asyncStorageHelper.setItem('userToken', res.data.token);

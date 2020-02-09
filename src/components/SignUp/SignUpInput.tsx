@@ -9,8 +9,7 @@ import {
 } from 'react-navigation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import axios from 'axios';
-import axiosConfig from '../../util/axiosConfig';
+import axiosInstance from '../../util/axiosInstance';
 
 interface Props {
   mobiletest: string;
@@ -133,20 +132,16 @@ function SignUpInput(props: Props): JSX.Element {
       <Button
         title="임시 회원가입 완료 버튼"
         onPress={(): void => {
-          axios
-            .post(
-              'users/signup',
-              {
-                email,
-                password,
-                name,
-                mobile,
-                birth: `${date.getFullYear()}-${date.getMonth() +
-                  1}-${date.getDate()}`,
-                gender,
-              },
-              axiosConfig,
-            )
+          axiosInstance
+            .post('users/signup', {
+              email,
+              password,
+              name,
+              mobile,
+              birth: `${date.getFullYear()}-${date.getMonth() +
+                1}-${date.getDate()}`,
+              gender,
+            })
             .then((res) => {
               console.log(res.status);
               if (props.navigation) {

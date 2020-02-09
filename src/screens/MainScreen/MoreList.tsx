@@ -1,18 +1,32 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
+import axiosInstance from '../../util/axiosInstance';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+import MoreListEntry from '../../components/MainScreen/MoreListEntry';
 
-function MoreList(): JSX.Element {
+interface Props {
+  part: string;
+}
+
+function MoreList(props: Props): JSX.Element {
+  const { part } = props;
+  const [houses, setHouses] = useState();
+
+  useEffect(() => {
+    axiosInstance
+      .get(`houses/part/:${part}`)
+      .then((res) => setHouses(res.data))
+      .catch((err) => console.log(err));
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>more list !</Text>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#fff',
+      }}
+    >
+      <MoreListEntry houses={houses} />
     </View>
   );
 }

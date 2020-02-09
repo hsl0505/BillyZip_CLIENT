@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { AntDesign } from '@expo/vector-icons';
@@ -8,7 +7,7 @@ import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor';
 import Search from './Search';
 import Chat from './Chat';
-import UserInfo from './UserInfo';
+import UserInfo from './UserInfo/UserInfo';
 
 interface IconProps {
   focused: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
-import asyncStorageHelper from '../util/asyncStorageHelper';
+import asyncStorageHelper from '../../util/asyncStorageHelper';
 
 const styles = StyleSheet.create({
   container: {
