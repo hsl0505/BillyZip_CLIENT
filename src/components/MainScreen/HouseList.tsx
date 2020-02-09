@@ -2,7 +2,12 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import HouseListEntry from './HouseListEntry';
 
-function HouseList(): JSX.Element {
+interface Props {
+  rand: undefined | object[];
+}
+
+function HouseList(props: Props): JSX.Element {
+  const { rand } = props;
   return (
     <View style={{ flex: 1 }}>
       <View>
@@ -11,7 +16,7 @@ function HouseList(): JSX.Element {
         </Text>
       </View>
       <View>
-        <HouseListEntry />
+        <HouseListEntry rand={rand} />
       </View>
     </View>
   );
