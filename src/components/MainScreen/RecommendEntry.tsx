@@ -8,6 +8,7 @@ interface Props {
 
 function RecommendEntry(props: Props): JSX.Element {
   const { rank } = props;
+  console.log('추천매물', rank);
   // fake data
   const fakedata = [
     {
@@ -201,7 +202,6 @@ function RecommendEntry(props: Props): JSX.Element {
     },
   ];
   // const tempArr = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
-  console.log(fakedata);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>

@@ -9,6 +9,7 @@ interface Props {
 
 function MoreListEntry(props: Props): JSX.Element {
   const { houses } = props;
+  console.log(houses);
   const fakedata = [
     {
       id: 1,
