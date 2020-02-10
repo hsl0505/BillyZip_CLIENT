@@ -13,10 +13,14 @@ const axiosInstance: AxiosInstance = axios.create({
   withCredentials: true,
 });
 
+axiosInstance.defaults.baseURL = `${TEST_IP}`;
+axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
+axiosInstance.defaults.withCredentials = true;
+
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const userToken = await AsyncStorage.getItem('userToken');
     const customConfig = config;
+    const userToken = await AsyncStorage.getItem('userToken');
     if (userToken) {
       customConfig.headers.Authorization = `Bearer ${userToken}`;
     }
