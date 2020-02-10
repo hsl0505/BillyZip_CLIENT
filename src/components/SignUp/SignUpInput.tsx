@@ -8,7 +8,7 @@ import {
   NavigationParams,
 } from 'react-navigation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import axiosInstance from '../../util/axiosInstance';
 
 interface Props {
@@ -93,7 +93,9 @@ function SignUpInput(props: Props): JSX.Element {
           <MaterialCommunityIcons
             name="calendar-blank"
             size={28}
-            onPress={(): void => setShow(true)}
+            onPress={(): void => {
+              setShow(true);
+            }}
           />
         }
         rightIconContainerStyle={{ marginRight: 10 }}
@@ -104,16 +106,16 @@ function SignUpInput(props: Props): JSX.Element {
         }
       />
       {show && (
-        <DateTimePicker
+        <DateTimePickerModal
           mode="date"
-          display="default"
-          value={date || new Date()}
-          onChange={(_e, d): void => {
+          isVisible={show}
+          onConfirm={(d): void => {
             if (d) {
               setShow(false);
               setDate(d);
             }
           }}
+          onCancel={(): void => setShow(false)}
         />
       )}
       <View style={{ flexDirection: 'row' }}>
@@ -143,7 +145,7 @@ function SignUpInput(props: Props): JSX.Element {
               gender,
             })
             .then((res) => {
-              console.log(res.status);
+              console.log('임시 회원가입 콘솔', res);
               if (props.navigation) {
                 props.navigation.navigate('LoginScreen');
               }
