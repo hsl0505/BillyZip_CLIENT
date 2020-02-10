@@ -46,11 +46,8 @@ function HouseListEntry(props: Props): JSX.Element {
               borderWidth: 1.5,
             }}
             titleStyle={{ color: 'purple' }}
-            onPress={(): boolean => {
-              if (props.navigation) {
-                props.navigation.navigate('MoreList', { part: 'apart' });
-              }
-              return false;
+            onPress={(): void => {
+              props.navigation.navigate('MoreList', { part: 'apart' });
             }}
           />
         </View>
@@ -77,11 +74,8 @@ function HouseListEntry(props: Props): JSX.Element {
               borderWidth: 1.5,
             }}
             titleStyle={{ color: 'purple' }}
-            onPress={(): boolean => {
-              if (props.navigation) {
-                props.navigation.navigate('MoreList', { part: 'oneroom' });
-              }
-              return false;
+            onPress={(): void => {
+              props.navigation.navigate('MoreList', { part: 'oneroom' });
             }}
           />
         </View>
@@ -108,13 +102,10 @@ function HouseListEntry(props: Props): JSX.Element {
               borderWidth: 1.5,
             }}
             titleStyle={{ color: 'purple' }}
-            onPress={(): boolean => {
-              if (props.navigation) {
-                props.navigation.navigate('MoreList', {
-                  part: 'detachedhouse',
-                });
-              }
-              return false;
+            onPress={(): void => {
+              props.navigation.navigate('MoreList', {
+                part: 'detachedhouse',
+              });
             }}
           />
         </View>
@@ -141,11 +132,8 @@ function HouseListEntry(props: Props): JSX.Element {
               borderWidth: 1.5,
             }}
             titleStyle={{ color: 'purple' }}
-            onPress={(): boolean => {
-              if (props.navigation) {
-                props.navigation.navigate('MoreList', { part: 'villa' });
-              }
-              return false;
+            onPress={(): void => {
+              props.navigation.navigate('MoreList', { part: 'villa' });
             }}
           />
         </View>
@@ -172,11 +160,8 @@ function HouseListEntry(props: Props): JSX.Element {
               borderWidth: 1.5,
             }}
             titleStyle={{ color: 'purple' }}
-            onPress={(): boolean => {
-              if (props.navigation) {
-                props.navigation.navigate('MoreList', { part: 'officetel' });
-              }
-              return false;
+            onPress={(): void => {
+              props.navigation.navigate('MoreList', { part: 'officetel' });
             }}
           />
         </View>

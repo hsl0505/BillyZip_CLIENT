@@ -18,11 +18,11 @@ function Home(): JSX.Element {
         // setLoading(true)
       })
       .catch((err) => console.log('err?', err));
-  });
+  }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ScrollView>
+      <ScrollView removeClippedSubviews>
         <View style={{ flex: 1 }}>
           <Recommend rank={rank} />
         </View>

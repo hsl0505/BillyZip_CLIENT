@@ -1,6 +1,12 @@
 import React from 'react';
 import { Card, Rating } from 'react-native-elements';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
 
 interface Props {
   RecommendOrHouses: string;
@@ -11,6 +17,10 @@ interface Props {
     images: Images[];
     avgRating?: number;
   };
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
 }
 
 interface Images {
@@ -23,42 +33,51 @@ function CardComponent(props: Props): JSX.Element {
   const { type, title, images, avgRating } = ele;
   const { filePath } = images[0];
   return (
-    <Card
-      image={{
-        uri: filePath,
-      }}
-      containerStyle={{
-        height: RecommendOrHouses === 'R' ? 280 : 150,
-        width: RecommendOrHouses === 'R' ? 300 : 200,
-        marginBottom: 15,
-      }}
-      imageStyle={{ height: RecommendOrHouses === 'R' ? 200 : 100, width: 200 }}
-      imageProps={{
-        resizeMode: RecommendOrHouses === 'R' ? undefined : 'cover',
+    <TouchableOpacity
+      onPress={(): void => {
+        props.navigation.navigate('HouseDetail');
       }}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View>
-          <Text>{title}</Text>
-          <Text>{type}</Text>
-        </View>
-        {RecommendOrHouses === 'R' ? (
+      <Card
+        image={{
+          uri: filePath,
+        }}
+        containerStyle={{
+          height: RecommendOrHouses === 'R' ? '90%' : 150,
+          width: RecommendOrHouses === 'R' ? 300 : 200,
+          marginBottom: 15,
+        }}
+        imageStyle={{
+          height: RecommendOrHouses === 'R' ? 200 : 100,
+          width: 200,
+        }}
+        imageProps={{
+          resizeMode: RecommendOrHouses === 'R' ? undefined : 'cover',
+        }}
+      >
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <View>
-            <Text style={{ alignSelf: 'center' }}>Rating</Text>
-            <Rating
-              readonly
-              startingValue={avgRating}
-              imageSize={20}
-              fractions={2}
-            />
-            <Text style={{ alignSelf: 'center' }}>{avgRating}</Text>
+            <Text>{title}</Text>
+            <Text>{type}</Text>
           </View>
-        ) : (
-          <View />
-        )}
-      </View>
-    </Card>
+          {RecommendOrHouses === 'R' ? (
+            <View>
+              <Text style={{ alignSelf: 'center' }}>Rating</Text>
+              <Rating
+                readonly
+                startingValue={avgRating}
+                imageSize={20}
+                fractions={2}
+              />
+              <Text style={{ alignSelf: 'center' }}>{avgRating}</Text>
+            </View>
+          ) : (
+            <View />
+          )}
+        </View>
+      </Card>
+    </TouchableOpacity>
   );
 }
 
-export default CardComponent;
+export default withNavigation(CardComponent);
