@@ -1,16 +1,30 @@
-import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView } from 'react-native';
 import HouseDetailComponent from '../../components/HouseDetail/HouseDetailComponent';
+import HouseDetailContent from '../../components/HouseDetail/HouseDetailContent';
+import axiosInstance from '../../util/axiosInstance';
 
-function HouseDetail(): JSX.Element {
+interface Props {
+  houseId: number;
+}
+
+function HouseDetail(props: Props): JSX.Element {
+  const { houseId } = props;
+  console.log(houseId);
+  const [house, setHouse] = useState();
+  console.log('디테일', house);
+  // useEffect(() => {
+  //   axiosInstance.get(`houses/${houseId}`).then((res) => {
+  //     setHouse(res.data);
+  //   });
+  // });
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <HouseDetailComponent />
       <ScrollView removeClippedSubviews>
-        <View
-          style={{ flex: 1, backgroundColor: '#fff', alignItems: 'center' }}
-        >
-          <Text>내용</Text>
+        <HouseDetailComponent />
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+          <HouseDetailContent />
         </View>
       </ScrollView>
     </View>
