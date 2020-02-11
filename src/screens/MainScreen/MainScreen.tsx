@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Home from './Home';
 import MoreList from './MoreList';
 import HouseDetail from '../HouseDetail/HouseDetail';
+import ReviewScreen from '../HouseDetail/ReviewScreen';
 
 const MainScreenStackNav = createStackNavigator(
   {
@@ -14,6 +15,9 @@ const MainScreenStackNav = createStackNavigator(
     },
     HouseDetail: {
       screen: HouseDetail,
+    },
+    ReviewScreen: {
+      screen: ReviewScreen,
     },
   },
   {

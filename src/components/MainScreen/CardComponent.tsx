@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Rating } from 'react-native-elements';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -11,6 +11,7 @@ import {
 interface Props {
   RecommendOrHouses: string;
   ele: {
+    id: number;
     type: string;
     title: string;
     description: string;
@@ -29,13 +30,12 @@ interface Images {
 
 function CardComponent(props: Props): JSX.Element {
   const { RecommendOrHouses, ele } = props;
-  // console.log(ele);
-  const { type, title, images, avgRating } = ele;
+  const { id, type, title, images, avgRating } = ele;
   const { filePath } = images[0];
   return (
     <TouchableOpacity
       onPress={(): void => {
-        props.navigation.navigate('HouseDetail');
+        props.navigation.navigate('HouseDetail', { houseId: id });
       }}
     >
       <Card
@@ -49,10 +49,11 @@ function CardComponent(props: Props): JSX.Element {
         }}
         imageStyle={{
           height: RecommendOrHouses === 'R' ? 200 : 100,
-          width: 200,
+          width: RecommendOrHouses === 'R' ? 300 : 200,
         }}
         imageProps={{
-          resizeMode: RecommendOrHouses === 'R' ? undefined : 'cover',
+          resizeMode: 'cover',
+          PlaceholderContent: <ActivityIndicator />,
         }}
       >
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

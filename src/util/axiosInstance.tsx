@@ -3,17 +3,18 @@ import { AsyncStorage } from 'react-native';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-import { TEST_IP } from 'react-native-dotenv';
+// import { TEST_IP } from 'react-native-dotenv';
+import ENV from '../util/env';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: `${TEST_IP}`,
+  baseURL: ENV.TEST_IP,
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
 
-axiosInstance.defaults.baseURL = `${TEST_IP}`;
+axiosInstance.defaults.baseURL = ENV.TEST_IP;
 axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
 axiosInstance.defaults.withCredentials = true;
 
@@ -24,6 +25,7 @@ axiosInstance.interceptors.request.use(
     if (userToken) {
       customConfig.headers.Authorization = `Bearer ${userToken}`;
     }
+
     return customConfig;
   },
   (error) => {
