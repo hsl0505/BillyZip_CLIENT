@@ -10,14 +10,17 @@ interface Props {
 
 function HouseDetail(props: Props): JSX.Element {
   const { houseId } = props;
-  console.log(houseId);
+  // console.log(houseId);
   const [house, setHouse] = useState();
   console.log('디테일', house);
-  // useEffect(() => {
-  //   axiosInstance.get(`houses/${houseId}`).then((res) => {
-  //     setHouse(res.data);
-  //   });
-  // });
+  useEffect(() => {
+    axiosInstance
+      .get(`houses/${houseId}`)
+      .then((res) => {
+        setHouse(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [houseId]);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
