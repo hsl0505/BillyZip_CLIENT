@@ -15,9 +15,11 @@ web-report/
 
 # env
 .env
+src/util/env.tsx
 
 # package-lock.json
 package-lock.json
 
 # build
 build/*
+
