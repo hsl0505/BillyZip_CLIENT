@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Image, Dimensions } from 'react-native';
-// import { Pagination } from 'react-native-snap-carousel';
+import { View, Dimensions, ActivityIndicator } from 'react-native';
+import { Image } from 'react-native-elements';
 
 interface Props {
   img: string;
@@ -14,6 +14,7 @@ function DetailImageComponent(props: Props): JSX.Element {
       <Image
         style={{ width, height: 250, resizeMode: 'cover' }}
         source={{ uri: img }}
+        PlaceholderContent={<ActivityIndicator />}
       />
     </View>
   );
