@@ -17,7 +17,7 @@ function MoreList(props: Props): JSX.Element {
       .get(`houses/part/:${part}`)
       .then((res) => setHouses(res.data))
       .catch((err) => console.log(err));
-  });
+  }, [part]);
 
   return (
     <View
