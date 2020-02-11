@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
 import { Card, Rating } from 'react-native-elements';
 
 interface Props {
@@ -28,6 +28,7 @@ function MoreCardComponent(props: Props): JSX.Element {
       imageStyle={{ height: 210 }}
       imageProps={{
         resizeMode: 'cover',
+        PlaceholderContent: <ActivityIndicator />,
       }}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
