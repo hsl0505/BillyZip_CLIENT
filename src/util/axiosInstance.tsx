@@ -6,6 +6,7 @@ import ENV from './env';
 // @ts-ignore
 // import { TEST_IP } from 'react-native-dotenv';
 
+import ENV from '../util/env';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: ENV.TEST_IP,
@@ -26,6 +27,7 @@ axiosInstance.interceptors.request.use(
     if (userToken) {
       customConfig.headers.Authorization = `Bearer ${userToken}`;
     }
+
     return customConfig;
   },
   (error) => {

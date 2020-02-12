@@ -10,46 +10,28 @@ function HouseDetailComponent(): JSX.Element {
     {
       id: 1,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
-      fileName: '1581055558441.jpg',
-      createdAt: '2020-02-07T06:05:58.471Z',
-      updatedAt: '2020-02-07T06:05:58.471Z',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327252989.jpg',
+      fileName: 'unnamed.jpg',
+      createdAt: '2020-02-10T00:34:13.348Z',
+      updatedAt: '2020-02-10T00:34:13.348Z',
       isActive: true,
     },
     {
       id: 2,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
-      fileName: '1581055558445.jpg',
-      createdAt: '2020-02-07T06:05:58.477Z',
-      updatedAt: '2020-02-07T06:05:58.477Z',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327252989.jpg',
+      fileName: 'maxresdefault.jpg',
+      createdAt: '2020-02-10T00:34:13.396Z',
+      updatedAt: '2020-02-10T00:34:13.396Z',
       isActive: true,
     },
     {
       id: 3,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
-      fileName: '1581055558446.jpg',
-      createdAt: '2020-02-07T06:05:58.481Z',
-      updatedAt: '2020-02-07T06:05:58.481Z',
-      isActive: true,
-    },
-    {
-      id: 3,
-      filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
-      fileName: '1581055558446.jpg',
-      createdAt: '2020-02-07T06:05:58.481Z',
-      updatedAt: '2020-02-07T06:05:58.481Z',
-      isActive: true,
-    },
-    {
-      id: 3,
-      filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
-      fileName: '1581055558446.jpg',
-      createdAt: '2020-02-07T06:05:58.481Z',
-      updatedAt: '2020-02-07T06:05:58.481Z',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327252993.jpg',
+      fileName: '2c7cb48c0ea2c1e83d12159f6bd811c6.jpg',
+      createdAt: '2020-02-10T00:34:13.450Z',
+      updatedAt: '2020-02-10T00:34:13.450Z',
       isActive: true,
     },
   ];
