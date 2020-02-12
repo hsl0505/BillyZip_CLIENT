@@ -5,10 +5,11 @@ import MoreCardComponent from '../MainScreen/MoreCardComponent';
 
 interface Props {
   houses: object[];
+  isFav: string;
 }
 
 function MoreListEntry(props: Props): JSX.Element {
-  const { houses } = props;
+  const { houses, isFav } = props;
   console.log(houses);
   const fakedata = [
     {
@@ -218,9 +219,10 @@ function MoreListEntry(props: Props): JSX.Element {
   return (
     <View>
       <FlatList
+        removeClippedSubviews
         data={fakedata}
         renderItem={({ item }): JSX.Element => (
-          <MoreCardComponent item={item} />
+          <MoreCardComponent item={item} isFav={isFav} />
         )}
         keyExtractor={(item): string => item.id.toString()}
         windowSize={3}

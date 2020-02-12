@@ -16,6 +16,7 @@ import {
 } from 'react-navigation';
 
 interface Props {
+  isFav: string;
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
     NavigationParams
@@ -24,6 +25,7 @@ interface Props {
 
 function HouseDetailContent(props: Props): JSX.Element {
   const { width } = Dimensions.get('window');
+  const { isFav } = props;
   const fakedata = {
     id: 1,
     plan: '30', //
@@ -105,8 +107,25 @@ function HouseDetailContent(props: Props): JSX.Element {
       updatedAt: '2020-02-10T00:34:13.180Z',
       isActive: true,
     },
+    user: {
+      id: 1,
+      email: '1',
+      password: '$2b$10$BWxxf8DXFtjAglV.aW9bfe9hMVzteJwWkX/JLbctj72IKSbc4Grs2',
+      name: 'jo',
+      mobile: '010-1111-2222',
+      gender: 'male',
+      birth: '2020-12-31',
+      currentPlan: null,
+      expiry: 3,
+      livingHouse: null,
+      isActive: true,
+      createdAt: '2020-02-11T05:55:37.754Z',
+      updatedAt: '2020-02-11T05:55:37.754Z',
+    },
     avgRating: 4.4,
+    favsNow: true,
   };
+
   const {
     title,
     type,
@@ -122,7 +141,10 @@ function HouseDetailContent(props: Props): JSX.Element {
     endTime,
     houseRule,
     amenity,
+    user,
   } = fakedata;
+
+  const { name } = user;
 
   const isTrueAmenity: string[] = [];
   Object.entries(amenity).forEach((ele) => {
@@ -182,9 +204,21 @@ function HouseDetailContent(props: Props): JSX.Element {
           ({reviews.length})
         </Text>
       </View>
+      <View style={{ flex: 1, marginTop: 20 }}>
+        <Text
+          style={{
+            fontSize: 20,
+            fontStyle: 'italic',
+            color: '#6E6E6E',
+            width: width * 0.8,
+          }}
+        >
+          호스트 {`  ${name}`} 님
+        </Text>
+      </View>
       <View
         style={{
-          marginTop: 40,
+          marginTop: 20,
           flex: 1,
           flexDirection: 'row',
           alignItems: 'center',
@@ -562,7 +596,7 @@ function HouseDetailContent(props: Props): JSX.Element {
           </View>
           <View style={{ alignItems: 'center', width: width * 0.22 }}>
             <MaterialCommunityIcons
-              name="shower"
+              name="washing-machine"
               size={40}
               color={isTrueAmenity.includes('washing') ? 'green' : '#A4A4A4'}
             />
@@ -613,8 +647,9 @@ function HouseDetailContent(props: Props): JSX.Element {
           title="리뷰 모두 보기"
           containerStyle={{ alignSelf: 'center' }}
           onPress={(): void => {
-            console.log('클릭');
-            props.navigation.navigate('ReviewScreen');
+            props.navigation.navigate(
+              isFav === 'f' ? 'FavorReview' : 'ReviewScreen',
+            );
           }}
         />
       </View>

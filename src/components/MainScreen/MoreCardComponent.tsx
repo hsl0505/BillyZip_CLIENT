@@ -20,6 +20,7 @@ interface Props {
     NavigationRoute<NavigationParams>,
     NavigationParams
   >;
+  isFav: string;
 }
 
 interface Images {
@@ -27,14 +28,17 @@ interface Images {
 }
 
 function MoreCardComponent(props: Props): JSX.Element {
-  const { item } = props;
+  const { item, isFav } = props;
   const { id, title, description, images, avgRating } = item;
   const { filePath } = images[0];
 
   return (
     <TouchableOpacity
       onPress={(): void => {
-        props.navigation.navigate('HouseDetail', { houseId: id });
+        props.navigation.navigate(
+          isFav === 'f' ? 'FavorHouseDetail' : 'HouseDetail',
+          { houseId: id, isFav },
+        );
       }}
     >
       <Card
