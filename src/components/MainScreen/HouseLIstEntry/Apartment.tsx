@@ -162,7 +162,7 @@ function Apartment(): JSX.Element {
         {
           id: 31,
           filePath:
-            'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581179987741.jpg',
+            'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
           fileName: 'S__286441484.jpg',
           createdAt: '2020-02-07T16:08:43.344Z',
           updatedAt: '2020-02-07T16:08:43.344Z',

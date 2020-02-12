@@ -10,7 +10,7 @@ function HouseDetailComponent(): JSX.Element {
     {
       id: 1,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581179987741.jpg',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
       fileName: '1581055558441.jpg',
       createdAt: '2020-02-07T06:05:58.471Z',
       updatedAt: '2020-02-07T06:05:58.471Z',
@@ -19,7 +19,7 @@ function HouseDetailComponent(): JSX.Element {
     {
       id: 2,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581179987741.jpg',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
       fileName: '1581055558445.jpg',
       createdAt: '2020-02-07T06:05:58.477Z',
       updatedAt: '2020-02-07T06:05:58.477Z',
@@ -28,7 +28,7 @@ function HouseDetailComponent(): JSX.Element {
     {
       id: 3,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581179987741.jpg',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
       fileName: '1581055558446.jpg',
       createdAt: '2020-02-07T06:05:58.481Z',
       updatedAt: '2020-02-07T06:05:58.481Z',
@@ -37,7 +37,7 @@ function HouseDetailComponent(): JSX.Element {
     {
       id: 3,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581179987741.jpg',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
       fileName: '1581055558446.jpg',
       createdAt: '2020-02-07T06:05:58.481Z',
       updatedAt: '2020-02-07T06:05:58.481Z',
@@ -46,7 +46,7 @@ function HouseDetailComponent(): JSX.Element {
     {
       id: 3,
       filePath:
-        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581179987741.jpg',
+        'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327194798.jpg',
       fileName: '1581055558446.jpg',
       createdAt: '2020-02-07T06:05:58.481Z',
       updatedAt: '2020-02-07T06:05:58.481Z',
