@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { FontAwesome } from '@expo/vector-icons';
 import DetailImageComponent from './DetailImageComponent';
+// import axiosInstance from '../../util/axiosInstance';
 
 function HouseDetailComponent(): JSX.Element {
+  // images, favs, id받아오기
   const { width } = Dimensions.get('window');
   const [activeSlide, setActiveSlide] = useState(0);
+  const [favsNow, setFavsNow] = useState(false);
+
+  // const id = 1;
   const fakeimages = [
     {
       id: 1,
@@ -50,6 +56,29 @@ function HouseDetailComponent(): JSX.Element {
         inactiveSlideScale={1}
         inactiveSlideOpacity={1}
         activeSlideOffset={10}
+      />
+      <FontAwesome
+        name={favsNow ? 'heart' : 'heart-o'}
+        size={34}
+        style={{ position: 'absolute', right: width * 0.05, top: 35 }}
+        color={favsNow ? 'red' : '#fff'}
+        onPress={(): void => {
+          if (favsNow) {
+            setFavsNow(false);
+            // axiosInstance
+            //   .delete(`favs/${id}`)
+            //   .then((res) => console.log(res.status))
+            //   .catch((err) => console.log(err));
+          } else {
+            setFavsNow(true);
+            // axiosInstance
+            //   .post('favs', {
+            //     houseId: id,
+            //   })
+            //   .then((res) => console.log(res.status))
+            //   .catch((err) => console.log(err));
+          }
+        }}
       />
       <Pagination
         activeDotIndex={activeSlide}

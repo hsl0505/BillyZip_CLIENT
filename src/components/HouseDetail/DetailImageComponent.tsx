@@ -12,7 +12,7 @@ function DetailImageComponent(props: Props): JSX.Element {
   return (
     <View style={{ alignItems: 'center' }}>
       <Image
-        style={{ width, height: 250, resizeMode: 'cover' }}
+        style={{ width, height: 275, resizeMode: 'cover' }}
         source={{ uri: img }}
         PlaceholderContent={<ActivityIndicator />}
       />

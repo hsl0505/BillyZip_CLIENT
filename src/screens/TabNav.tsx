@@ -4,9 +4,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { AntDesign } from '@expo/vector-icons';
 
 import MainScreenStackNav from './MainScreen/MainScreen';
-import Favor from './Favor';
+import Favor from './Favor/Favor';
 // import Search from './Search/Search';
-import SearchScreen from './Search/SearchScreen'
+import SearchScreen from './Search/SearchScreen';
 import Chat from './Chat';
 // import UserInfo from './UserInfo/UserInfo';
 import UserInfoScreenStackNav from './UserInfo/UserInforScreen';
@@ -56,6 +56,7 @@ const TabNav = createBottomTabNavigator(
       inactiveTintColor: 'gray',
       showLabel: false,
     },
+    resetOnBlur: true,
   },
 );
 

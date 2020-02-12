@@ -26,7 +26,7 @@ function MoreList(props: Props): JSX.Element {
         backgroundColor: '#fff',
       }}
     >
-      <MoreListEntry houses={houses} />
+      <MoreListEntry houses={houses} isFav="m" />
     </View>
   );
 }
