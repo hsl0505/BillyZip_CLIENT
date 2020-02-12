@@ -204,7 +204,11 @@ function RecommendEntry(props: Props): JSX.Element {
   // const tempArr = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        removeClippedSubviews
+      >
         {fakedata.map((ele) => (
           <CardComponent key={ele.id} RecommendOrHouses="R" ele={ele} />
         ))}

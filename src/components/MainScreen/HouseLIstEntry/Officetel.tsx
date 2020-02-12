@@ -194,7 +194,11 @@ function Officetel(): JSX.Element {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        removeClippedSubviews
+      >
         {fakedata.map((ele) => (
           <CardComponent key={ele.id} RecommendOrHouses="H" ele={ele} />
         ))}
