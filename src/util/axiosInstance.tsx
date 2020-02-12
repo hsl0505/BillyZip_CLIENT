@@ -1,9 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 import { AsyncStorage } from 'react-native';
+import ENV from './env';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 // import { TEST_IP } from 'react-native-dotenv';
+
 import ENV from '../util/env';
 
 const axiosInstance: AxiosInstance = axios.create({

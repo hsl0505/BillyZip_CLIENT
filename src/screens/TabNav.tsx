@@ -5,7 +5,8 @@ import { AntDesign } from '@expo/vector-icons';
 
 import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor';
-import Search from './Search';
+// import Search from './Search/Search';
+import SearchScreen from './Search/SearchScreen'
 import Chat from './Chat';
 import UserInfo from './UserInfo/UserInfo';
 
@@ -18,7 +19,7 @@ const TabNav = createBottomTabNavigator(
   {
     MainScreenStackNav,
     Favor,
-    Search,
+    Search: SearchScreen,
     Chat,
     UserInfo,
   },
