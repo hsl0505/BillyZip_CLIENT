@@ -1,15 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-import asyncStorageHelper from '../../util/asyncStorageHelper';
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+import { View } from 'react-native';
+import UserInfoList from '../../components/UserInfo/UserInfoList';
 
 // 스택 네비게이션
 // 1: 모든 버튼이 있는 스크린
@@ -19,14 +10,8 @@ const styles = StyleSheet.create({
 
 function UserInfo(): JSX.Element {
   return (
-    <View style={styles.container}>
-      <Text>UserInfo</Text>
-      <Button
-        title="임시 로그아웃"
-        onPress={(): void => {
-          asyncStorageHelper.clear();
-        }}
-      />
+    <View>
+      <UserInfoList />
     </View>
   );
 }
