@@ -7,7 +7,8 @@ import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor';
 import Search from './Search';
 import Chat from './Chat';
-import UserInfo from './UserInfo/UserInfo';
+// import UserInfo from './UserInfo/UserInfo';
+import UserInfoScreenStackNav from './UserInfo/UserInforScreen';
 
 interface IconProps {
   focused: boolean;
@@ -20,7 +21,7 @@ const TabNav = createBottomTabNavigator(
     Favor,
     Search,
     Chat,
-    UserInfo,
+    UserInfo: UserInfoScreenStackNav,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
