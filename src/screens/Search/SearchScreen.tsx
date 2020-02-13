@@ -2,11 +2,10 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Search from './Search';
 import MapSearch from './MapSearch';
 import NormalSearch from './NormalSearch';
+import SearchResult from './SearchResult';
+import HouseDetail from '../HouseDetail/HouseDetail';
+import ReviewScreen from '../HouseDetail/ReviewScreen';
 
-// * 다른 스크린으로 보내는 방법
-// onPress={() => props.navigation.navigate('보낼 스크린 이름')}
-
-// 스택 만든다
 const SearchScreen = createStackNavigator(
   {
     SelectSearch: {
@@ -18,6 +17,15 @@ const SearchScreen = createStackNavigator(
     NormalSearch: {
       screen: NormalSearch,
     },
+    SearchResult: {
+      screen: SearchResult,
+    },
+    HouseDetail: {
+      screen: HouseDetail,
+    },
+    ReviewScreen: {
+      screen: ReviewScreen,
+    }
   },
   {
     initialRouteName: 'SelectSearch',

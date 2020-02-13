@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 import { AsyncStorage } from 'react-native';
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 // import { TEST_IP } from 'react-native-dotenv';
