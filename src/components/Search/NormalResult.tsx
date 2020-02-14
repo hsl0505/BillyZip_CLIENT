@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
-
 import MoreCardComponent from '../MainScreen/MoreCardComponent';
 
 interface Props {
-  houses: Item[];
+  data: Item[];
   isFav: string;
 }
 
@@ -20,15 +19,14 @@ interface Images {
   filePath: string | undefined;
 }
 
-function MoreListEntry(props: Props): JSX.Element {
-  const { houses, isFav } = props;
+function NormalResult(props: Props): JSX.Element {
+  const { data } = props;
   return (
     <View>
       <FlatList
-        removeClippedSubviews
-        data={houses}
+        data={data}
         renderItem={({ item }): JSX.Element => (
-          <MoreCardComponent item={item} isFav={isFav} />
+          <MoreCardComponent item={item} isFav='a'/>
         )}
         keyExtractor={(item): string => item.id.toString()}
         windowSize={3}
@@ -37,4 +35,4 @@ function MoreListEntry(props: Props): JSX.Element {
   );
 }
 
-export default MoreListEntry;
+export default NormalResult;
