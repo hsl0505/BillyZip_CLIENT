@@ -17,8 +17,6 @@ interface Props {
 }
 
 function NormalSearchForm(props: Props): JSX.Element {
-  //   console.log(props);
-
   const [selectedIdxPlan, setSiPlan] = useState();
   const [selectedIdxType, setSiType] = useState();
   const [selectedIdxYear, setSiYear] = useState();
@@ -111,7 +109,6 @@ function NormalSearchForm(props: Props): JSX.Element {
               })
               .then((res) => {
                 if (res.status === 200) {
-                    console.log('?', res.data);
                   props.navigation.navigate('SearchResult', { data: res.data });
                 }
               })

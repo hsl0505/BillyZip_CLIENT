@@ -4,6 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import { Input, Button } from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
 import axiosInstance from '../../util/axiosInstance';
 
 function MapSearchForm(props: any): JSX.Element {
@@ -116,15 +117,31 @@ function MapSearchForm(props: any): JSX.Element {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-          onPress={(e) => console.log(e.nativeEvent)}
+          // onPress={(e) => console.log(e.nativeEvent)}
         >
           {markers.map(
-            (marker: { id: number; coordinate: any; title: any }) => (
+            (marker: {
+              key: number;
+              id: number;
+              coordinate: { latitude: number; longitude: number };
+              title: string;
+            }) => (
               <Marker
                 key={marker.id}
                 coordinate={marker.coordinate}
                 title={marker.title}
-                onPress={e => console.log(e.nativeEvent)}
+                identifier={String(marker.id)}
+                onPress={(e) => {
+                  console.log(e.nativeEvent);
+                  axiosInstance
+                    .get(`houses/${e.nativeEvent.id}`)
+                    .then((res) => {
+                      console.log('res.data ???  ', res.data);
+                    });
+
+                  // 아래 navigate에 옵션으로 위에서 받은 res.data를 주기
+                  props.navigation.navigate('HouseDetail');
+                }}
               />
             ),
           )}
@@ -133,4 +150,4 @@ function MapSearchForm(props: any): JSX.Element {
     </View>
   );
 }
-export default MapSearchForm;
+export default withNavigation(MapSearchForm);
