@@ -3,7 +3,20 @@ import { View, Text } from 'react-native';
 import RecommendEntry from './RecommendEntry';
 
 interface Props {
-  rank: undefined | object[];
+  rank: Ele[];
+}
+
+interface Ele {
+  id: number;
+  type: string;
+  title: string;
+  description: string;
+  images: Images[];
+  avgRating?: number;
+}
+
+interface Images {
+  filePath: string | undefined;
 }
 
 function Recommend(props: Props): JSX.Element {
