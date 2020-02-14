@@ -104,7 +104,7 @@ function HouseListEntry(props: Props): JSX.Element {
             titleStyle={{ color: 'purple' }}
             onPress={(): void => {
               props.navigation.navigate('MoreList', {
-                part: 'detachedhouse',
+                part: 'dandok',
               });
             }}
           />
