@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
 import axiosInstance from '../../util/axiosInstance';
 
 import MoreListEntry from '../../components/MainScreen/MoreListEntry';
 
 interface Props {
-  part: string;
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
 }
 
 function MoreList(props: Props): JSX.Element {
-  const { part } = props;
+  const { navigation } = props;
+  const part = navigation.getParam('part');
   const [houses, setHouses] = useState();
 
   useEffect(() => {
     axiosInstance
-      .get(`houses/part/:${part}`)
-      .then((res) => setHouses(res.data))
+      .get(`houses/part/${part}`)
+      .then((res) => {
+        setHouses(res.data);
+      })
       .catch((err) => console.log(err));
   }, [part]);
 
@@ -31,4 +43,4 @@ function MoreList(props: Props): JSX.Element {
   );
 }
 
-export default MoreList;
+export default withNavigation(MoreList);
