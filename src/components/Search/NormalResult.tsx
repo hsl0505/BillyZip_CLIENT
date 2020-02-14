@@ -21,7 +21,6 @@ interface Images {
 
 function NormalResult(props: Props): JSX.Element {
   const { data } = props;
-  console.log('data is ', data);
   return (
     <View>
       <FlatList

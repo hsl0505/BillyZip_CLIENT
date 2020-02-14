@@ -7,6 +7,7 @@ import {
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
+import axiosInstance from '../../util/axiosInstance';
 
 interface Props {
   navigation: NavigationScreenProp<
@@ -28,7 +29,7 @@ function SelectSearch(props: Props): JSX.Element {
     <View style={{flex: 1, alignItems: 'center'}}>
       <View style={styles.container}>
         <Button
-          title="일반검색"
+          title="상세검색"
           onPress={(): void => {
             props.navigation.navigate('NormalSearch');
           }}
@@ -38,7 +39,9 @@ function SelectSearch(props: Props): JSX.Element {
         <Button
           title="지도검색"
           onPress={(): void => {
-            props.navigation.navigate('MapSearch');
+            axiosInstance.get('houses/all').then((res) => {
+              props.navigation.navigate('MapSearch', {data: res.data});
+            })
           }}
         />
       </View>
