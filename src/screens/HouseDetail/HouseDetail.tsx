@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StatusBar } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -42,7 +42,7 @@ function HouseDetail(props: Props): JSX.Element {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <StatusBar hidden />
+      {/* <StatusBar hidden /> */}
       <ScrollView removeClippedSubviews>
         <HouseDetailComponent />
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
