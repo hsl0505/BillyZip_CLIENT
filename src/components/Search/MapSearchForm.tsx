@@ -7,6 +7,15 @@ import { Input, Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import axiosInstance from '../../util/axiosInstance';
 
+// const { width, height } = Dimensions.get('window');
+// const ASPECT_RATIO = width / height;
+const LATITUDE = 35.39673755350146;
+const LONGITUDE = 127.71844625473022;
+// const LATITUDE_DELTA = 0.0922;
+// const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const LATITUDE_DELTA = 4;
+const LONGITUDE_DELTA = 4;
+
 function MapSearchForm(props: any): JSX.Element {
   const styles = StyleSheet.create({
     mapStyle: {
@@ -109,15 +118,16 @@ function MapSearchForm(props: any): JSX.Element {
       </View>
       <View>
         <MapView
-          provider="google"
           style={styles.mapStyle}
+          provider="google"
+          showsUserLocation
           initialRegion={{
-            latitude: 37.54525971247632,
-            longitude: 126.99263580143452,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitude: LATITUDE,
+            longitude: LONGITUDE,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
           }}
-          // onPress={(e) => console.log(e.nativeEvent)}
+          onPress={(e) => console.log(e.nativeEvent)}
         >
           {markers.map(
             (marker: {
