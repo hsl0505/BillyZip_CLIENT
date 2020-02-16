@@ -7,7 +7,8 @@ import {
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
-import CurrentPlanComponent from '../../components/UserInfo/CurrentPlanComponent';
+
+import CurrentPlanComponent from '../../../components/UserInfo/CurrentModel/CurrentPlanComponent';
 
 const styles = StyleSheet.create({
   container: {

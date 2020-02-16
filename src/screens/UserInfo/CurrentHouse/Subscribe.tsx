@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 
-import CurrentPlan from '../../../components/UserInfo/CurrentPlan';
-import LivingHouse from '../../../components/UserInfo/LivingHouse';
+import CurrentPlan from '../../../components/UserInfo/CurrentModel/CurrentPlan';
+import LivingHouse from '../../../components/UserInfo/CurrentModel/LivingHouse';
 import axiosInstance from '../../../util/axiosInstance';
 
 interface Props {

@@ -6,7 +6,7 @@ import {
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
-import LivingHouseComponent from '../../components/UserInfo/LivingHouseComponent';
+import LivingHouseComponent from '../../../components/UserInfo/CurrentModel/LivingHouseComponent';
 
 interface Values {
   id: number;
