@@ -33,11 +33,6 @@ const IconsList = [
     routeName: 'Hosting',
   },
   {
-    title: '즐겨찾기',
-    icon: 'heart',
-    routeName: 'Pick',
-  },
-  {
     title: '결제',
     icon: 'credit-card',
     routeName: 'Payment',
