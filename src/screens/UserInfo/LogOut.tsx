@@ -1,4 +1,5 @@
 import React from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import {
@@ -19,6 +20,7 @@ interface Props {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: '#fff',
     flex: 1,
     justifyContent: 'center',
   },
@@ -27,9 +29,20 @@ const styles = StyleSheet.create({
 function LogOut(props: Props): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 30 }}>로그아웃 페이지</Text>
+      <MaterialIcons
+        name="event-available"
+        size={80}
+        color="purple"
+        onPress={(): void => {
+          asyncStorageHelper.clear();
+          props.navigation.navigate('LoginScreen');
+        }}
+      />
+      <Text style={{ fontSize: 15 }}>
+        로그아웃을 하고 싶다면 아래의 버튼을 눌러주세요
+      </Text>
       <Button
-        title="임시 로그아웃"
+        title="로그아웃"
         onPress={(): void => {
           asyncStorageHelper.clear();
           props.navigation.navigate('LoginScreen');
