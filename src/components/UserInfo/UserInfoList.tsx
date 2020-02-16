@@ -38,7 +38,7 @@ const IconsList = [
     routeName: 'Payment',
   },
   {
-    title: '임시 로그아웃',
+    title: '로그아웃',
     icon: 'logout',
     routeName: 'LogOut',
   },

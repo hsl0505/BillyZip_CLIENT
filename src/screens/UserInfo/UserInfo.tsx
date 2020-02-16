@@ -10,7 +10,7 @@ import UserInfoList from '../../components/UserInfo/UserInfoList';
 
 function UserInfo(): JSX.Element {
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <UserInfoList />
     </View>
   );
