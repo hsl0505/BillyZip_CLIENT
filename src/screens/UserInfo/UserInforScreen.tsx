@@ -1,14 +1,16 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import UserInfo from './UserInfo';
-import Subscribe from './Subscribe';
-import MyInfo from './MyInfo';
 import Hosting from './Hosting/Hosting';
-import Pick from './Pick';
-import Payment from './Payment';
-import LogOut from './LogOut';
 import HostingManagement from './Hosting/HostingManagement';
 import HostingPost from './Hosting/HostingPost';
+import Subscribe from './CurrentHouse/Subscribe';
+import MyInfo from './MyInfo/MyInfo';
+import Payment from './Payment';
+import LogOut from './LogOut';
+import Mobile from './MyInfo/Mobile';
+import Password from './MyInfo/Password';
+import UserInfoList from '../../components/UserInfo/UserInfoList';
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
@@ -30,16 +32,23 @@ const UserInfoScreenStackNav = createStackNavigator(
     HostingPost: {
       screen: HostingPost,
     },
-    Pick: {
-      screen: Pick,
-    },
     Payment: {
       screen: Payment,
     },
     LogOut: {
       screen: LogOut,
     },
+    Mobile: {
+      screen: Mobile,
+    },
+    Password: {
+      screen: Password,
+    },
+    UserInfoList: {
+      screen: UserInfoList,
+    },
   },
+
   {
     initialRouteName: 'UserInfo',
   },
