@@ -11,6 +11,7 @@ import LogOut from './LogOut';
 import Mobile from './MyInfo/Mobile';
 import Password from './MyInfo/Password';
 import UserInfoList from '../../components/UserInfo/UserInfoList';
+import HouseDetail from '../HouseDetail/HouseDetail';
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
@@ -31,6 +32,9 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     HostingPost: {
       screen: HostingPost,
+    },
+    HouseDetail: {
+      screen: HouseDetail,
     },
     Payment: {
       screen: Payment,
