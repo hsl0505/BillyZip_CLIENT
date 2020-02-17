@@ -50,7 +50,7 @@ function NormalSearchForm(props: Props): JSX.Element {
     <View>
       <View>
         <Input
-          placeholder="지역명을 입력해 주세요. 예: 강남구"
+          placeholder="지역명을 입력해 주세요. 예: 성남시 / 부안군 / 강남구"
           label="지역명"
           labelStyle={{ alignSelf: 'center' }}
           onChangeText={(text): void => setDistrict(text)}
