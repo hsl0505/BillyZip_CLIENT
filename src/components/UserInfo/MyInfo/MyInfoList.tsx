@@ -78,11 +78,13 @@ function MyInfoList(props: Props): JSX.Element {
         <Text>{email}</Text>
       </View>
 
-      <Text style={styles.title}>핸드폰</Text>
+      <Text style={styles.title}>휴대폰</Text>
       <TouchableOpacity
         style={styles.TextViewStyle}
         onPress={(): void => {
-          props.navigation.navigate('Mobile');
+          props.navigation.navigate('Mobile', {
+            key: myInfo,
+          });
         }}
       >
         <Text>

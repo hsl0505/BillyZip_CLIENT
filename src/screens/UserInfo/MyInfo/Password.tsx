@@ -75,6 +75,7 @@ function Password(props: Props): JSX.Element {
           setPassword(text);
         }}
         errorMessage={passwordErr}
+        errorStyle={{ alignSelf: 'center' }}
       />
       <Button
         title="확인"
