@@ -2,6 +2,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 interface Items {
   uri?: string;
+  type?: string;
 }
 
 const cameraHelper = {
@@ -17,14 +18,15 @@ const cameraHelper = {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
+        // base64: true,
         aspect: [4, 3],
         allowsMultipleSelection: true,
       });
       if (!result.cancelled) {
         if (!previous[0].uri) {
-          cb([{ uri: result.uri }]);
+          cb([result]);
         } else {
-          cb(previous.concat([{ uri: result.uri }]));
+          cb(previous.concat([result]));
         }
       }
     } catch (err) {
@@ -47,9 +49,9 @@ const cameraHelper = {
       });
       if (!result.cancelled) {
         if (!previous[0].uri) {
-          cb([{ uri: result.uri }]);
+          cb([result]);
         } else {
-          cb(previous.concat([{ uri: result.uri }]));
+          cb(previous.concat([result]));
         }
       }
     } catch (err) {
