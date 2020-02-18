@@ -7,20 +7,28 @@ import axiosInstance from '../../../util/axiosInstance';
 
 function Subscribe(): JSX.Element {
   const [subscribedHouses, setSubscribedHouses] = useState([]);
-
+  const [ready, setReady] = useState(false);
   useEffect(() => {
     axiosInstance
       .get(`users/currentInfo`)
-      .then((res) => setSubscribedHouses(res.data))
+      .then((res) => {
+        setSubscribedHouses(res.data);
+        setReady(true);
+      })
+
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <ScrollView removeClippedSubviews>
-        <CurrentPlan subscribedHouses={subscribedHouses} />
-        <LivingHouse subscribedHouses={subscribedHouses} />
-      </ScrollView>
+      {ready === false ? (
+        <View />
+      ) : (
+        <ScrollView removeClippedSubviews>
+          <CurrentPlan subscribedHouses={subscribedHouses} />
+          <LivingHouse subscribedHouses={subscribedHouses} />
+        </ScrollView>
+      )}
     </View>
   );
 }

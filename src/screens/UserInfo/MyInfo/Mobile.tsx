@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import { Input, Button, Overlay } from 'react-native-elements';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -58,6 +58,7 @@ function Mobile(props: Props): JSX.Element {
   const [PhoneNumErr, setPhoneNumErr] = useState();
   const [userVerifyNum, setuserVerifyNum] = useState();
   const [userVerifyNumErr, setuserVerifyNumErr] = useState();
+  const [isVisible, setVisible] = useState(false);
   console.log('유저 번호 11:: ', userPhoneNum);
   return (
     <View style={styles.container}>
@@ -84,7 +85,7 @@ function Mobile(props: Props): JSX.Element {
             })
             .then((res) => {
               if (res.status === 200) {
-                setPhoneNumErr(res.data);
+                Alert.alert('인증번호가 발송되었습니다');
               }
             })
             .catch((err) => {
@@ -122,7 +123,7 @@ function Mobile(props: Props): JSX.Element {
                   })
                   .then((result) => {
                     if (result.status === 200) {
-                      props.navigation.navigate('UserInfo');
+                      setVisible(true);
                     }
                   })
                   .catch((err) => {
@@ -137,6 +138,35 @@ function Mobile(props: Props): JSX.Element {
             });
         }}
       />
+      <Overlay
+        isVisible={isVisible}
+        height={100}
+        width={220}
+        onBackdropPress={(): void => setVisible(false)}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ alignSelf: 'center', fontSize: 15, marginTop: 10 }}>
+            휴대폰 번호가 변경되었습니다
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'space-around',
+            }}
+          >
+            <Button
+              title="완료"
+              onPress={(): void => {
+                setVisible(false);
+                props.navigation.navigate('UserInfo');
+              }}
+              type="clear"
+            />
+          </View>
+        </View>
+      </Overlay>
     </View>
   );
 }
