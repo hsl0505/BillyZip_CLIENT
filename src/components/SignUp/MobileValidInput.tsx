@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import { Input, Button, Overlay } from 'react-native-elements';
 
 import {
   withNavigation,
@@ -53,7 +53,7 @@ function MobileValidInput(props: Props): JSX.Element {
   const [PhoneNumErr, setPhoneNumErr] = useState();
   const [userVerifyNum, setuserVerifyNum] = useState();
   const [userVerifyNumErr, setuserVerifyNumErr] = useState();
-
+  const [isVisible, setVisible] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <Text style={styles.title}>휴대폰 번호 인증</Text>
@@ -78,7 +78,7 @@ function MobileValidInput(props: Props): JSX.Element {
             })
             .then((res) => {
               if (res.status === 200) {
-                setPhoneNumErr(res.data); // 성공 -> 에러 처리 옳지 않음 (추후 수정 : 모바일도)
+                Alert.alert('인증번호가 발송되었습니다');
               }
             })
             .catch((err) => {
@@ -110,9 +110,7 @@ function MobileValidInput(props: Props): JSX.Element {
             })
             .then((res) => {
               if (res.status === 200) {
-                props.navigation.navigate('SignUpInputScreen', {
-                  mobiletest: userPhoneNum,
-                });
+                setVisible(true);
               }
             })
             .catch((err) => {
@@ -122,6 +120,38 @@ function MobileValidInput(props: Props): JSX.Element {
             });
         }}
       />
+
+      <Overlay
+        isVisible={isVisible}
+        height={100}
+        width={220}
+        onBackdropPress={(): void => setVisible(false)}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ alignSelf: 'center', fontSize: 15, marginTop: 10 }}>
+            휴대폰 번호가 인증되었습니다
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'space-around',
+            }}
+          >
+            <Button
+              title="완료"
+              onPress={(): void => {
+                setVisible(false);
+                props.navigation.navigate('SignUpInputScreen', {
+                  mobiletest: userPhoneNum,
+                });
+              }}
+              type="clear"
+            />
+          </View>
+        </View>
+      </Overlay>
     </View>
   );
 }

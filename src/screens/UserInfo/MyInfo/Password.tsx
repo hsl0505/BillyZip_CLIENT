@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { Input, Button, Overlay } from 'react-native-elements';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -56,12 +56,10 @@ const styles = StyleSheet.create({
 function Password(props: Props): JSX.Element {
   const { navigation } = props;
   const params = navigation.getParam('key');
-  // console.log('param ::', params);
   const { email, name, birth, mobile, gender } = params;
-  // console.log('비밀번호 수정 페이지 : ', email, name, birth, mobile, gender);
-
   const [password, setPassword] = useState();
   const [passwordErr, setPasswordErr] = useState();
+  const [isVisible, setVisible] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>비밀번호</Text>
@@ -70,7 +68,6 @@ function Password(props: Props): JSX.Element {
         containerStyle={styles.TextViewStyle}
         underlineColorAndroid="transparent"
         onChangeText={(text): void => {
-          console.log('password :: ', text);
           setPassword(text);
         }}
         errorMessage={passwordErr}
@@ -92,7 +89,7 @@ function Password(props: Props): JSX.Element {
             })
             .then((res) => {
               if (res.status === 200) {
-                props.navigation.navigate('UserInfo');
+                setVisible(true);
               }
             })
             .catch((err) => {
@@ -102,6 +99,35 @@ function Password(props: Props): JSX.Element {
             });
         }}
       />
+      <Overlay
+        isVisible={isVisible}
+        height={100}
+        width={220}
+        onBackdropPress={(): void => setVisible(false)}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ alignSelf: 'center', fontSize: 15, marginTop: 10 }}>
+            비밀번호가 변경되었습니다
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'space-around',
+            }}
+          >
+            <Button
+              title="완료"
+              onPress={(): void => {
+                setVisible(false);
+                props.navigation.navigate('UserInfo');
+              }}
+              type="clear"
+            />
+          </View>
+        </View>
+      </Overlay>
     </View>
   );
 }
