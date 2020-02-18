@@ -15,7 +15,6 @@ interface Props {
     NavigationRoute<NavigationParams>,
     NavigationParams
   >;
-  number: number;
 }
 
 const styles = StyleSheet.create({
@@ -60,7 +59,7 @@ function Password(props: Props): JSX.Element {
   // console.log('param ::', params);
   const { email, name, birth, mobile, gender } = params;
   // console.log('비밀번호 수정 페이지 : ', email, name, birth, mobile, gender);
-  const { number } = props;
+
   const [password, setPassword] = useState();
   const [passwordErr, setPasswordErr] = useState();
   return (
@@ -83,7 +82,7 @@ function Password(props: Props): JSX.Element {
         onPress={(): void => {
           setPasswordErr('');
           axiosInstance
-            .put(`users/${number}/myInfo`, {
+            .put(`users/myInfo`, {
               email,
               name,
               birth,
@@ -93,7 +92,7 @@ function Password(props: Props): JSX.Element {
             })
             .then((res) => {
               if (res.status === 200) {
-                props.navigation.navigate('MyInfo');
+                props.navigation.navigate('UserInfo');
               }
             })
             .catch((err) => {

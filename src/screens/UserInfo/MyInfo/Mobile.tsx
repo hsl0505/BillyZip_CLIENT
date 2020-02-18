@@ -122,7 +122,7 @@ function Mobile(props: Props): JSX.Element {
                   })
                   .then((result) => {
                     if (result.status === 200) {
-                      props.navigation.navigate('MyInfo');
+                      props.navigation.navigate('UserInfo');
                     }
                   })
                   .catch((err) => {

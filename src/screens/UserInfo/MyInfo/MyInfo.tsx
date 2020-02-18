@@ -4,10 +4,6 @@ import { View, StyleSheet } from 'react-native';
 import MyInfoList from '../../../components/UserInfo/MyInfo/MyInfoList';
 import axiosInstance from '../../../util/axiosInstance';
 
-interface Props {
-  number: number;
-}
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -15,15 +11,14 @@ const styles = StyleSheet.create({
   },
 });
 
-function MyInfo(props: Props): JSX.Element {
-  const { number } = props;
+function MyInfo(): JSX.Element {
   const [myInfo, setMyInfo] = useState({});
   useEffect(() => {
     axiosInstance
-      .get(`users/${number}/myInfo`)
+      .get(`users/myInfo`)
       .then((res) => setMyInfo(res.data))
       .catch((err) => console.log(err));
-  }, [number]);
+  }, []);
 
   return (
     <View style={styles.container}>
