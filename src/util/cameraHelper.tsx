@@ -14,7 +14,11 @@ const cameraHelper = {
       console.log('camera err :', console.log(err));
     }
   },
-  getPhoto: async (cb: Function, previous: Items[]): Promise<void> => {
+  getPhoto: async (
+    cb: Function,
+    previous: Items[],
+    cb2: Function,
+  ): Promise<void> => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
@@ -25,8 +29,10 @@ const cameraHelper = {
       if (!result.cancelled) {
         if (!previous[0].uri) {
           cb([result]);
+          cb2(false);
         } else {
           cb(previous.concat([result]));
+          cb2(false);
         }
       }
     } catch (err) {
@@ -41,7 +47,11 @@ const cameraHelper = {
       console.log('camera err', err);
     }
   },
-  getPhotoByCamera: async (cb: Function, previous: Items[]): Promise<void> => {
+  getPhotoByCamera: async (
+    cb: Function,
+    previous: Items[],
+    cb2: Function,
+  ): Promise<void> => {
     try {
       const result = await ImagePicker.launchCameraAsync({
         allowsEditing: true,
@@ -50,8 +60,10 @@ const cameraHelper = {
       if (!result.cancelled) {
         if (!previous[0].uri) {
           cb([result]);
+          cb2(false);
         } else {
           cb(previous.concat([result]));
+          cb2(false);
         }
       }
     } catch (err) {

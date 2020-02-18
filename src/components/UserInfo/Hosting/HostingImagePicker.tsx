@@ -80,8 +80,6 @@ function HostingImagePicker(props: Props): JSX.Element {
   const [startTime, setStart] = useState(7);
   const [endTime, setEnd] = useState(30);
 
-  console.log(display);
-
   let forAme = false;
   if (
     secondFloor ||
@@ -255,9 +253,7 @@ function HostingImagePicker(props: Props): JSX.Element {
                 if (hasCamera !== 'granted') {
                   Alert.alert('카메라 접근 권한을 설정해주세요');
                 } else {
-                  cameraHelper
-                    .getPhotoByCamera(setImage, images)
-                    .then(() => setVisible(false));
+                  cameraHelper.getPhotoByCamera(setImage, images, setVisible);
                 }
               }}
               size={30}
@@ -268,9 +264,7 @@ function HostingImagePicker(props: Props): JSX.Element {
                 if (hasCameraRoll !== 'granted') {
                   Alert.alert('사진/미디어 접근 권한을 설정해주세요');
                 } else {
-                  cameraHelper
-                    .getPhoto(setImage, images)
-                    .then(() => setVisible(false));
+                  cameraHelper.getPhoto(setImage, images, setVisible);
                 }
               }}
               size={30}
@@ -434,7 +428,7 @@ function HostingImagePicker(props: Props): JSX.Element {
           }}
         >
           <Input
-            placeholder="주소 입력 후 주소를 추가해주세요"
+            placeholder={`주소 입력 후 주소를 추가해주세요${'\n'}예시 : 서울특별시 용산구 용산2가동 남산공원길 105`}
             multiline
             textAlignVertical="top"
             value={admin}
@@ -701,7 +695,7 @@ function HostingImagePicker(props: Props): JSX.Element {
             <Text
               style={{ marginVertical: 10, marginLeft: 15, fontWeight: 'bold' }}
             >
-              최대 거주기간 : {endTime} 일 (약 {Math.round(endTime / 7)} 주)
+              최대 거주기간 : {endTime}일 (약 {Math.round(endTime / 7)} 주)
             </Text>
             <Slider
               minimumValue={30}
@@ -720,18 +714,16 @@ function HostingImagePicker(props: Props): JSX.Element {
       <View style={{ flex: 1, marginTop: 30, marginLeft: 15, marginRight: 15 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <MaterialCommunityIcons
-            name={
-              display ? 'checkbox-marked-outline' : 'checkbox-blank-outline'
-            }
+            name="checkbox-marked-outline"
             size={20}
-            style={{ color: display ? 'green' : undefined }}
+            style={{ color: 'green' }}
           />
           <Text
             style={{
               marginLeft: 5,
               fontSize: 20,
               fontWeight: 'bold',
-              color: display ? 'green' : undefined,
+              color: 'green',
             }}
           >
             공개 여부
@@ -802,12 +794,9 @@ function HostingImagePicker(props: Props): JSX.Element {
                   Platform.OS === 'android'
                     ? imgUri
                     : imgUri.replace('file://', '');
-
                 const temp: FormDataValue = {
                   name: imgUri.split('/').pop(),
-                  type: `image/${imgUri.slice(
-                    (imgUri.lastIndexOf('.') - 1) * -1,
-                  )}`,
+                  type: `image/${imgUri.slice(imgUri.lastIndexOf('.') + 1)}`,
                   uri: modUri,
                 };
                 formData.append('images', temp);
