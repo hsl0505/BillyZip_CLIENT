@@ -132,7 +132,7 @@ function SignUpInput(props: Props): JSX.Element {
         }}
       />
       <Button
-        title="임시 회원가입 완료 버튼"
+        title="회원가입"
         onPress={(): void => {
           axiosInstance
             .post('users/signup', {
