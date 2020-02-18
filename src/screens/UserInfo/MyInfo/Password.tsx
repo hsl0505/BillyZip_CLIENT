@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
 function Password(props: Props): JSX.Element {
   const { navigation } = props;
   const params = navigation.getParam('key');
-  console.log('param ::', params);
+  // console.log('param ::', params);
   const { email, name, birth, mobile, gender } = params;
-  console.log('비밀번호 수정 페이지 : ', email, name, birth, mobile, gender);
+  // console.log('비밀번호 수정 페이지 : ', email, name, birth, mobile, gender);
   const { number } = props;
   const [password, setPassword] = useState();
   const [passwordErr, setPasswordErr] = useState();

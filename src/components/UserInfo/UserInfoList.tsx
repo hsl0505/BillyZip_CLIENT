@@ -37,11 +37,6 @@ const IconsList = [
     icon: 'credit-card',
     routeName: 'Payment',
   },
-  {
-    title: '로그아웃',
-    icon: 'logout',
-    routeName: 'LogOut',
-  },
 ];
 
 function UserInfolist(props: Props): JSX.Element {
