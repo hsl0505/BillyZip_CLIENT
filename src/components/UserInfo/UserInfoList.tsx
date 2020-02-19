@@ -24,7 +24,7 @@ const IconsList = [
   },
   {
     title: '내 정보',
-    icon: 'settings',
+    icon: 'user',
     routeName: 'MyInfo',
   },
   {
