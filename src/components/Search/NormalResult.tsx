@@ -19,6 +19,7 @@ interface Item {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function NormalResult(props: Props): JSX.Element {

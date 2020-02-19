@@ -8,7 +8,7 @@ function HostingSkeleton(): JSX.Element {
       style={{
         flex: 1,
         alignItems: 'center',
-        height: 260,
+        height: 280,
         justifyContent: 'center',
         borderStyle: 'solid',
         borderBottomColor: '#D8D8D8',

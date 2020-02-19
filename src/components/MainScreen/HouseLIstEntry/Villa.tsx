@@ -17,6 +17,7 @@ interface Ele {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function Villa(props: Props): JSX.Element {

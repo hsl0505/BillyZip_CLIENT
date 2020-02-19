@@ -144,8 +144,7 @@ function SignUpInput(props: Props): JSX.Element {
                 1}-${date.getDate()}`,
               gender,
             })
-            .then((res) => {
-              console.log('임시 회원가입 콘솔', res);
+            .then(() => {
               if (props.navigation) {
                 props.navigation.navigate('LoginScreen');
               }

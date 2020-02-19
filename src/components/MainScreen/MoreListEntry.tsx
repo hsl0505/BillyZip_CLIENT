@@ -31,6 +31,7 @@ interface Fav {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function MoreListEntry(props: Props): JSX.Element {

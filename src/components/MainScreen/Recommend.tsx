@@ -17,6 +17,7 @@ interface Ele {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function Recommend(props: Props): JSX.Element {
