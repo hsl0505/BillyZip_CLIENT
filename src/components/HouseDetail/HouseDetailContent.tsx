@@ -16,115 +16,35 @@ import {
 } from 'react-navigation';
 
 interface Props {
-  isFav: string;
+  isFav?: string;
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
     NavigationParams
   >;
+  house: {
+    title: string;
+    type: string;
+    description: string;
+    adminDistrict: string;
+    plan: string;
+    year: number;
+    status: boolean;
+    avgRating: number;
+    access: number;
+    startTime: number;
+    endTime: number;
+    houseRule: string;
+    amenity: {};
+    user: {
+      name: string;
+    };
+    reviews: [];
+  };
 }
 
 function HouseDetailContent(props: Props): JSX.Element {
   const { width } = Dimensions.get('window');
-  const { isFav } = props;
-  const fakedata = {
-    id: 1,
-    plan: '30', //
-    type: 'apart', //
-    year: '1', //
-    access: '1', //
-    status: false, //
-    display: true,
-    startTime: 7, //
-    endTime: 365, //
-    location: ['1', '2'],
-    adminDistrict:
-      '강남구, xxx동, 123-45, FASTFIVE 삼성 3호점 12층 (서울특별시 강남구 테헤란로 503)', // FASTFIVE 삼성 3호점 12층 (서울특별시 강남구 테헤란로 503)
-    title: '강남 미친 시티뷰와 미세먼지를 느껴보세요', //
-    description:
-      '50년 된 아파트인데 괜찮아 ? 50년 된 아파트인데 괜찮아 ? 50년 된 아파트인데 괜찮아 ? 50년 된 아파트인데 괜찮아 ? 50년 된 아파트인데 괜찮아 ?',
-    houseRule: '혼숙 금지',
-    isActive: true,
-    createdAt: '2020-02-10T00:34:13.222Z',
-    updatedAt: '2020-02-10T00:34:13.222Z',
-    images: [
-      {
-        id: 1,
-        filePath:
-          'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327252989.jpg',
-        fileName: 'unnamed.jpg',
-        createdAt: '2020-02-10T00:34:13.348Z',
-        updatedAt: '2020-02-10T00:34:13.348Z',
-        isActive: true,
-      },
-      {
-        id: 2,
-        filePath:
-          'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327252989.jpg',
-        fileName: 'maxresdefault.jpg',
-        createdAt: '2020-02-10T00:34:13.396Z',
-        updatedAt: '2020-02-10T00:34:13.396Z',
-        isActive: true,
-      },
-      {
-        id: 3,
-        filePath:
-          'https://billyzip.s3.ap-northeast-2.amazonaws.com/1581327252993.jpg',
-        fileName: '2c7cb48c0ea2c1e83d12159f6bd811c6.jpg',
-        createdAt: '2020-02-10T00:34:13.450Z',
-        updatedAt: '2020-02-10T00:34:13.450Z',
-        isActive: true,
-      },
-    ],
-    reviews: [
-      {
-        id: 1,
-        comment: '와 진짜 여기 살아봤는데 사진 사기입니다;;',
-        rating: 1,
-        createdAt: '2020-02-10T00:35:56.789Z',
-        updatedAt: '2020-02-10T00:35:56.789Z',
-        isActive: true,
-      },
-      {
-        id: 2,
-        comment: '근데 왜 자기가 올린 집을 욕하고 있지..?',
-        rating: 5,
-        createdAt: '2020-02-10T00:36:31.863Z',
-        updatedAt: '2020-02-10T00:36:31.863Z',
-        isActive: true,
-      },
-    ],
-    amenity: {
-      id: 1,
-      secondFloor: true,
-      parking: true,
-      aircon: true,
-      autoLock: false,
-      tv: true,
-      bed: true,
-      washing: false,
-      allowPet: false,
-      createdAt: '2020-02-10T00:34:13.180Z',
-      updatedAt: '2020-02-10T00:34:13.180Z',
-      isActive: true,
-    },
-    user: {
-      id: 1,
-      email: '1',
-      password: '$2b$10$BWxxf8DXFtjAglV.aW9bfe9hMVzteJwWkX/JLbctj72IKSbc4Grs2',
-      name: 'jo',
-      mobile: '010-1111-2222',
-      gender: 'male',
-      birth: '2020-12-31',
-      currentPlan: null,
-      expiry: 3,
-      livingHouse: null,
-      isActive: true,
-      createdAt: '2020-02-11T05:55:37.754Z',
-      updatedAt: '2020-02-11T05:55:37.754Z',
-    },
-    avgRating: 4.4,
-    favsNow: true,
-  };
+  const { isFav, house } = props;
 
   const {
     title,
@@ -142,7 +62,7 @@ function HouseDetailContent(props: Props): JSX.Element {
     houseRule,
     amenity,
     user,
-  } = fakedata;
+  } = house;
 
   const { name } = user;
 
@@ -152,17 +72,6 @@ function HouseDetailContent(props: Props): JSX.Element {
       isTrueAmenity.push(ele[0]);
     }
   });
-
-  // const amenityIconName: AmenityIconName = {
-  //   secondFloor: 'stairs',
-  //   parking: 'parking',
-  //   aircon: 'air-conditioner',
-  //   autoLock: 'lock-smart',
-  //   tv: 'television-classic',
-  //   bed: 'bed-empty',
-  //   washing: 'shower',
-  //   allowPet: 'paw',
-  // };
 
   return (
     <View style={{ flex: 1, marginHorizontal: 15, marginBottom: 25 }}>
@@ -649,6 +558,7 @@ function HouseDetailContent(props: Props): JSX.Element {
           onPress={(): void => {
             props.navigation.navigate(
               isFav === 'f' ? 'FavorReview' : 'ReviewScreen',
+              { avgRating, reviews },
             );
           }}
         />
