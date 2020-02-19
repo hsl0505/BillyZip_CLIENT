@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import {
   withNavigation,
@@ -7,6 +7,8 @@ import {
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
+
+import { AntDesign } from '@expo/vector-icons';
 
 interface Props {
   RecommendOrHouses: string;
@@ -30,7 +32,7 @@ interface Images {
 
 function CardComponent(props: Props): JSX.Element {
   const { RecommendOrHouses, ele } = props;
-  const { id, type, title, images, avgRating } = ele;
+  const { id, type, title, images, avgRating, description } = ele;
   const { filePath } = images[0];
   return (
     <TouchableOpacity
@@ -43,12 +45,12 @@ function CardComponent(props: Props): JSX.Element {
           uri: filePath,
         }}
         containerStyle={{
-          height: RecommendOrHouses === 'R' ? '90%' : 150,
+          height: RecommendOrHouses === 'R' ? 300 : 190,
           width: RecommendOrHouses === 'R' ? 300 : 200,
           marginBottom: 15,
         }}
         imageStyle={{
-          height: RecommendOrHouses === 'R' ? 200 : 100,
+          height: RecommendOrHouses === 'R' ? 200 : 120,
           width: RecommendOrHouses === 'R' ? 300 : 200,
         }}
         imageProps={{
@@ -56,25 +58,74 @@ function CardComponent(props: Props): JSX.Element {
           PlaceholderContent: <ActivityIndicator />,
         }}
       >
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <View>
-            <Text>{title}</Text>
-            <Text>{type}</Text>
-          </View>
-          {RecommendOrHouses === 'R' ? (
-            <View>
-              <Text style={{ alignSelf: 'center' }}>Rating</Text>
-              <Rating
-                readonly
-                startingValue={avgRating}
-                imageSize={20}
-                fractions={2}
-              />
-              <Text style={{ alignSelf: 'center' }}>{avgRating}</Text>
+        <View>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <View
+              style={{
+                width: RecommendOrHouses === 'R' ? 205 : 180,
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: RecommendOrHouses === 'R' ? 17 : 14,
+                }}
+                numberOfLines={RecommendOrHouses === 'R' ? 2 : 1}
+                ellipsizeMode="tail"
+              >
+                {title}
+              </Text>
             </View>
-          ) : (
-            <View />
-          )}
+
+            {RecommendOrHouses === 'R' ? (
+              <View style={{ marginRight: 5 }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}
+                >
+                  <AntDesign name="star" size={20} color="purple" />
+                  <Text
+                    style={{ fontSize: 20, marginLeft: 5, fontWeight: 'bold' }}
+                  >
+                    {avgRating ? avgRating.toFixed(2) : avgRating}
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      alignSelf: 'flex-end',
+                      fontSize: 15,
+                      marginTop: 5,
+                    }}
+                  >
+                    {type.toUpperCase()}
+                  </Text>
+                </View>
+              </View>
+            ) : (
+              <View />
+            )}
+          </View>
+
+          <View
+            style={{
+              width: RecommendOrHouses === 'R' ? 205 : 180,
+              marginTop: RecommendOrHouses === 'R' ? undefined : 10,
+            }}
+          >
+            <Text
+              style={{ fontStyle: 'italic', color: '#A4A4A4' }}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {`" ${description} "`}
+            </Text>
+          </View>
         </View>
       </Card>
     </TouchableOpacity>

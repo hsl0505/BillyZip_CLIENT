@@ -15,14 +15,28 @@ import Villa from './HouseLIstEntry/Villa';
 import Officetel from './HouseLIstEntry/Officetel';
 
 interface Props {
-  rand: undefined | object[];
+  rand: Ele[][];
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
     NavigationParams
   >;
 }
 
+interface Ele {
+  id: number;
+  type: string;
+  title: string;
+  description: string;
+  images: Images[];
+  avgRating?: number;
+}
+
+interface Images {
+  filePath: string | undefined;
+}
+
 function HouseListEntry(props: Props): JSX.Element {
+  const { rand } = props;
   return (
     <View style={{ marginBottom: 15 }}>
       <View>
@@ -35,7 +49,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 18 }}>아파트</Text>
+          <Text style={{ fontSize: 22, marginLeft: 10 }}>아파트</Text>
           <Button
             title="More"
             type="outline"
@@ -51,9 +65,9 @@ function HouseListEntry(props: Props): JSX.Element {
             }}
           />
         </View>
-        <Apartment />
+        <Apartment apart={rand[0]} />
       </View>
-      <View>
+      <View style={{ marginTop: 20 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -63,7 +77,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 18, marginLeft: 10 }}>원룸</Text>
+          <Text style={{ fontSize: 22, marginLeft: 10 }}>원룸</Text>
           <Button
             title="More"
             type="outline"
@@ -79,9 +93,9 @@ function HouseListEntry(props: Props): JSX.Element {
             }}
           />
         </View>
-        <OneRoom />
+        <OneRoom oneroom={rand[4]} />
       </View>
-      <View>
+      <View style={{ marginTop: 20 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -91,7 +105,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 18, marginLeft: 10 }}>단독주택</Text>
+          <Text style={{ fontSize: 22, marginLeft: 10 }}>단독주택</Text>
           <Button
             title="More"
             type="outline"
@@ -109,9 +123,9 @@ function HouseListEntry(props: Props): JSX.Element {
             }}
           />
         </View>
-        <DetachedHouse />
+        <DetachedHouse dandok={rand[1]} />
       </View>
-      <View>
+      <View style={{ marginTop: 20 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -121,7 +135,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 18, marginLeft: 10 }}>빌라</Text>
+          <Text style={{ fontSize: 22, marginLeft: 10 }}>빌라</Text>
           <Button
             title="More"
             type="outline"
@@ -137,9 +151,9 @@ function HouseListEntry(props: Props): JSX.Element {
             }}
           />
         </View>
-        <Villa />
+        <Villa villa={rand[3]} />
       </View>
-      <View>
+      <View style={{ marginTop: 20 }}>
         <View
           style={{
             flexDirection: 'row',
@@ -149,7 +163,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 18, marginLeft: 10 }}>오피스텔</Text>
+          <Text style={{ fontSize: 22, marginLeft: 10 }}>오피스텔</Text>
           <Button
             title="More"
             type="outline"
@@ -165,7 +179,7 @@ function HouseListEntry(props: Props): JSX.Element {
             }}
           />
         </View>
-        <Officetel />
+        <Officetel officetel={rand[2]} />
       </View>
     </View>
   );

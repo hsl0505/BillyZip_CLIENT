@@ -147,7 +147,9 @@ function HostingImagePicker(props: Props): JSX.Element {
             <Carousel
               data={images}
               renderItem={({ item }): JSX.Element => (
-                <HostingImageComponent img={item.uri} />
+                <TouchableOpacity onPress={(): void => setVisible(true)}>
+                  <HostingImageComponent img={item.uri} />
+                </TouchableOpacity>
               )}
               itemWidth={width}
               sliderWidth={width}
@@ -365,7 +367,7 @@ function HostingImagePicker(props: Props): JSX.Element {
           <Picker.Item label="5년 이하" value={5} />
           <Picker.Item label="10년 이하" value={10} />
           <Picker.Item label="20년 이하" value={20} />
-          <Picker.Item label="20년 이상" value={30} />
+          <Picker.Item label="30년 이하" value={30} />
         </Picker>
       </View>
 
@@ -397,7 +399,7 @@ function HostingImagePicker(props: Props): JSX.Element {
           <Picker.Item label="10분 이내" value={10} />
           <Picker.Item label="20분 이내" value={20} />
           <Picker.Item label="30분 이내" value={30} />
-          <Picker.Item label="30분 이상" value={40} />
+          <Picker.Item label="60분 이내" value={60} />
         </Picker>
       </View>
 

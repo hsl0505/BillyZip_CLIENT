@@ -3,7 +3,20 @@ import { View, Text } from 'react-native';
 import HouseListEntry from './HouseListEntry';
 
 interface Props {
-  rand: undefined | object[];
+  rand: Ele[][];
+}
+
+interface Ele {
+  id: number;
+  type: string;
+  title: string;
+  description: string;
+  images: Images[];
+  avgRating?: number;
+}
+
+interface Images {
+  filePath: string | undefined;
 }
 
 function HouseList(props: Props): JSX.Element {
@@ -15,7 +28,7 @@ function HouseList(props: Props): JSX.Element {
           House List
         </Text>
       </View>
-      <View>
+      <View style={{ marginTop: 20 }}>
         <HouseListEntry rand={rand} />
       </View>
     </View>

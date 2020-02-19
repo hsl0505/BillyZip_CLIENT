@@ -28,7 +28,7 @@ function Recommend(props: Props): JSX.Element {
           BillyZip이 추천하는 House
         </Text>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, marginTop: 10 }}>
         <RecommendEntry rank={rank} />
       </View>
     </View>

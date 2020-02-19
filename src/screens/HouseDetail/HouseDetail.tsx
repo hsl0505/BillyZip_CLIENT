@@ -12,8 +12,6 @@ import HouseDetailContent from '../../components/HouseDetail/HouseDetailContent'
 import axiosInstance from '../../util/axiosInstance';
 
 interface Props {
-  // 여기 바껴야함
-
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
     NavigationParams
@@ -25,7 +23,6 @@ function HouseDetail(props: Props): JSX.Element {
   const houseId = navigation.getParam('houseId');
   const isFav = navigation.getParam('isFav');
   const [house, setHouse] = useState();
-  console.log('디테일', house);
 
   // 네비게이트 파람으로 하우스 아이디, isFav 받아야함
   // HouseDetailComponent -> id, images, favs 넣어주기
@@ -42,13 +39,20 @@ function HouseDetail(props: Props): JSX.Element {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      {/* <StatusBar hidden /> */}
-      <ScrollView removeClippedSubviews>
-        <HouseDetailComponent />
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
-          <HouseDetailContent isFav={isFav} />
-        </View>
-      </ScrollView>
+      {house ? (
+        <ScrollView removeClippedSubviews>
+          <HouseDetailComponent
+            images={house.images}
+            houseId={houseId}
+            favsNow={house.favsNow}
+          />
+          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <HouseDetailContent isFav={isFav} house={house} />
+          </View>
+        </ScrollView>
+      ) : (
+        <View />
+      )}
     </View>
   );
 }

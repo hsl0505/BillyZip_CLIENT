@@ -1,12 +1,14 @@
 import React from 'react';
 import { Text, View, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Card, Rating } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import {
   withNavigation,
   NavigationScreenProp,
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
+
+import { AntDesign } from '@expo/vector-icons';
 
 interface Props {
   item: {
@@ -15,11 +17,14 @@ interface Props {
     description: string;
     images: Images[];
     avgRating: number;
+    adminDistrict: string;
   };
+
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
     NavigationParams
   >;
+
   isFav: string;
 }
 
@@ -29,7 +34,7 @@ interface Images {
 
 function MoreCardComponent(props: Props): JSX.Element {
   const { item, isFav } = props;
-  const { id, title, description, images, avgRating } = item;
+  const { id, title, description, images, avgRating, adminDistrict } = item;
   const { filePath } = images[0];
 
   return (
@@ -43,28 +48,48 @@ function MoreCardComponent(props: Props): JSX.Element {
     >
       <Card
         image={{ uri: filePath }}
-        containerStyle={{ marginBottom: 15, height: 300 }}
+        containerStyle={{ marginBottom: 15, height: 330 }}
         imageStyle={{ height: 210 }}
         imageProps={{
           resizeMode: 'cover',
           PlaceholderContent: <ActivityIndicator />,
         }}
       >
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
           <View>
-            <Text>{title}</Text>
-            <Text>{description}</Text>
+            <Text
+              style={{ width: 240, fontWeight: 'bold', fontSize: 17 }}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {title}
+            </Text>
           </View>
           <View>
-            <Text style={{ alignSelf: 'center' }}>Rating</Text>
-            <Rating
-              readonly
-              startingValue={avgRating}
-              imageSize={20}
-              fractions={2}
-            />
-            <Text style={{ alignSelf: 'center' }}>{avgRating}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <AntDesign name="star" size={20} color="purple" />
+              <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 5 }}>
+                {avgRating ? avgRating.toFixed(2) : avgRating}
+              </Text>
+            </View>
           </View>
+        </View>
+        <View>
+          <Text style={{ marginTop: 5 }} numberOfLines={1} ellipsizeMode="tail">
+            {adminDistrict}
+          </Text>
+          <Text
+            style={{ marginTop: 9, fontStyle: 'italic' }}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {`" ${description} "`}
+          </Text>
         </View>
       </Card>
     </TouchableOpacity>
