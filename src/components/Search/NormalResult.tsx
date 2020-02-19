@@ -3,15 +3,6 @@ import { View, FlatList, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import MoreCardComponent from '../MainScreen/MoreCardComponent';
 
-// const styles = StyleSheet.create({
-//   container: {
-//     alignItems: 'center',
-//     flex: 1,
-//     justifyContent: 'center',
-//     marginTop: 20,
-//   },
-// });
-
 interface Props {
   data: Item[];
   isFav: string;
