@@ -33,6 +33,7 @@ interface Ele {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function HouseListEntry(props: Props): JSX.Element {

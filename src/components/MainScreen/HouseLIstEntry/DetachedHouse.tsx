@@ -17,6 +17,7 @@ interface Ele {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function DetachedHouse(props: Props): JSX.Element {
