@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
 import Recommend from '../../components/MainScreen/Recommend';
 import HouseList from '../../components/MainScreen/HouseList';
 import axiosInstance from '../../util/axiosInstance';
 
-function Home(): JSX.Element {
+interface Props {
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
+}
+
+function Home(props: Props): JSX.Element {
+  const { navigation } = props;
   const [rankAndRand, setRandR] = useState({
     rank: [],
     rand: [[], [], [], [], []],
@@ -17,10 +31,23 @@ function Home(): JSX.Element {
         setRandR(res.data);
       })
       .catch((err) => console.log('err?', err));
-  }, []);
+
+    const subscribe = navigation.addListener('didFocus', () => {
+      axiosInstance
+        .get('houses')
+        .then((res) => {
+          setRandR(res.data);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    return (): void => {
+      subscribe.remove();
+    };
+  }, [navigation]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 20 }}>
       <ScrollView removeClippedSubviews>
         <View style={{ flex: 1 }}>
           <Recommend rank={rankAndRand.rank} />
@@ -33,4 +60,4 @@ function Home(): JSX.Element {
   );
 }
 
-export default Home;
+export default withNavigation(Home);
