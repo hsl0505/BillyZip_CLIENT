@@ -83,7 +83,6 @@ function MapSearchForm(props: any): JSX.Element {
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
-          // onPress={(e) => console.log(e.nativeEvent)}
         >
           {markers.map(
             (marker: {
@@ -102,13 +101,11 @@ function MapSearchForm(props: any): JSX.Element {
                   axiosInstance
                     .get(`houses/${e.nativeEvent.id}`)
                     .then((res) => {
-                      console.log('res.data ???  ', res.data);
+                      props.navigation.navigate('HouseDetail', {
+                        houseId: res.data.id,
+                        isFav: res.data.favsNow,
+                      });
                     });
-
-                  // 아래 navigate에 옵션으로 위에서 받은 res.data를 주기
-                  setTimeout(() => {
-                    props.navigation.navigate('HouseDetail');
-                  }, 1000);
                 }}
               />
             ),
