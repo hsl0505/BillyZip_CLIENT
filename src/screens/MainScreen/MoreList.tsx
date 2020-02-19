@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -22,6 +22,28 @@ function MoreList(props: Props): JSX.Element {
   const part = navigation.getParam('part');
   const [houses, setHouses] = useState();
 
+  let forTitle;
+
+  switch (part) {
+    case 'apart':
+      forTitle = '아파트';
+      break;
+    case 'dandok':
+      forTitle = '단독주택';
+      break;
+    case 'oneroom':
+      forTitle = '원룸';
+      break;
+    case 'villa':
+      forTitle = '빌라';
+      break;
+    case 'officetel':
+      forTitle = '오피스텔';
+      break;
+    default:
+      forTitle = '';
+  }
+
   useEffect(() => {
     axiosInstance
       .get(`houses/part/${part}`)
@@ -36,8 +58,20 @@ function MoreList(props: Props): JSX.Element {
       style={{
         flex: 1,
         backgroundColor: '#fff',
+        marginTop: 25,
       }}
     >
+      <Text
+        style={{
+          marginLeft: 15,
+          marginTop: 25,
+          marginBottom: 10,
+          fontSize: 28,
+          fontWeight: 'bold',
+        }}
+      >
+        {forTitle}
+      </Text>
       <MoreListEntry houses={houses} isFav="m" />
     </View>
   );
