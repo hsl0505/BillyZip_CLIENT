@@ -16,21 +16,42 @@ const UserInfoScreenStackNav = createStackNavigator(
   {
     UserInfo: {
       screen: UserInfo,
+      navigationOptions: {
+        title: '더보기',
+      },
     },
     Subscribe: {
       screen: Subscribe,
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: undefined,
+      },
     },
     MyInfo: {
       screen: MyInfo,
+      navigationOptions: {
+        title: '내 정보',
+      },
     },
     Hosting: {
       screen: Hosting,
+      navigationOptions: {
+        title: '호스팅',
+      },
     },
     HostingManagement: {
       screen: HostingManagement,
+      navigationOptions: {},
     },
     HostingPost: {
       screen: HostingPost,
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
+      },
     },
     HouseDetail: {
       screen: HouseDetail,
