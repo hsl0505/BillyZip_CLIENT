@@ -18,6 +18,7 @@ const Favor = createStackNavigator(
   },
   {
     initialRouteName: 'FavorScreen',
+    headerMode: 'none',
   },
 );
 

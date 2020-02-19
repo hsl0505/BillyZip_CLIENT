@@ -37,7 +37,7 @@ function MoreListEntry(props: Props): JSX.Element {
   const { houses, isFav, favHouses } = props;
 
   return (
-    <View>
+    <View style={{ marginBottom: 100 }}>
       {houses ? (
         <FlatList
           removeClippedSubviews

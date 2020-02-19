@@ -1,12 +1,10 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import HostingPostComponent from '../../../components/UserInfo/Hosting/HostingPostComponent';
 
 function HostingPost(): JSX.Element {
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      {/* <KeyboardAvoidingView style={{ flex: 1 }} enabled> */}
+    <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 30 }}>
       <ScrollView
         removeClippedSubviews
         keyboardShouldPersistTaps="always"
@@ -14,7 +12,6 @@ function HostingPost(): JSX.Element {
       >
         <HostingPostComponent />
       </ScrollView>
-      {/* </KeyboardAvoidingView> */}
     </View>
   );
 }

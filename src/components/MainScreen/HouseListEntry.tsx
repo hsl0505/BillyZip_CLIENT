@@ -49,7 +49,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 22, marginLeft: 10 }}>아파트</Text>
+          <Text style={{ fontSize: 22 }}>아파트</Text>
           <Button
             title="More"
             type="outline"
@@ -77,7 +77,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 22, marginLeft: 10 }}>원룸</Text>
+          <Text style={{ fontSize: 22 }}>원룸</Text>
           <Button
             title="More"
             type="outline"
@@ -105,7 +105,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 22, marginLeft: 10 }}>단독주택</Text>
+          <Text style={{ fontSize: 22 }}>단독주택</Text>
           <Button
             title="More"
             type="outline"
@@ -135,7 +135,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 22, marginLeft: 10 }}>빌라</Text>
+          <Text style={{ fontSize: 22 }}>빌라</Text>
           <Button
             title="More"
             type="outline"
@@ -163,7 +163,7 @@ function HouseListEntry(props: Props): JSX.Element {
             marginRight: 15,
           }}
         >
-          <Text style={{ fontSize: 22, marginLeft: 10 }}>오피스텔</Text>
+          <Text style={{ fontSize: 22 }}>오피스텔</Text>
           <Button
             title="More"
             type="outline"

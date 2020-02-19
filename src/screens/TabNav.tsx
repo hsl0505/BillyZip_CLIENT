@@ -43,7 +43,7 @@ const TabNav = createBottomTabNavigator(
             iconName = 'message1';
             break;
           case 'UserInfo':
-            iconName = 'user';
+            iconName = 'ellipsis1';
             break;
           default:
             iconName = 'exclamationcircleo';
@@ -56,6 +56,7 @@ const TabNav = createBottomTabNavigator(
       inactiveTintColor: 'gray',
       showLabel: false,
     },
+    resetOnBlur: true,
   },
 );
 

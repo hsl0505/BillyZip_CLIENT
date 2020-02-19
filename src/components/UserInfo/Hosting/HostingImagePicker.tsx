@@ -208,7 +208,12 @@ function HostingImagePicker(props: Props): JSX.Element {
             }
           }}
           type="outline"
-          buttonStyle={{ marginRight: 15 }}
+          buttonStyle={{
+            marginRight: 15,
+            borderWidth: 1,
+            borderColor: 'purple',
+          }}
+          titleStyle={{ color: 'purple' }}
         />
         <Button
           title="이미지 전체 삭제"
@@ -220,7 +225,12 @@ function HostingImagePicker(props: Props): JSX.Element {
             }
           }}
           type="outline"
-          buttonStyle={{ marginRight: 15 }}
+          buttonStyle={{
+            marginRight: 15,
+            borderWidth: 1,
+            borderColor: 'purple',
+          }}
+          titleStyle={{ color: 'purple' }}
         />
       </View>
 
@@ -751,6 +761,9 @@ function HostingImagePicker(props: Props): JSX.Element {
       <View style={{ flex: 1, alignItems: 'center', marginTop: 15 }}>
         <Button
           title="호스팅 하기"
+          type="outline"
+          buttonStyle={{ borderColor: 'purple', borderWidth: 1 }}
+          titleStyle={{ color: 'purple' }}
           onPress={(): void => {
             if (
               !images[0].uri ||
@@ -811,7 +824,7 @@ function HostingImagePicker(props: Props): JSX.Element {
                   },
                 })
                 .then((res) => {
-                  console.log('포스팅 응답!', res.data.id);
+                  // console.log('포스팅 응답!', res.data.id);
                   Alert.alert('포스팅이 완료되었습니다!');
                   props.navigation.navigate('HouseDetail', {
                     houseId: res.data.id,
