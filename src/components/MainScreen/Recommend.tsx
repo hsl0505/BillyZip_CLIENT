@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, AsyncStorage } from 'react-native';
 import RecommendEntry from './RecommendEntry';
 
 interface Props {
@@ -21,10 +21,48 @@ interface Images {
 
 function Recommend(props: Props): JSX.Element {
   const { rank } = props;
+  const [userName, setUserName] = useState('');
+
+  async function getUserName(): Promise<void> {
+    try {
+      const name = await AsyncStorage.getItem('userName');
+      if (name) {
+        setUserName(name);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getUserName();
+  });
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 24, marginTop: '4%', marginLeft: '5%' }}>
+        <Text
+          style={{
+            marginTop: 35,
+            marginLeft: 15,
+            fontSize: 26,
+            fontWeight: 'bold',
+            fontStyle: 'italic',
+          }}
+        >
+          {userName} 님,
+        </Text>
+        <Text
+          style={{
+            marginTop: 4,
+            marginLeft: 15,
+            fontSize: 26,
+            fontWeight: 'bold',
+          }}
+        >
+          무슨 집을 찾고 계시나요?
+        </Text>
+        <Text style={{ fontSize: 24, marginTop: 35, marginLeft: 15 }}>
           BillyZip이 추천하는 House
         </Text>
       </View>
