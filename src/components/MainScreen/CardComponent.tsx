@@ -28,12 +28,23 @@ interface Props {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function CardComponent(props: Props): JSX.Element {
   const { RecommendOrHouses, ele } = props;
   const { id, type, title, images, avgRating, description } = ele;
-  const { filePath } = images[0];
+  let filePath;
+  images.forEach((img) => {
+    if (img.fileName === 'mainImg.jpg') {
+      filePath = img.filePath;
+    }
+  });
+
+  if (!filePath) {
+    filePath = images[0].filePath;
+  }
+
   return (
     <TouchableOpacity
       onPress={(): void => {

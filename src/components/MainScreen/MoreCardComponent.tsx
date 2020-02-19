@@ -30,12 +30,22 @@ interface Props {
 
 interface Images {
   filePath: string | undefined;
+  fileName: string | undefined;
 }
 
 function MoreCardComponent(props: Props): JSX.Element {
   const { item, isFav } = props;
   const { id, title, description, images, avgRating, adminDistrict } = item;
-  const { filePath } = images[0];
+  let filePath;
+  images.forEach((img) => {
+    if (img.fileName === 'mainImg.jpg') {
+      filePath = img.filePath;
+    }
+  });
+
+  if (!filePath) {
+    filePath = images[0].filePath;
+  }
 
   return (
     <TouchableOpacity
