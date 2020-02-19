@@ -5,13 +5,15 @@ import HouseList from '../../components/MainScreen/HouseList';
 import axiosInstance from '../../util/axiosInstance';
 
 function Home(): JSX.Element {
-  const [rankAndRand, setRandR] = useState({ rank: [], rand: [] });
+  const [rankAndRand, setRandR] = useState({
+    rank: [],
+    rand: [[], [], [], [], []],
+  });
 
   useEffect(() => {
     axiosInstance
       .get('houses')
       .then((res) => {
-        console.log(res.data);
         setRandR(res.data);
       })
       .catch((err) => console.log('err?', err));
@@ -23,7 +25,7 @@ function Home(): JSX.Element {
         <View style={{ flex: 1 }}>
           <Recommend rank={rankAndRand.rank} />
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop: 45 }}>
           <HouseList rand={rankAndRand.rand} />
         </View>
       </ScrollView>
