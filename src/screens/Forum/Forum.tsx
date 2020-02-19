@@ -4,19 +4,20 @@ import Room from './Room';
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-  },
+  }
 });
 
-function Chat(): JSX.Element {
+function Forum(): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text>Chat List</Text>
-      <Room />
+      <Text>Forum List</Text>
+      <View>
+        <Room />
+      </View>
     </View>
   );
 }
 
-export default Chat;
+export default Forum;

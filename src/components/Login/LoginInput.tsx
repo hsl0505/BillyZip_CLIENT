@@ -58,9 +58,10 @@ function LoginInput(props: Partial<NavigationInjectedProps>): JSX.Element {
               email,
               password,
             })
-            .then((res) => {
+            .then(async (res) => {
               if (res.status === 200) {
                 asyncStorageHelper.setItem('userToken', res.data.token);
+                asyncStorageHelper.setItem('userId', JSON.stringify(res.data.userId));
                 if (props.navigation) {
                   props.navigation.navigate('App');
                 }

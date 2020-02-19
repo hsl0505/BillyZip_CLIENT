@@ -7,7 +7,7 @@ import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor/Favor';
 // import Search from './Search/Search';
 import SearchScreen from './Search/SearchScreen';
-import Chat from './Chat';
+import Forum from './Forum/Forum';
 // import UserInfo from './UserInfo/UserInfo';
 import UserInfoScreenStackNav from './UserInfo/UserInforScreen';
 
@@ -21,7 +21,7 @@ const TabNav = createBottomTabNavigator(
     MainScreenStackNav,
     Favor,
     Search: SearchScreen,
-    Chat,
+    Forum,
     UserInfo: UserInfoScreenStackNav,
   },
   {
@@ -39,7 +39,7 @@ const TabNav = createBottomTabNavigator(
           case 'Search':
             iconName = 'search1';
             break;
-          case 'Chat':
+          case 'Forum':
             iconName = 'message1';
             break;
           case 'UserInfo':
