@@ -7,7 +7,7 @@ import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor/Favor';
 // import Search from './Search/Search';
 import SearchScreen from './Search/SearchScreen';
-import Forum from './Forum/Forum';
+import ForumScreen from './Forum/ForumScreen';
 // import UserInfo from './UserInfo/UserInfo';
 import UserInfoScreenStackNav from './UserInfo/UserInforScreen';
 
@@ -21,7 +21,7 @@ const TabNav = createBottomTabNavigator(
     MainScreenStackNav,
     Favor,
     Search: SearchScreen,
-    Forum,
+    Forum: ForumScreen,
     UserInfo: UserInfoScreenStackNav,
   },
   {
