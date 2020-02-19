@@ -22,10 +22,10 @@ const cameraHelper = {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        // base64: true,
         aspect: [4, 3],
         allowsMultipleSelection: true,
       });
+
       if (!result.cancelled) {
         if (!previous[0].uri) {
           cb([result]);

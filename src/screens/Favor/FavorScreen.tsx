@@ -17,7 +17,7 @@ function FavorScreen(): JSX.Element {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <MoreListEntry houses={favHouses} isFav="f" />
+      {favHouses ? <MoreListEntry favHouses={favHouses} isFav="f" /> : <View />}
     </View>
   );
 }

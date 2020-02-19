@@ -13,6 +13,7 @@ interface Item {
   description: string;
   images: Images[];
   avgRating: number;
+  adminDistrict: string;
 }
 
 interface Images {
@@ -26,7 +27,7 @@ function NormalResult(props: Props): JSX.Element {
       <FlatList
         data={data}
         renderItem={({ item }): JSX.Element => (
-          <MoreCardComponent item={item} isFav='a'/>
+          <MoreCardComponent item={item} isFav="a" />
         )}
         keyExtractor={(item): string => item.id.toString()}
         windowSize={3}
