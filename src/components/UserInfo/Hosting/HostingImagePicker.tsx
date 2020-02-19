@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Dimensions, Alert, Text, Picker, Platform } from 'react-native';
+import {
+  View,
+  Dimensions,
+  Alert,
+  Text,
+  Picker,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {
   Button,
@@ -56,6 +64,7 @@ function HostingImagePicker(props: Props): JSX.Element {
   const [hasLocation, setLocationPermission] = useState();
 
   const [images, setImage] = useState<Items[]>([{}]);
+  const [mainImg, setMainImg] = useState();
 
   const [type, setType] = useState();
   const [plan, setPlan] = useState();
@@ -79,6 +88,8 @@ function HostingImagePicker(props: Props): JSX.Element {
   const [allowPet, setAP] = useState(false);
   const [startTime, setStart] = useState(7);
   const [endTime, setEnd] = useState(30);
+
+  const [onPosting, setOnPosting] = useState(false);
 
   let forAme = false;
   if (
@@ -139,6 +150,27 @@ function HostingImagePicker(props: Props): JSX.Element {
           >
             이미지 올리기
           </Text>
+          <MaterialCommunityIcons
+            name="lightbulb-on"
+            size={34}
+            style={{ marginLeft: mainImg !== undefined ? 85 : 155 }}
+            onPress={(): void => {
+              if (!images[0].uri) {
+                Alert.alert('업로드 된 이미지가 없습니다');
+              } else {
+                setMainImg(activeSlide);
+                Alert.alert('현재 이미지가 대표 이미지로 설정 되었습니다');
+              }
+            }}
+            color={mainImg !== undefined ? 'purple' : 'black'}
+          />
+          {mainImg !== undefined ? (
+            <Text style={{ marginLeft: 10, color: 'purple' }}>
+              {mainImg + 1}번 이미지
+            </Text>
+          ) : (
+            <View />
+          )}
         </View>
       </View>
       {images[0].uri ? (
@@ -148,7 +180,10 @@ function HostingImagePicker(props: Props): JSX.Element {
               data={images}
               renderItem={({ item }): JSX.Element => (
                 <TouchableOpacity onPress={(): void => setVisible(true)}>
-                  <HostingImageComponent img={item.uri} />
+                  <HostingImageComponent
+                    img={item.uri}
+                    mainimg={activeSlide === mainImg ? 'y' : 'n'}
+                  />
                 </TouchableOpacity>
               )}
               itemWidth={width}
@@ -200,11 +235,18 @@ function HostingImagePicker(props: Props): JSX.Element {
               Alert.alert('삭제할 이미지가 없습니다.');
             } else if (images.length === 1) {
               setImage([{}]);
+              setMainImg(undefined);
             } else {
               const deleteImages = images
                 .slice(0, activeSlide)
                 .concat(images.slice(activeSlide + 1));
               setImage(deleteImages);
+
+              if (activeSlide === mainImg) {
+                setMainImg(undefined);
+              } else if (mainImg > activeSlide) {
+                setMainImg(mainImg - 1);
+              }
             }
           }}
           type="outline"
@@ -222,6 +264,7 @@ function HostingImagePicker(props: Props): JSX.Element {
               Alert.alert('삭제할 이미지가 없습니다.');
             } else {
               setImage([{}]);
+              setMainImg(undefined);
             }
           }}
           type="outline"
@@ -780,6 +823,7 @@ function HostingImagePicker(props: Props): JSX.Element {
             ) {
               Alert.alert('빠진 항목이 있는 지 확인해 주세요');
             } else {
+              setOnPosting(true);
               const formData = new FormData();
               formData.append('plan', plan); // 스트링
               formData.append('type', type); // 스트링
@@ -803,14 +847,15 @@ function HostingImagePicker(props: Props): JSX.Element {
               formData.append('startTime', JSON.stringify(startTime)); // 넘버
               formData.append('endTime', JSON.stringify(endTime)); // 넘버
 
-              images.forEach((img) => {
+              images.forEach((img, index) => {
                 const imgUri = img.uri ? img.uri : '';
                 const modUri =
                   Platform.OS === 'android'
                     ? imgUri
                     : imgUri.replace('file://', '');
                 const temp: FormDataValue = {
-                  name: imgUri.split('/').pop(),
+                  name:
+                    index === mainImg ? 'mainImg.jpg' : imgUri.split('/').pop(),
                   type: `image/${imgUri.slice(imgUri.lastIndexOf('.') + 1)}`,
                   uri: modUri,
                 };
@@ -824,10 +869,10 @@ function HostingImagePicker(props: Props): JSX.Element {
                   },
                 })
                 .then((res) => {
-                  // console.log('포스팅 응답!', res.data.id);
+                  setOnPosting(false);
                   Alert.alert('포스팅이 완료되었습니다!');
                   props.navigation.navigate('HouseDetail', {
-                    houseId: res.data.id,
+                    houseId: res.data.houseId,
                   });
                 })
                 .catch((err) => console.log(err));
@@ -835,6 +880,16 @@ function HostingImagePicker(props: Props): JSX.Element {
           }}
         />
       </View>
+      <Overlay isVisible={onPosting} height={100}>
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <Text style={{ marginBottom: 20 }}>
+            호스팅 중입니다 잠시만 기다려 주세요
+          </Text>
+          <ActivityIndicator />
+        </View>
+      </Overlay>
     </View>
   );
 }
