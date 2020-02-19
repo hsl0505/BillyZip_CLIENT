@@ -16,12 +16,11 @@ interface Props {
 }
 
 function ReviewScreen(props: Props): JSX.Element {
-  // 리뷰스, 평균 레이팅 받기
   const { navigation } = props;
   const avgRating = navigation.getParam('avgRating');
   const reviews = navigation.getParam('reviews');
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 25 }}>
       <ReviewComponent avgRating={avgRating} reviews={reviews} />
     </View>
   );

@@ -25,7 +25,7 @@ function ReviewComponent(props: Props): JSX.Element {
   const reviewLength = reviews.length;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={{ marginTop: 20, marginHorizontal: 20 }}>
         <Text style={{ fontSize: 35, fontWeight: 'bold' }}>후기</Text>
       </View>

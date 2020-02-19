@@ -25,10 +25,11 @@ const SearchScreen = createStackNavigator(
     },
     ReviewScreen: {
       screen: ReviewScreen,
-    }
+    },
   },
   {
     initialRouteName: 'SelectSearch',
+    headerMode: 'none',
   },
 );
 

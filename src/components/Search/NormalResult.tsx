@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import MoreCardComponent from '../MainScreen/MoreCardComponent';
 
