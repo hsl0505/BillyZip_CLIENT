@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 import {
   withNavigation,
@@ -40,27 +40,27 @@ function LivingHouseComponenet(props: Props): JSX.Element {
   const list = [
     {
       name: `구독 타입 : ${type}`,
-      icon: 'done',
+      icon: 'home-account',
     },
     {
-      name: `건축 년도 : ${year}년 이내`,
-      icon: 'done',
+      name: `건축년도 : ${year}년 이내`,
+      icon: 'calendar-range',
     },
     {
       name: `지하철 도보 : ${access}분 이내`,
-      icon: 'done',
+      icon: 'subway',
     },
     {
-      name: `행정구역명 : ${adminDistrict}`,
-      icon: 'done',
+      name: `주소 : ${adminDistrict}`,
+      icon: 'home-map-marker',
     },
     {
-      name: `특약사항 : ${houseRule}`,
-      icon: 'done',
+      name: `주의사항 : ${houseRule}`,
+      icon: 'message-alert',
     },
     {
       name: '상세 정보 확인하기',
-      icon: 'zoom-in',
+      icon: 'comment-search-outline',
     },
   ];
 
@@ -70,10 +70,11 @@ function LivingHouseComponenet(props: Props): JSX.Element {
         <ListItem
           key={i.toString()}
           title={l.name}
-          leftIcon={<MaterialIcons name={l.icon} size={28} />}
+          leftIcon={<MaterialCommunityIcons name={l.icon} size={28} />}
           bottomDivider
           onPress={(): void => {
-            if (l.icon === 'zoom-in') {
+            if (l.icon === 'comment-search-outline') {
+              console.log('houseId :: ', id);
               props.navigation.navigate('HouseDetail', { houseId: id });
             }
           }}
