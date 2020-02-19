@@ -60,7 +60,13 @@ function LoginInput(props: Partial<NavigationInjectedProps>): JSX.Element {
             })
             .then((res) => {
               if (res.status === 200) {
+                console.log(res.data);
                 asyncStorageHelper.setItem('userToken', res.data.token);
+                asyncStorageHelper.setItem(
+                  'userId',
+                  JSON.stringify(res.data.userId),
+                );
+                asyncStorageHelper.setItem('userName', res.data.userName);
                 if (props.navigation) {
                   props.navigation.navigate('App');
                 }
