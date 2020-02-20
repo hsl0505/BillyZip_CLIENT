@@ -37,6 +37,7 @@ interface Props {
     amenity: {};
     user: {
       name: string;
+      id: number;
     };
     reviews: [];
   };
@@ -64,7 +65,7 @@ function HouseDetailContent(props: Props): JSX.Element {
     user,
   } = house;
 
-  const { name } = user;
+  const { name, id } = user;
 
   const isTrueAmenity: string[] = [];
   Object.entries(amenity).forEach((ele) => {
@@ -560,6 +561,28 @@ function HouseDetailContent(props: Props): JSX.Element {
               isFav === 'f' ? 'FavorReview' : 'ReviewScreen',
               { avgRating, reviews },
             );
+          }}
+        />
+      </View>
+      <View style={{ flex: 1, marginTop: 70 }}>
+        <Text
+          style={{
+            fontSize: 25,
+            fontWeight: 'bold',
+            marginLeft: 10,
+            marginBottom: 15,
+          }}
+        >
+          Forum
+        </Text>
+        <Text style={{ marginLeft: 10 }}>
+          {name} 호스트님의 포럼에 참가하여 의견 나눠보세요.
+        </Text>
+        <Button
+          title="포럼 참가"
+          containerStyle={{ alignSelf: 'center' }}
+          onPress={(): void => {
+            props.navigation.navigate('Room', {hostId: id});
           }}
         />
       </View>
