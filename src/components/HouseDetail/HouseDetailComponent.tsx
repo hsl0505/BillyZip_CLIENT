@@ -48,7 +48,7 @@ function HouseDetailComponent(props: Props): JSX.Element {
             setFavsNow(false);
             axiosInstance
               .delete(`favs/${houseId}`)
-              .then((res) => console.log(res.status))
+              .then()
               .catch((err) => console.log(err));
           } else {
             setFavsNow(true);
@@ -56,7 +56,7 @@ function HouseDetailComponent(props: Props): JSX.Element {
               .post('favs', {
                 houseId,
               })
-              .then((res) => console.log(res.status))
+              .then()
               .catch((err) => console.log(err));
           }
         }}

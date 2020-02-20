@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
 
 function MyInfoList(props: Props): JSX.Element {
   const { myInfo } = props;
-  // console.log(myInfo);
   const { email, name, mobile, birth } = myInfo;
 
   return (
