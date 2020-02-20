@@ -1,11 +1,24 @@
 import React from 'react';
 import { View, FlatList, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { Button } from 'react-native-elements';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
 import ReviewCardComponent from './ReviewCardComponent';
 
 interface Props {
   avgRating: number;
   reviews: Rv[];
+  houseId: number;
+  isFav: string;
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
 }
 
 interface Rv {
@@ -20,8 +33,7 @@ interface Rv {
 }
 
 function ReviewComponent(props: Props): JSX.Element {
-  // 네비게이션 프롭스로 리뷰스, 평균레이팅 받아와야됨
-  const { avgRating, reviews } = props;
+  const { avgRating, reviews, houseId, isFav } = props;
   const reviewLength = reviews.length;
 
   return (
@@ -35,6 +47,9 @@ function ReviewComponent(props: Props): JSX.Element {
           marginTop: 15,
           marginHorizontal: 20,
           alignItems: 'center',
+          paddingBottom: 15,
+          borderBottomWidth: 1,
+          borderBottomColor: '#D8D8D8',
         }}
       >
         <AntDesign name="star" size={20} color="green" />
@@ -44,7 +59,21 @@ function ReviewComponent(props: Props): JSX.Element {
         <Text style={{ fontWeight: 'bold', fontSize: 20, marginLeft: 25 }}>
           총 {reviewLength}개의 리뷰
         </Text>
+        <View style={{ marginLeft: 30 }}>
+          <Button
+            title="리뷰 등록하기"
+            type="clear"
+            titleStyle={{ color: 'purple' }}
+            onPress={(): void => {
+              props.navigation.navigate(
+                isFav === 'f' ? 'ReviewPostScreen' : 'ReviewPostScreen',
+                { houseId, isFav },
+              );
+            }}
+          />
+        </View>
       </View>
+
       <FlatList
         showsVerticalScrollIndicator={false}
         removeClippedSubviews
@@ -59,4 +88,4 @@ function ReviewComponent(props: Props): JSX.Element {
   );
 }
 
-export default React.memo(ReviewComponent);
+export default React.memo(withNavigation(ReviewComponent));
