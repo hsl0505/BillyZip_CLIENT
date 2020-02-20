@@ -126,7 +126,7 @@ function HostingImagePicker(props: Props): JSX.Element {
     <View
       style={{
         flex: 1,
-        marginBottom: 25,
+        marginBottom: 15,
       }}
     >
       <View style={{ flex: 1, marginVertical: 10, marginLeft: 15 }}>
@@ -483,7 +483,7 @@ function HostingImagePicker(props: Props): JSX.Element {
           }}
         >
           <Input
-            placeholder={`주소 입력 후 주소를 추가해주세요${'\n'}예시 : 서울특별시 용산구 용산2가동 남산공원길 105`}
+            placeholder={`주소 입력 후 주소를 추가해주세요${'\n'}${'\n'}예시 : 서울특별시 용산구 용산2가동 남산공원길 105`}
             multiline
             textAlignVertical="top"
             value={admin}
