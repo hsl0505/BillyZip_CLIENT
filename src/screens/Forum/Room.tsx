@@ -11,19 +11,12 @@ let myName: any;
 
 function Room(props: any): JSX.Element {
   // ! 매물상세에서 send a message를 눌러 이 컴포넌트로 들어올 때 props로 호스트의 hostId를 받는다.
-  let { hostId } = props;
   const { navigation } = props;
-  const data = navigation ? navigation.getParam('data') : undefined;
+  const hostId = navigation ? navigation.getParam('hostId') : undefined;
 
-  console.log('data', data);
-  console.log('??', hostId);
-  // const hostId = 1;
-
-
-  // 풋터에서 왔다면 hostId 없기 때문에 hostId = data; 해준다.
-  if (!hostId) {
-    hostId = data;
-  }
+  // hostId = 1;
+  console.log('hostId ?? ', hostId);
+  console.log('navigation ?? ', navigation); //   "detailHostId": 3,  "footerHostId": 1
 
   const [chat, setChat] = useState('');
   const [messages, setMessages] = useState([]);
@@ -36,7 +29,7 @@ function Room(props: any): JSX.Element {
       .then((res) => {
         setMessages(JSON.parse(res.data.forumLog));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('로그가 존재하지 않습니다.', err));
 
     const getMyId = async (): Promise<void> => {
       myId = await AsyncStorage.getItem('userId');
@@ -80,6 +73,7 @@ function Room(props: any): JSX.Element {
       <Button
         title="전송"
         onPress={(): any => {
+          handleMessageToHost(hostId || myId);
           axiosInstance
             .post('forum', {
               messages,
@@ -93,7 +87,6 @@ function Room(props: any): JSX.Element {
             })
             .catch((err) => console.error(err));
 
-          handleMessageToHost(hostId || myId);
         }}
       />
       <Button

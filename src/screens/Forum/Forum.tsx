@@ -46,10 +46,8 @@ function Forum(props: any): JSX.Element {
             bottomDivider
             chevron
             onPress={(): void => {
-              console.log('리스트 눌렸다~');
               // hostId 넣어주기
-              console.log(forum.hostId);
-              props.navigation.navigate('Room', {data: forum.hostId});
+              props.navigation.navigate('Room', {hostId: forum.hostId});
             }}
           />
         ))}
