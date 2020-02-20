@@ -22,6 +22,7 @@ interface Props {
     NavigationParams
   >;
   house: {
+    id: number;
     title: string;
     type: string;
     description: string;
@@ -46,6 +47,8 @@ interface Props {
 function HouseDetailContent(props: Props): JSX.Element {
   const { width } = Dimensions.get('window');
   const { isFav, house } = props;
+
+  const houseId = house.id;
 
   const {
     title,
@@ -559,7 +562,7 @@ function HouseDetailContent(props: Props): JSX.Element {
           onPress={(): void => {
             props.navigation.navigate(
               isFav === 'f' ? 'FavorReview' : 'ReviewScreen',
-              { avgRating, reviews },
+              { avgRating, reviews, houseId, isFav },
             );
           }}
         />
@@ -582,7 +585,7 @@ function HouseDetailContent(props: Props): JSX.Element {
           title="포럼 참가"
           containerStyle={{ alignSelf: 'center' }}
           onPress={(): void => {
-            props.navigation.navigate('Room', {hostId: id});
+            props.navigation.navigate('Room', { hostId: id });
           }}
         />
       </View>
