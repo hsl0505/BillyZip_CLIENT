@@ -1,8 +1,10 @@
 import io from 'socket.io-client';
-// import ENV from '../util/env';
+import ENV from './env';
 
-const socket = io('http://192.168.219.102:4000', {
-    transports: ['websocket']
-  });
+const ioIp = ENV.TEST_IP.slice(0, ENV.TEST_IP.length - 1);
 
-  export default socket;
+const socket = io(`${ioIp}`, {
+  transports: ['websocket'],
+});
+
+export default socket;
