@@ -19,9 +19,16 @@ function ReviewScreen(props: Props): JSX.Element {
   const { navigation } = props;
   const avgRating = navigation.getParam('avgRating');
   const reviews = navigation.getParam('reviews');
+  const houseId = navigation.getParam('houseId');
+  const isFav = navigation.getParam('isFav');
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 25 }}>
-      <ReviewComponent avgRating={avgRating} reviews={reviews} />
+      <ReviewComponent
+        avgRating={avgRating}
+        reviews={reviews}
+        houseId={houseId}
+        isFav={isFav}
+      />
     </View>
   );
 }
