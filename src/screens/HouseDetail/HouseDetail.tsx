@@ -24,10 +24,6 @@ function HouseDetail(props: Props): JSX.Element {
   const isFav = navigation.getParam('isFav');
   const [house, setHouse] = useState();
 
-  // 네비게이트 파람으로 하우스 아이디, isFav 받아야함
-  // HouseDetailComponent -> id, images, favs 넣어주기
-  // HouseDetailContent -> 나머지 넣어주기 (avgrating 포함)
-
   useEffect(() => {
     axiosInstance
       .get(`houses/${houseId}`)
@@ -35,7 +31,20 @@ function HouseDetail(props: Props): JSX.Element {
         setHouse(res.data);
       })
       .catch((err) => console.log(err));
-  }, [houseId]);
+
+    const subscribe = navigation.addListener('didFocus', () => {
+      axiosInstance
+        .get(`houses/${houseId}`)
+        .then((res) => {
+          setHouse(res.data);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    return (): void => {
+      subscribe.remove();
+    };
+  }, [houseId, navigation]);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
