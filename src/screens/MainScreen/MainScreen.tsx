@@ -5,6 +5,7 @@ import MoreList from './MoreList';
 import HouseDetail from '../HouseDetail/HouseDetail';
 import ReviewScreen from '../HouseDetail/ReviewScreen';
 import Room from '../Forum/Room';
+import ReviewPostScreen from '../HouseDetail/ReviewPostScreen';
 
 const MainScreenStackNav = createStackNavigator(
   {
@@ -20,9 +21,12 @@ const MainScreenStackNav = createStackNavigator(
     ReviewScreen: {
       screen: ReviewScreen,
     },
+    ReviewPostScreen: {
+      screen: ReviewPostScreen,
+    },
     Room: {
       screen: Room,
-    }
+    },
   },
   {
     initialRouteName: 'Home',

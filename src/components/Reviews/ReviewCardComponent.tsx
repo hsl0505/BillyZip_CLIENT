@@ -10,7 +10,6 @@ interface Props {
     createdAt: string;
     user: {
       name: string;
-      gender: string;
     };
   };
 }
@@ -18,8 +17,8 @@ interface Props {
 function ReviewCardComponent(props: Props): JSX.Element {
   const { item } = props;
   const { comment, rating, createdAt, user } = item;
-  const { name, gender } = user;
-  console.log(comment, rating, createdAt, name, gender);
+  const { name } = user;
+
   return (
     <View
       style={{
