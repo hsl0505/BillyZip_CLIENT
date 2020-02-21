@@ -63,7 +63,7 @@ function Room(props: any): JSX.Element {
         <Text key={key++}>{message}</Text>
       ))}
       <Input
-        placeholder="입력해주세여"
+        placeholder={`${myName}님의 의견을 여기에 적어 주세요.`}
         clearButtonMode="always"
         onChangeText={(text): void => {
           setChat(text);
@@ -90,9 +90,10 @@ function Room(props: any): JSX.Element {
         }}
       />
       <Button
-        title="포럼 리스트로 나가기"
+        title="포럼 이용규칙"
         onPress={(): any => {
-          props.navigation.navigate('Forum');
+          props.navigation.navigate('ForumNotice');
+          // 공지 오버레이 띄우기
         }}
       />
     </View>
