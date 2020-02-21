@@ -1,6 +1,7 @@
+/* eslint-disable no-irregular-whitespace */
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { Button, Input, ButtonGroup } from 'react-native-elements';
+import { Button, Input, ButtonGroup, CheckBox } from 'react-native-elements';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -30,6 +31,7 @@ function SignUpInput(props: Props): JSX.Element {
   const [secure, setSecure] = useState(true);
   const [name, setName] = useState();
   const [gender, setGender] = useState();
+  const [checked, setChecked] = useState(false);
 
   const buttons = ['Male', 'Female'];
   return (
@@ -131,26 +133,46 @@ function SignUpInput(props: Props): JSX.Element {
           setGender(buttons[e]);
         }}
       />
+      <View>
+        <Text>{`
+      [개인정보 수집·이용 동의]
+
+      ① 개인정보의 수집·이용목적 : 사용자 위치정보에 따른 서비스 제공
+      ② 수집하려는 개인정보의 항목 : 위치정보
+      ③ 개인정보의 보유 및 이용기간(근거법률) : 1년
+      ④ 동의를 거부할 수 있으며, 동의 거부시 BillyZip 서비스가 제공되지 않습니다.
+      `}</Text>
+        <CheckBox
+          center
+          title="위치정보 이용동의[필수]"
+          checked={checked}
+          onPress={() => {
+            setChecked(!checked);
+          }}
+        />
+      </View>
       <Button
         title="회원가입"
         onPress={(): void => {
-          axiosInstance
-            .post('users/signup', {
-              email,
-              password,
-              name,
-              mobile,
-              birth: `${date.getFullYear()}-${date.getMonth() +
-                1}-${date.getDate()}`,
-              gender,
-            })
-            .then(() => {
-              if (props.navigation) {
-                props.navigation.navigate('LoginScreen');
-              }
-              return false;
-            })
-            .catch((err) => console.log(err));
+          if (checked === true) {
+            axiosInstance
+              .post('users/signup', {
+                email,
+                password,
+                name,
+                mobile,
+                birth: `${date.getFullYear()}-${date.getMonth() +
+                  1}-${date.getDate()}`,
+                gender,
+              })
+              .then(() => {
+                if (props.navigation) {
+                  props.navigation.navigate('LoginScreen');
+                }
+                return false;
+              })
+              .catch((err) => console.log(err));
+          }
         }}
       />
     </View>

@@ -59,7 +59,7 @@ function MobileValidInput(props: Props): JSX.Element {
       <Text style={styles.title}>휴대폰 번호 인증</Text>
 
       <Input
-        placeholder="예) 0101234567"
+        placeholder="예) 01012345678"
         containerStyle={styles.TextViewStyle}
         underlineColorAndroid="transparent"
         onChangeText={(text): void => {
@@ -90,7 +90,7 @@ function MobileValidInput(props: Props): JSX.Element {
       />
 
       <Input
-        placeholder="인증번호 입력 예) 1234"
+        placeholder="예) 1234"
         containerStyle={styles.TextViewStyle}
         underlineColorAndroid="transparent"
         onChangeText={(text): void => {
@@ -100,7 +100,7 @@ function MobileValidInput(props: Props): JSX.Element {
         errorStyle={{ alignSelf: 'center' }}
       />
       <Button
-        title="확인"
+        title="인증번호 확인"
         buttonStyle={styles.ButtonViewStyle}
         onPress={(): void => {
           axiosInstance
