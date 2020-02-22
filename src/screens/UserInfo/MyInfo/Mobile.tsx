@@ -59,7 +59,7 @@ function Mobile(props: Props): JSX.Element {
   const [userVerifyNum, setuserVerifyNum] = useState();
   const [userVerifyNumErr, setuserVerifyNumErr] = useState();
   const [isVisible, setVisible] = useState(false);
-  console.log('유저 번호 11:: ', userPhoneNum);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>변경할 휴대폰 번호를 입력하세요</Text>
