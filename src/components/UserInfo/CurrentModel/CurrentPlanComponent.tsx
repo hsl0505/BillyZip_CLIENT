@@ -42,7 +42,7 @@ function CurrentPlanComponent(props: Props): JSX.Element {
           fontWeight: 'bold',
         }}
       >
-        현재 구독 중인 모델의 플랜은 {plan} 입니다
+        현재 구독 중인 플랜은 {plan} 입니다
       </Text>
     </View>
   );
