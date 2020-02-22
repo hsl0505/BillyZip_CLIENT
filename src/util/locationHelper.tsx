@@ -2,12 +2,24 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
 const locationHelper = {
-  getLocationPermission: async (cb: Function): Promise<void> => {
+  reqLocationPermission: async (cb: Function): Promise<void> => {
     try {
       const { status } = await Permissions.askAsync(Permissions.LOCATION);
       cb(status);
     } catch (err) {
       console.log('location err :', err);
+    }
+  },
+  getLocationPermission: async (): Promise<string | undefined> => {
+    try {
+      const { status } = await Permissions.getAsync(Permissions.LOCATION);
+      if (status === 'granted') {
+        return 'granted';
+      }
+      return 'notGranted';
+    } catch (err) {
+      console.log(err);
+      return undefined;
     }
   },
   getLocationFromAddress: async (

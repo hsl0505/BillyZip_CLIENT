@@ -6,7 +6,7 @@ interface Items {
 }
 
 const cameraHelper = {
-  getRollPermission: async (cb: Function): Promise<void> => {
+  reqRollPermission: async (cb: Function): Promise<void> => {
     try {
       const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
       cb(status);
@@ -14,6 +14,19 @@ const cameraHelper = {
       console.log('camera err :', console.log(err));
     }
   },
+  getRollPermission: async (): Promise<string | undefined> => {
+    try {
+      const { status } = await ImagePicker.getCameraRollPermissionsAsync();
+      if (status === 'granted') {
+        return 'granted';
+      }
+      return 'notGranted';
+    } catch (err) {
+      console.log(err);
+      return undefined;
+    }
+  },
+
   getPhoto: async (
     cb: Function,
     previous: Items[],
@@ -39,7 +52,7 @@ const cameraHelper = {
       console.log('camera err : ', console.log(err));
     }
   },
-  getCameraPermission: async (cb: Function): Promise<void> => {
+  reqCameraPermission: async (cb: Function): Promise<void> => {
     try {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       cb(status);
@@ -47,6 +60,19 @@ const cameraHelper = {
       console.log('camera err', err);
     }
   },
+  getCameraPermission: async (): Promise<string | undefined> => {
+    try {
+      const { status } = await ImagePicker.getCameraPermissionsAsync();
+      if (status === 'granted') {
+        return 'granted';
+      }
+      return 'notGranted';
+    } catch (err) {
+      console.log(err);
+      return undefined;
+    }
+  },
+
   getPhotoByCamera: async (
     cb: Function,
     previous: Items[],
