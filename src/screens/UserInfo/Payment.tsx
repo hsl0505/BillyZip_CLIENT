@@ -3,6 +3,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
+import axiosInstance from '../../util/axiosInstance';
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -18,7 +20,11 @@ function LogOut(): JSX.Element {
       <Button
         title="결제"
         onPress={(): void => {
-          console.log('결제 페이지');
+          axiosInstance.post('payment', {
+            subscribePlan,
+            paymentDate,
+            paymentOption,
+          });
         }}
       />
     </View>

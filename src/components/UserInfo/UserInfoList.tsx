@@ -35,7 +35,7 @@ const IconsList = [
   {
     title: '결제',
     icon: 'credit-card',
-    routeName: 'Payment',
+    routeName: 'Pricing',
   },
 ];
 
