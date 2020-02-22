@@ -32,7 +32,7 @@ function HostingComponent(props: Props): JSX.Element {
     },
   ];
   return (
-    <View style={{ marginTop: 25 }}>
+    <View>
       {IconList.map((item, i) => (
         <ListItem
           key={i.toString()}

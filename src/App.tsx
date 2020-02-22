@@ -5,7 +5,7 @@ import AuthValideScreen from './screens/AuthValid/AuthValidScreen';
 console.ignoredYellowBox = ['Remote debugger'];
 // import TabNav from './screens/TabNav';
 YellowBox.ignoreWarnings([
-    'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+  'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?',
 ]);
 
 function App(): JSX.Element {

@@ -1,12 +1,56 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView } from 'react-native';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
+import HostingManagementComponent from '../../../components/UserInfo/Hosting/HostingManagementComponent';
+import axiosInstance from '../../../util/axiosInstance';
 
-function HostingManagement(): JSX.Element {
+interface Props {
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
+}
+
+function HostingManagement(props: Props): JSX.Element {
+  const { navigation } = props;
+  const [myHosting, setMyHosting] = useState([]);
+
+  useEffect(() => {
+    if (myHosting.length === 0) {
+      axiosInstance
+        .get('users/list')
+        .then((res) => {
+          setMyHosting(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+
+    const subscribe = navigation.addListener('willFocus', () => {
+      axiosInstance
+        .get('users/list')
+        .then((res) => {
+          setMyHosting(res.data);
+        })
+        .catch((err) => console.log(err));
+    });
+
+    return (): void => {
+      subscribe.remove();
+    };
+  }, [myHosting.length, navigation]);
+
   return (
-    <View>
-      <Text>호스팅 매니지먼트 스크린</Text>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <ScrollView removeClippedSubviews>
+        <HostingManagementComponent myHosting={myHosting} />
+      </ScrollView>
     </View>
   );
 }
 
-export default HostingManagement;
+export default withNavigation(HostingManagement);

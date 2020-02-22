@@ -25,14 +25,16 @@ function Home(props: Props): JSX.Element {
   });
 
   useEffect(() => {
-    axiosInstance
-      .get('houses')
-      .then((res) => {
-        setRandR(res.data);
-      })
-      .catch((err) => console.log('err?', err));
+    if (rankAndRand.rank.length === 0) {
+      axiosInstance
+        .get('houses')
+        .then((res) => {
+          setRandR(res.data);
+        })
+        .catch((err) => console.log('err?', err));
+    }
 
-    const subscribe = navigation.addListener('didFocus', () => {
+    const subscribe = navigation.addListener('willFocus', () => {
       axiosInstance
         .get('houses')
         .then((res) => {
@@ -44,7 +46,7 @@ function Home(props: Props): JSX.Element {
     return (): void => {
       subscribe.remove();
     };
-  }, [navigation]);
+  }, [navigation, rankAndRand]);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', marginTop: 20 }}>

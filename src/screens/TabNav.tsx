@@ -56,7 +56,7 @@ const TabNav = createBottomTabNavigator(
       inactiveTintColor: 'gray',
       showLabel: false,
     },
-    resetOnBlur: true,
+    // resetOnBlur: true,
   },
 );
 

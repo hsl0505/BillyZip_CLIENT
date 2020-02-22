@@ -17,6 +17,7 @@ const LoginInputScreen = createStackNavigator(
   },
   {
     initialRouteName: 'LoginScreen',
+    headerMode: 'none',
   },
 );
 

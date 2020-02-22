@@ -21,12 +21,14 @@ function FavorScreen(props: Props): JSX.Element {
   const [favHouses, setFavHouses] = useState();
 
   useEffect(() => {
-    axiosInstance
-      .get('favs')
-      .then((res) => {
-        setFavHouses(res.data);
-      })
-      .catch((err) => console.log(err));
+    if (!favHouses) {
+      axiosInstance
+        .get('favs')
+        .then((res) => {
+          setFavHouses(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
 
     const subscribe = navigation.addListener('didFocus', () => {
       axiosInstance
@@ -40,7 +42,7 @@ function FavorScreen(props: Props): JSX.Element {
     return (): void => {
       subscribe.remove();
     };
-  }, [navigation]);
+  }, [favHouses, navigation]);
 
   return (
     <View

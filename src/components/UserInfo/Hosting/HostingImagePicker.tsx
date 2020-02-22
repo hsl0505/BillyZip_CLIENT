@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Dimensions,
@@ -22,6 +22,7 @@ import {
   NavigationScreenProp,
   NavigationRoute,
   NavigationParams,
+  StackActions,
 } from 'react-navigation';
 
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -36,11 +37,52 @@ interface Props {
     NavigationRoute<NavigationParams>,
     NavigationParams
   >;
+  editTarget?: Edit;
+  hasCamera: string;
+  hasCameraRoll: string;
+  hasLocation: string;
+}
+
+interface Edit {
+  id: number;
+  plan: string;
+  type: string;
+  year: number;
+  access: number;
+  status: boolean;
+  display: boolean;
+  location: string[];
+  adminDistrict: string;
+  title: string;
+  description: string;
+  houseRule: string;
+  images: Img[];
+  amenity: Amenity;
+  startTime: number;
+  endTime: number;
+}
+
+interface Img {
+  fileName: string;
+  filePath: string;
+  MainImage: boolean;
+}
+
+interface Amenity {
+  secondFloor: boolean;
+  parking: boolean;
+  aircon: boolean;
+  autoLock: boolean;
+  tv: boolean;
+  bed: boolean;
+  washing: boolean;
+  allowPet: boolean;
 }
 
 interface Items {
   uri?: string;
-  type?: string;
+  fileName?: string;
+  isMain?: boolean;
 }
 
 declare global {
@@ -56,38 +98,81 @@ declare global {
 }
 
 function HostingImagePicker(props: Props): JSX.Element {
+  const { editTarget, hasCamera, hasCameraRoll, hasLocation } = props;
+
+  const editImages: Items[] | (() => Items[]) = [];
+  if (editTarget) {
+    editTarget.images.forEach((img) => {
+      const temp = {
+        uri: img.filePath,
+        isMain: img.MainImage,
+        fileName: img.fileName,
+      };
+      editImages.push(temp);
+    });
+  }
+
+  let editMainImg;
+
+  for (let i = 0; i < editImages.length; i += 1) {
+    if (editImages[i].isMain) {
+      editMainImg = i;
+    }
+  }
+
   const { width } = Dimensions.get('window');
   const [isVisible, setVisible] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [hasCamera, setCamera] = useState();
-  const [hasCameraRoll, setCameraRoll] = useState();
-  const [hasLocation, setLocationPermission] = useState();
 
-  const [images, setImage] = useState<Items[]>([{}]);
-  const [mainImg, setMainImg] = useState();
+  const [images, setImage] = useState<Items[]>(editTarget ? editImages : [{}]);
+  const [mainImg, setMainImg] = useState(editTarget ? editMainImg : undefined);
 
-  const [type, setType] = useState();
-  const [plan, setPlan] = useState();
-  const [year, setYear] = useState();
-  const [access, setAccess] = useState();
-  const [status] = useState(false);
-  const [display, setDisplay] = useState(true);
-  const [location, setLocation] = useState();
-  const [admin, setAdmin] = useState();
-  const [title, setTitle] = useState();
-  const [description, setDesc] = useState();
-  const [houseRule, setHouseRule] = useState();
+  const [type, setType] = useState(editTarget ? editTarget.type : undefined);
+  const [plan, setPlan] = useState(editTarget ? editTarget.plan : undefined);
+  const [year, setYear] = useState(editTarget ? editTarget.year : undefined);
+  const [access, setAccess] = useState(
+    editTarget ? editTarget.access : undefined,
+  );
+  const [status] = useState(editTarget ? editTarget.status : false);
+  const [display, setDisplay] = useState(
+    editTarget ? editTarget.display : true,
+  );
+  const [location, setLocation] = useState(
+    editTarget ? editTarget.location : undefined,
+  );
+  const [admin, setAdmin] = useState(
+    editTarget ? editTarget.adminDistrict : undefined,
+  );
+  const [title, setTitle] = useState(editTarget ? editTarget.title : undefined);
+  const [description, setDesc] = useState(
+    editTarget ? editTarget.description : undefined,
+  );
+  const [houseRule, setHouseRule] = useState(
+    editTarget ? editTarget.houseRule : undefined,
+  );
 
-  const [secondFloor, setSF] = useState(false);
-  const [parking, setParking] = useState(false);
-  const [aircon, setAC] = useState(false);
-  const [autoLock, setAL] = useState(false);
-  const [tv, setTv] = useState(false);
-  const [bed, setBed] = useState(false);
-  const [washing, setWM] = useState(false);
-  const [allowPet, setAP] = useState(false);
-  const [startTime, setStart] = useState(7);
-  const [endTime, setEnd] = useState(30);
+  const [secondFloor, setSF] = useState(
+    editTarget ? editTarget.amenity.secondFloor : false,
+  );
+  const [parking, setParking] = useState(
+    editTarget ? editTarget.amenity.parking : false,
+  );
+  const [aircon, setAC] = useState(
+    editTarget ? editTarget.amenity.aircon : false,
+  );
+  const [autoLock, setAL] = useState(
+    editTarget ? editTarget.amenity.autoLock : false,
+  );
+  const [tv, setTv] = useState(editTarget ? editTarget.amenity.tv : false);
+  const [bed, setBed] = useState(editTarget ? editTarget.amenity.bed : false);
+  const [washing, setWM] = useState(
+    editTarget ? editTarget.amenity.washing : false,
+  );
+  const [allowPet, setAP] = useState(
+    editTarget ? editTarget.amenity.allowPet : false,
+  );
+  const [startTime, setStart] = useState(editTarget ? editTarget.startTime : 7);
+  const [endTime, setEnd] = useState(editTarget ? editTarget.endTime : 30);
 
   const [onPosting, setOnPosting] = useState(false);
 
@@ -113,14 +198,6 @@ function HostingImagePicker(props: Props): JSX.Element {
   } else {
     forSETime = false;
   }
-
-  useEffect(() => {
-    if (hasCameraRoll !== 'granted') {
-      cameraHelper.getRollPermission(setCameraRoll);
-      cameraHelper.getCameraPermission(setCamera);
-      locationHelper.getLocationPermission(setLocationPermission);
-    }
-  }, [hasCameraRoll, hasCamera, hasLocation]);
 
   return (
     <View
@@ -150,10 +227,7 @@ function HostingImagePicker(props: Props): JSX.Element {
           >
             이미지 올리기
           </Text>
-          <MaterialCommunityIcons
-            name="lightbulb-on"
-            size={34}
-            style={{ marginLeft: mainImg !== undefined ? 85 : 155 }}
+          <TouchableOpacity
             onPress={(): void => {
               if (!images[0].uri) {
                 Alert.alert('업로드 된 이미지가 없습니다');
@@ -162,15 +236,22 @@ function HostingImagePicker(props: Props): JSX.Element {
                 Alert.alert('현재 이미지가 대표 이미지로 설정 되었습니다');
               }
             }}
-            color={mainImg !== undefined ? 'purple' : 'black'}
-          />
-          {mainImg !== undefined ? (
-            <Text style={{ marginLeft: 10, color: 'purple' }}>
-              {mainImg + 1}번 이미지
-            </Text>
-          ) : (
-            <View />
-          )}
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+          >
+            <MaterialCommunityIcons
+              name="lightbulb-on"
+              size={34}
+              style={{ marginLeft: mainImg !== undefined ? 85 : 50 }}
+              color={mainImg !== undefined ? 'purple' : 'black'}
+            />
+            {mainImg !== undefined ? (
+              <Text style={{ marginLeft: 10, color: 'purple' }}>
+                {mainImg + 1}번 이미지
+              </Text>
+            ) : (
+              <Text style={{ marginLeft: 10 }}>대표 이미지 설정</Text>
+            )}
+          </TouchableOpacity>
         </View>
       </View>
       {images[0].uri ? (
@@ -244,8 +325,8 @@ function HostingImagePicker(props: Props): JSX.Element {
 
               if (activeSlide === mainImg) {
                 setMainImg(undefined);
-              } else if (mainImg > activeSlide) {
-                setMainImg(mainImg - 1);
+              } else if (mainImg) {
+                if (mainImg > activeSlide) setMainImg(mainImg - 1);
               }
             }
           }}
@@ -547,11 +628,11 @@ function HostingImagePicker(props: Props): JSX.Element {
         </View>
         <Input
           placeholder="제목을 입력하세요"
+          value={title}
           multiline
           textAlignVertical="top"
           onChangeText={(text): void => setTitle(text)}
           inputContainerStyle={{ marginTop: 5 }}
-          // scrollEnabled={false}
         />
       </View>
 
@@ -578,10 +659,10 @@ function HostingImagePicker(props: Props): JSX.Element {
         <Input
           placeholder="어떤 집인가요?"
           multiline
+          value={description}
           textAlignVertical="top"
           onChangeText={(text): void => setDesc(text)}
           inputContainerStyle={{ marginTop: 5 }}
-          // scrollEnabled={false}
         />
       </View>
 
@@ -608,10 +689,10 @@ function HostingImagePicker(props: Props): JSX.Element {
         <Input
           placeholder="지켜야할 규칙을 적어주세요"
           multiline
+          value={houseRule}
           textAlignVertical="top"
           onChangeText={(text): void => setHouseRule(text)}
           inputContainerStyle={{ marginTop: 5 }}
-          // scrollEnabled={false}
         />
       </View>
 
@@ -803,7 +884,7 @@ function HostingImagePicker(props: Props): JSX.Element {
 
       <View style={{ flex: 1, alignItems: 'center', marginTop: 15 }}>
         <Button
-          title="호스팅 하기"
+          title={editTarget ? '호스팅 수정' : '호스팅 하기'}
           type="outline"
           buttonStyle={{ borderColor: 'purple', borderWidth: 1 }}
           titleStyle={{ color: 'purple' }}
@@ -862,20 +943,45 @@ function HostingImagePicker(props: Props): JSX.Element {
                 formData.append('images', temp);
               });
 
-              axiosInstance
-                .post('houses', formData, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
-                })
-                .then((res) => {
-                  setOnPosting(false);
-                  Alert.alert('포스팅이 완료되었습니다!');
-                  props.navigation.navigate('HouseDetail', {
-                    houseId: res.data.houseId,
-                  });
-                })
-                .catch((err) => console.log(err));
+              if (!editTarget) {
+                axiosInstance
+                  .post('houses', formData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                    },
+                  })
+                  .then((res) => {
+                    setOnPosting(false);
+                    Alert.alert('포스팅이 완료되었습니다!');
+                    const popAction = StackActions.pop({
+                      n: 1,
+                    });
+                    props.navigation.dispatch(popAction);
+                    props.navigation.navigate('HouseDetail', {
+                      houseId: res.data.houseId,
+                    });
+                  })
+                  .catch((err) => console.log(err));
+              } else {
+                axiosInstance
+                  .put(`houses/${editTarget.id}`, formData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                    },
+                  })
+                  .then((res) => {
+                    setOnPosting(false);
+                    Alert.alert('포스팅이 수정되었습니다!');
+                    const popAction = StackActions.pop({
+                      n: 1,
+                    });
+                    props.navigation.dispatch(popAction);
+                    props.navigation.navigate('HouseDetail', {
+                      houseId: res.data.houseId,
+                    });
+                  })
+                  .catch((err) => console.log(err));
+              }
             }
           }}
         />
@@ -894,4 +1000,4 @@ function HostingImagePicker(props: Props): JSX.Element {
   );
 }
 
-export default withNavigation(HostingImagePicker);
+export default React.memo(withNavigation(HostingImagePicker));
