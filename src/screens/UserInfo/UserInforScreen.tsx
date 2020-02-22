@@ -11,6 +11,7 @@ import Mobile from './MyInfo/Mobile';
 import Password from './MyInfo/Password';
 import UserInfoList from '../../components/UserInfo/UserInfoList';
 import HouseDetail from '../HouseDetail/HouseDetail';
+import HostingEditScreen from './Hosting/HostingEditScreen';
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
@@ -42,7 +43,12 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     HostingManagement: {
       screen: HostingManagement,
-      navigationOptions: {},
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
+      },
     },
     HostingPost: {
       screen: HostingPost,
@@ -55,6 +61,15 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     HouseDetail: {
       screen: HouseDetail,
+    },
+    HostingEdit: {
+      screen: HostingEditScreen,
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
+      },
     },
     Payment: {
       screen: Payment,
