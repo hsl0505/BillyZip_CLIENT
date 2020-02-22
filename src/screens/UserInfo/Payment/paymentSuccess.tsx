@@ -78,8 +78,8 @@ function PaymentSuccess(props: Props): JSX.Element {
             justifyContent: 'space-between',
           }}
         >
-          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>구독모델</Text>
-          <Text>{numberWithCommas(amount)}</Text>
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>구독플랜</Text>
+          <Text>{paymentValues[2]}만원/월</Text>
         </View>
         <Divider
           style={{ borderColor: 'purple', borderWidth: 0.5, marginBottom: 20 }}
