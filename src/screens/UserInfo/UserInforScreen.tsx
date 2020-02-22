@@ -6,12 +6,14 @@ import HostingManagement from './Hosting/HostingManagement';
 import HostingPost from './Hosting/HostingPost';
 import Subscribe from './CurrentHouse/Subscribe';
 import MyInfo from './MyInfo/MyInfo';
-import Payment from './Payment';
+import Pricing from '../UserInfo/Payment/Pricing';
 import Mobile from './MyInfo/Mobile';
 import Password from './MyInfo/Password';
 import UserInfoList from '../../components/UserInfo/UserInfoList';
 import HouseDetail from '../HouseDetail/HouseDetail';
 import HostingEditScreen from './Hosting/HostingEditScreen';
+import Payment from './Payment/Payment';
+import PaymentSuccess from './Payment/paymentSuccess';
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
@@ -82,6 +84,12 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     UserInfoList: {
       screen: UserInfoList,
+    },
+    Pricing: {
+      screen: Pricing,
+    },
+    PaymentSuccess: {
+      screen: PaymentSuccess,
     },
   },
 
