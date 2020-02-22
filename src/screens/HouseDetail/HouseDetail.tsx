@@ -25,13 +25,6 @@ function HouseDetail(props: Props): JSX.Element {
   const [house, setHouse] = useState();
 
   useEffect(() => {
-    axiosInstance
-      .get(`houses/${houseId}`)
-      .then((res) => {
-        setHouse(res.data);
-      })
-      .catch((err) => console.log(err));
-
     const subscribe = navigation.addListener('didFocus', () => {
       axiosInstance
         .get(`houses/${houseId}`)
