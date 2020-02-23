@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import {
   MaterialCommunityIcons,
@@ -7,13 +7,15 @@ import {
   FontAwesome,
   Entypo,
 } from '@expo/vector-icons';
-import { Rating, Button } from 'react-native-elements';
+import { Rating, Button, Overlay } from 'react-native-elements';
 import {
   withNavigation,
   NavigationScreenProp,
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
+
+import axiosInstance from '../../util/axiosInstance';
 
 interface Props {
   isFav?: string;
@@ -47,7 +49,7 @@ interface Props {
 function HouseDetailContent(props: Props): JSX.Element {
   const { width } = Dimensions.get('window');
   const { isFav, house } = props;
-
+  const [isVisible, setVisible] = useState(false);
   const houseId = house.id;
 
   const {
@@ -590,8 +592,53 @@ function HouseDetailContent(props: Props): JSX.Element {
         />
       </View>
       <View style={{ flex: 1, marginTop: 40 }}>
-        <Button title="신청하기" />
+        <Button
+          title="신청하기"
+          onPress={(): void => {
+            axiosInstance
+              .post('application', {
+                houseId,
+              })
+              .then((res) => {
+                if (res.status === 200) {
+                  setVisible(true);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        />
       </View>
+      <Overlay
+        isVisible={isVisible}
+        height={100}
+        width={280}
+        onBackdropPress={(): void => setVisible(false)}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ alignSelf: 'center', fontSize: 15, marginTop: 10 }}>
+            신청이 완료되었습니다.{'\n'}신청 후, 최소 1일~3일 정도 소요됩니다.
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'space-around',
+            }}
+          >
+            <Button
+              title="확인"
+              onPress={(): void => {
+                setVisible(false);
+                props.navigation.navigate('Home');
+              }}
+              type="clear"
+            />
+          </View>
+        </View>
+      </Overlay>
     </View>
   );
 }
