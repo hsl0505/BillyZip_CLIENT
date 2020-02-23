@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { View, Text } from 'react-native';
+
 import {
   withNavigation,
   NavigationScreenProp,
@@ -8,23 +8,21 @@ import {
   NavigationParams,
 } from 'react-navigation';
 
-import CurrentPlanComponent from '../../../components/UserInfo/CurrentModel/CurrentPlanComponent';
+import LivingHouseComponent from './LivingHouseComponent';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-});
-
-interface Values {
+interface LivingHouse {
   id: number;
-  plan: string;
+  type: string;
+  year: number;
+  access: number;
+  adminDistrict: string;
+  houseRule: string;
 }
 interface Props {
-  subscribedHouses: Values[];
+  subscribedHouses: {
+    livingHouse?: LivingHouse[];
+    currentPlan?: string;
+  };
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
     NavigationParams
@@ -33,30 +31,27 @@ interface Props {
 
 function CurrentPlan(props: Props): JSX.Element {
   const { subscribedHouses } = props;
+  console.log('현재 구독 모델 페이지 :: ', subscribedHouses);
+  const { livingHouse, currentPlan } = subscribedHouses;
 
   return (
-    <View style={styles.container}>
-      {subscribedHouses.length !== 0 ? (
-        <View>
-          {subscribedHouses.map((ele) => (
-            <CurrentPlanComponent key={ele.id} ele={ele} />
-          ))}
-        </View>
-      ) : (
-        <View
-          style={{
-            alignItems: 'center',
-            flex: 1,
-            justifyContent: 'center',
-            marginTop: 100,
-          }}
-        >
-          <AntDesign name="frowno" size={80} color="purple" />
-          <Text style={{ fontSize: 20, marginTop: 50 }}>
-            현재 구독중인 플랜이 없습니다
-          </Text>
-        </View>
-      )}
+    <View>
+      <Text>현구 구독 모델 페이지</Text>
+      <Text>
+        {currentPlan === null ? '구독 플랜 미신청' : `${currentPlan}만원/달`}
+      </Text>
+      <Text>현재 살고 있는 집</Text>
+      <View>
+        {livingHouse === undefined ? (
+          <Text>현재 살고 있는 집이 없습니다</Text>
+        ) : (
+          <View>
+            {livingHouse.map((ele) => (
+              <LivingHouseComponent key={ele.id} ele={ele} />
+            ))}
+          </View>
+        )}
+      </View>
     </View>
   );
 }

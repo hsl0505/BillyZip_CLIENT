@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 import {
@@ -8,14 +8,6 @@ import {
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-});
 
 interface Props {
   ele: {
@@ -65,7 +57,7 @@ function LivingHouseComponenet(props: Props): JSX.Element {
   ];
 
   return (
-    <View style={styles.container}>
+    <View>
       {list.map((l, i) => (
         <ListItem
           key={i.toString()}
@@ -74,7 +66,6 @@ function LivingHouseComponenet(props: Props): JSX.Element {
           bottomDivider
           onPress={(): void => {
             if (l.icon === 'comment-search-outline') {
-              console.log('houseId :: ', id);
               props.navigation.navigate('HouseDetail', { houseId: id });
             }
           }}
