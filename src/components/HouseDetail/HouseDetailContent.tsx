@@ -597,14 +597,12 @@ function HouseDetailContent(props: Props): JSX.Element {
       <View style={{ flex: 1, marginTop: 40 }}>
         <Button
           title="신청하기"
-          titleStyle={{ color: 'purple' }}
+          type="clear"
+          titleStyle={{ color: 'purple', fontWeight: 'bold', fontSize: 20 }}
           buttonStyle={{
-            borderWidth: 1,
-            borderColor: 'purple',
             width: 200,
             alignSelf: 'center',
           }}
-          type="outline"
           onPress={(): void => {
             axiosInstance
               .post('application', {
@@ -674,7 +672,6 @@ function HouseDetailContent(props: Props): JSX.Element {
               title="확인"
               onPress={(): void => {
                 setVisibleTwo(false);
-                props.navigation.navigate('Home');
               }}
               type="clear"
             />

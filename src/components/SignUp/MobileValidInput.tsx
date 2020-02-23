@@ -54,7 +54,6 @@ function MobileValidInput(props: Props): JSX.Element {
       <View style={{ marginTop: 20 }}>
         <Input
           placeholder="핸드폰 번호를 - 없이 입력해주세요"
-          multiline
           containerStyle={styles.TextViewStyle}
           underlineColorAndroid="transparent"
           onChangeText={(text): void => {

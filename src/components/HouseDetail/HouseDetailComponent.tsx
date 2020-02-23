@@ -44,29 +44,34 @@ function HouseDetailComponent(props: Props): JSX.Element {
         inactiveSlideOpacity={1}
         activeSlideOffset={10}
       />
-      <FontAwesome
-        name={isFavsNow ? 'heart' : 'heart-o'}
-        size={34}
-        style={{ position: 'absolute', right: width * 0.07, top: 40 }}
-        color={isFavsNow ? 'red' : '#fff'}
-        onPress={(): void => {
-          if (isFavsNow) {
-            setFavsNow(false);
-            axiosInstance
-              .delete(`favs/${houseId}`)
-              .then()
-              .catch((err) => console.log(err));
-          } else {
-            setFavsNow(true);
-            axiosInstance
-              .post('favs', {
-                houseId,
-              })
-              .then()
-              .catch((err) => console.log(err));
-          }
-        }}
-      />
+      {isReady ? (
+        <FontAwesome
+          name={isFavsNow ? 'heart' : 'heart-o'}
+          size={34}
+          style={{ position: 'absolute', right: width * 0.07, top: 40 }}
+          color={isFavsNow ? 'red' : '#fff'}
+          onPress={(): void => {
+            if (isFavsNow) {
+              setFavsNow(false);
+              axiosInstance
+                .delete(`favs/${houseId}`)
+                .then()
+                .catch((err) => console.log(err));
+            } else {
+              setFavsNow(true);
+              axiosInstance
+                .post('favs', {
+                  houseId,
+                })
+                .then()
+                .catch((err) => console.log(err));
+            }
+          }}
+        />
+      ) : (
+        <View />
+      )}
+
       {isReady ? (
         <Pagination
           activeDotIndex={activeSlide}

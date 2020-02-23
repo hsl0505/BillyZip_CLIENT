@@ -18,7 +18,6 @@ import HostingApplyScreen from './Hosting/HostingApplyScreen';
 import SubscribeList from './Payment/SubscribeList';
 import Application from './Application';
 
-
 const UserInfoScreenStackNav = createStackNavigator(
   {
     UserInfo: {
@@ -32,19 +31,26 @@ const UserInfoScreenStackNav = createStackNavigator(
       navigationOptions: {
         title: '',
         headerTransparent: true,
-        headerLeft: undefined,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
       },
     },
     MyInfo: {
       screen: MyInfo,
       navigationOptions: {
-        title: '내 정보',
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
       },
     },
     Application: {
       screen: Application,
       navigationOptions: {
-        title: '매물 신청 현황',
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
       },
     },
     Hosting: {
@@ -97,9 +103,21 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     Mobile: {
       screen: Mobile,
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
+      },
     },
     Password: {
       screen: Password,
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
+      },
     },
     UserInfoList: {
       screen: UserInfoList,
