@@ -50,6 +50,7 @@ function HouseDetailContent(props: Props): JSX.Element {
   const { width } = Dimensions.get('window');
   const { isFav, house } = props;
   const [isVisible, setVisible] = useState(false);
+  const [isVisibleTwo, setVisibleTwo] = useState(false);
   const houseId = house.id;
 
   const {
@@ -605,7 +606,9 @@ function HouseDetailContent(props: Props): JSX.Element {
                 }
               })
               .catch((err) => {
-                console.log(err);
+                if (err.response.status === 403) {
+                  setVisibleTwo(true);
+                }
               });
           }}
         />
@@ -632,6 +635,35 @@ function HouseDetailContent(props: Props): JSX.Element {
               title="확인"
               onPress={(): void => {
                 setVisible(false);
+                props.navigation.navigate('Home');
+              }}
+              type="clear"
+            />
+          </View>
+        </View>
+      </Overlay>
+      <Overlay
+        isVisible={isVisibleTwo}
+        height={100}
+        width={280}
+        onBackdropPress={(): void => setVisibleTwo(false)}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ alignSelf: 'center', fontSize: 15, marginTop: 10 }}>
+            구독하고 계시는 플랜과 맞지 않는 매물입니다.
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'flex-end',
+              justifyContent: 'space-around',
+            }}
+          >
+            <Button
+              title="확인"
+              onPress={(): void => {
+                setVisibleTwo(false);
                 props.navigation.navigate('Home');
               }}
               type="clear"

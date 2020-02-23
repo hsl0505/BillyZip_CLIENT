@@ -23,6 +23,11 @@ const IconsList = [
     routeName: 'Subscribe',
   },
   {
+    title: '매물 신청 현황',
+    icon: 'user',
+    routeName: 'Application',
+  },
+  {
     title: '내 정보',
     icon: 'user',
     routeName: 'MyInfo',

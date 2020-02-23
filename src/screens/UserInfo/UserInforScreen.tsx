@@ -16,6 +16,7 @@ import Payment from './Payment/Payment';
 import PaymentSuccess from './Payment/paymentSuccess';
 import HostingApplyScreen from './Hosting/HostingApplyScreen';
 import SubscribeList from './Payment/SubscribeList';
+import Application from './Application';
 
 
 const UserInfoScreenStackNav = createStackNavigator(
@@ -38,6 +39,12 @@ const UserInfoScreenStackNav = createStackNavigator(
       screen: MyInfo,
       navigationOptions: {
         title: '내 정보',
+      },
+    },
+    Application: {
+      screen: Application,
+      navigationOptions: {
+        title: '매물 신청 현황',
       },
     },
     Hosting: {
