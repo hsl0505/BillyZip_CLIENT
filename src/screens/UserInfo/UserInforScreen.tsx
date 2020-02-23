@@ -14,6 +14,7 @@ import HouseDetail from '../HouseDetail/HouseDetail';
 import HostingEditScreen from './Hosting/HostingEditScreen';
 import Payment from './Payment/Payment';
 import PaymentSuccess from './Payment/paymentSuccess';
+import HostingApplyScreen from './Hosting/HostingApplyScreen';
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
@@ -66,6 +67,15 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     HostingEdit: {
       screen: HostingEditScreen,
+      navigationOptions: {
+        title: '',
+        headerTransparent: true,
+        headerLeft: (): null => null,
+        headerBackTitleVisible: false,
+      },
+    },
+    HostingApplyScreen: {
+      screen: HostingApplyScreen,
       navigationOptions: {
         title: '',
         headerTransparent: true,

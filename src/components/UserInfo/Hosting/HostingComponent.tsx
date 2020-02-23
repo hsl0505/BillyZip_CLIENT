@@ -21,9 +21,14 @@ function HostingComponent(props: Props): JSX.Element {
   const [isVisible, setVisible] = useState(false);
   const IconList = [
     {
-      title: '호스팅 관리',
+      title: '내 호스팅 관리',
       icon: 'book-open',
       routeName: 'HostingManagement',
+    },
+    {
+      title: '구독 신청 현황',
+      icon: 'user-following',
+      routeName: 'HostingApply',
     },
     {
       title: '호스팅 신청',
@@ -43,6 +48,8 @@ function HostingComponent(props: Props): JSX.Element {
           onPress={(): void => {
             if (item.routeName === 'HostingManagement') {
               props.navigation.navigate('HostingManagement');
+            } else if (item.routeName === 'HostingApply') {
+              props.navigation.navigate('HostingApplyScreen');
             } else {
               setVisible(true);
             }
