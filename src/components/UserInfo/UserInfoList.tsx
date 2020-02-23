@@ -18,7 +18,7 @@ interface Props {
 
 const IconsList = [
   {
-    title: '현재 구독 플랜',
+    title: '현재 구독 플랜 / 살고 있는 집',
     icon: 'calendar',
     routeName: 'Subscribe',
   },
