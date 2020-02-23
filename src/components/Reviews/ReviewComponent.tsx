@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, FlatList, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text, AsyncStorage } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Button } from 'react-native-elements';
 import {
@@ -27,6 +27,7 @@ interface Rv {
   rating: number;
   createdAt: string;
   user: {
+    id: number;
     name: string;
     gender: string;
   };
@@ -35,6 +36,20 @@ interface Rv {
 function ReviewComponent(props: Props): JSX.Element {
   const { avgRating, reviews, houseId, isFav } = props;
   const reviewLength = reviews.length;
+  const [userId, setUserId] = useState();
+  const [isReady, setReady] = useState(false);
+
+  async function gerUserId(): Promise<void> {
+    const userIdGet = await AsyncStorage.getItem('userId');
+    if (userIdGet) {
+      setUserId(userIdGet);
+      setReady(true);
+    }
+  }
+
+  useEffect(() => {
+    gerUserId();
+  });
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -74,16 +89,24 @@ function ReviewComponent(props: Props): JSX.Element {
         </View>
       </View>
 
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        removeClippedSubviews
-        data={reviews}
-        renderItem={({ item }): JSX.Element => (
-          <ReviewCardComponent item={item} />
-        )}
-        keyExtractor={(item): string => item.id.toString()}
-        windowSize={3}
-      />
+      {isReady ? (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          removeClippedSubviews
+          data={reviews}
+          renderItem={({ item }): JSX.Element => (
+            <ReviewCardComponent
+              item={item}
+              userId={userId}
+              houseId={houseId}
+            />
+          )}
+          keyExtractor={(item): string => item.id.toString()}
+          windowSize={3}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 }

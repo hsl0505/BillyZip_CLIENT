@@ -22,9 +22,14 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     const customConfig = config;
     const userToken = await AsyncStorage.getItem('userToken');
-    
+    const userId = await AsyncStorage.getItem('userId');
+
     if (userToken) {
       customConfig.headers.Authorization = `Bearer ${userToken}`;
+    }
+
+    if (userId) {
+      customConfig.headers['X-userId-Header'] = userId;
     }
 
     return customConfig;
