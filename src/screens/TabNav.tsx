@@ -5,10 +5,8 @@ import { AntDesign } from '@expo/vector-icons';
 
 import MainScreenStackNav from './MainScreen/MainScreen';
 import Favor from './Favor/Favor';
-// import Search from './Search/Search';
 import SearchScreen from './Search/SearchScreen';
 import ForumScreen from './Forum/ForumScreen';
-// import UserInfo from './UserInfo/UserInfo';
 import UserInfoScreenStackNav from './UserInfo/UserInforScreen';
 
 interface IconProps {
