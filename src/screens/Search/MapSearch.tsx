@@ -7,7 +7,6 @@ import {
   NavigationParams,
 } from 'react-navigation';
 import MapSearchForm from '../../components/Search/MapSearchForm';
-// import GoogleMapComponent from '../../components/Search/GoogleMapComponent'
 
 interface Props {
   navigation: NavigationScreenProp<
@@ -23,7 +22,6 @@ function MapSearch(props: Props): JSX.Element {
   return (
     <View>
       <MapSearchForm data={data} />
-      {/* <GoogleMapComponent data={data} /> */}
     </View>
   );
 }
