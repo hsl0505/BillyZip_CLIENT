@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AsyncStorage, View, ActivityIndicator, StatusBar } from 'react-native';
+import { AsyncStorage, View, StatusBar } from 'react-native';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 
 function AuthLoadingScreen(
@@ -23,8 +23,14 @@ function AuthLoadingScreen(
   });
 
   return (
-    <View>
-      <ActivityIndicator />
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgb(102,051,204)',
+      }}
+    >
       <StatusBar hidden />
     </View>
   );

@@ -75,7 +75,7 @@ function HostingManagementComponent(props: Props): JSX.Element {
                       alignSelf: 'center',
                     }}
                   >
-                    {item.status ? '이용 중' : '이용 가능'}
+                    {item.status ? '현재 거주' : '거주 가능'}
                   </Text>
                   <Text
                     style={{

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -21,6 +21,7 @@ function MoreList(props: Props): JSX.Element {
   const { navigation } = props;
   const part = navigation.getParam('part');
   const [houses, setHouses] = useState();
+  const [isReady, setReady] = useState(false);
 
   let forTitle;
 
@@ -49,6 +50,7 @@ function MoreList(props: Props): JSX.Element {
       .get(`houses/part/${part}`)
       .then((res) => {
         setHouses(res.data);
+        setReady(true);
       })
       .catch((err) => console.log(err));
   }, [part]);
@@ -61,18 +63,28 @@ function MoreList(props: Props): JSX.Element {
         marginTop: 25,
       }}
     >
-      <Text
-        style={{
-          marginLeft: 15,
-          marginTop: 25,
-          marginBottom: 10,
-          fontSize: 28,
-          fontWeight: 'bold',
-        }}
-      >
-        {forTitle}
-      </Text>
-      <MoreListEntry houses={houses} isFav="m" />
+      {isReady ? (
+        <View>
+          <Text
+            style={{
+              marginLeft: 15,
+              marginTop: 25,
+              marginBottom: 10,
+              fontSize: 28,
+              fontWeight: 'bold',
+            }}
+          >
+            {forTitle}
+          </Text>
+          <MoreListEntry houses={houses} isFav="m" />
+        </View>
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      )}
     </View>
   );
 }

@@ -63,6 +63,9 @@ function MoreCardComponent(props: Props): JSX.Element {
         imageProps={{
           resizeMode: 'cover',
           PlaceholderContent: <ActivityIndicator />,
+          placeholderStyle: {
+            backgroundColor: '#fff',
+          },
         }}
       >
         <View
