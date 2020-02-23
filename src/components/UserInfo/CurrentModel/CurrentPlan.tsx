@@ -55,7 +55,7 @@ function CurrentPlan(props: Props): JSX.Element {
                 marginBottom: 5,
               }}
             >
-              구독중인 플랜이 없습니다
+              구독 중인 플랜이 없습니다
             </Text>
             <Text
               style={{
