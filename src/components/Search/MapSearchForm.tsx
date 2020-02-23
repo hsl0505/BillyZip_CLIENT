@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Alert } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { Input, Button } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import {
   withNavigation,
   NavigationScreenProp,
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
+import { Feather } from '@expo/vector-icons';
 import axiosInstance from '../../util/axiosInstance';
 
 const LATITUDE = 35.39673755350146;
@@ -54,7 +55,7 @@ function MapSearchForm(props: Props): JSX.Element {
   const [markers, setMarkers] = useState(housesData);
 
   return (
-    <View>
+    <View style={{ backgroundColor: '#fff' }}>
       <View style={{ marginTop: 40 }}>
         <Input
           placeholder={`검색할 내용을 입력해 주세요. ${'\n'}예 : 강남 시티뷰가 좋은 집`}
@@ -69,39 +70,42 @@ function MapSearchForm(props: Props): JSX.Element {
           }}
           onChangeText={(text): void => setSearchWord(text)}
           inputContainerStyle={{ marginHorizontal: 15 }}
-        />
-        <Button
-          title="검색하기"
-          titleStyle={{ color: 'purple' }}
-          type="clear"
-          onPress={(): void => {
-            axiosInstance
-              .post('houses/search', {
-                searchWord,
-              })
-              .then((res) => {
-                const searchHouse = res.data.map((house: House) => {
-                  return {
-                    id: house.id,
-                    title: house.title,
-                    coordinate: {
-                      latitude: Number(house.location[0]),
-                      longitude: Number(house.location[1]),
-                    },
-                  };
-                });
-                setMarkers(searchHouse);
-              });
-          }}
-          buttonStyle={{
-            marginTop: 20,
-            marginBottom: 20,
-            width: 200,
-            alignSelf: 'center',
-          }}
+          rightIcon={
+            <Feather
+              name="search"
+              size={26}
+              style={{ marginRight: 15 }}
+              onPress={(): void => {
+                axiosInstance
+                  .post('houses/search', {
+                    searchWord,
+                  })
+                  .then((res) => {
+                    const searchHouse = res.data.map((house: House) => {
+                      return {
+                        id: house.id,
+                        title: house.title,
+                        coordinate: {
+                          latitude: Number(house.location[0]),
+                          longitude: Number(house.location[1]),
+                        },
+                      };
+                    });
+                    setMarkers(searchHouse);
+                  })
+                  .catch((err) => {
+                    if (
+                      err.response.data.error === 'houses가 존재하지 않습니다.'
+                    ) {
+                      Alert.alert('검색하신 결과가 존재하지않습니다');
+                    }
+                  });
+              }}
+            />
+          }
         />
       </View>
-      <View style={{ borderTopWidth: 0.2 }}>
+      <View style={{ borderTopWidth: 0.2, marginTop: 20 }}>
         <MapView
           style={styles.mapStyle}
           provider="google"
@@ -120,7 +124,6 @@ function MapSearchForm(props: Props): JSX.Element {
               title={marker.title}
               identifier={String(marker.id)}
               onPress={(e): void => {
-                console.log(e.nativeEvent);
                 axiosInstance.get(`houses/${e.nativeEvent.id}`).then((res) => {
                   props.navigation.navigate('HouseDetail', {
                     houseId: res.data.id,

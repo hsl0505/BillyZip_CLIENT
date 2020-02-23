@@ -1,6 +1,7 @@
 import React from 'react';
 import { Entypo } from '@expo/vector-icons';
-import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-elements';
 
 import {
   withNavigation,
@@ -30,16 +31,6 @@ interface Props {
 }
 
 const styles = StyleSheet.create({
-  // ButtonViewStyle: {
-  //   backgroundColor: '#D1D1D1',
-  //   // borderColor: '#dfe4ea',
-  //   // borderWidth: 1,
-  //   // marginBottom: 30,
-  //   // marginLeft: 20,
-  //   // marginRight: 20,
-  //   // padding: 10,
-  //   width: '90%',
-  // },
   TextViewStyle: {
     backgroundColor: '#F9F9F9',
     borderColor: '#dfe4ea',
@@ -64,6 +55,9 @@ function MyInfoList(props: Props): JSX.Element {
 
   return (
     <View>
+      <View style={{ marginTop: 40, marginLeft: 15 }}>
+        <Text style={{ fontWeight: 'bold', fontSize: 26 }}>내 정보</Text>
+      </View>
       <Text style={styles.title}>이름</Text>
       <View style={styles.TextViewStyle}>
         <Text>{name}</Text>
@@ -115,6 +109,8 @@ function MyInfoList(props: Props): JSX.Element {
       >
         <Button
           title="로그아웃"
+          type="clear"
+          titleStyle={{ color: 'purple' }}
           onPress={(): void => {
             asyncStorageHelper.clear();
             props.navigation.navigate('LoginScreen');
@@ -122,6 +118,8 @@ function MyInfoList(props: Props): JSX.Element {
         />
         <Button
           title="회원탈퇴"
+          type="clear"
+          titleStyle={{ color: 'purple' }}
           onPress={(): void => {
             axiosInstance
               .delete('users/myInfo')

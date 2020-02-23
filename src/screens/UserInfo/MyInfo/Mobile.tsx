@@ -54,18 +54,23 @@ const styles = StyleSheet.create({
 });
 
 function Mobile(props: Props): JSX.Element {
-  const [userPhoneNum, setuserPhoneNum] = useState();
+  const [userPhoneNum, setuserPhoneNum] = useState('');
   const [PhoneNumErr, setPhoneNumErr] = useState();
-  const [userVerifyNum, setuserVerifyNum] = useState();
+  const [userVerifyNum, setuserVerifyNum] = useState('');
   const [userVerifyNumErr, setuserVerifyNumErr] = useState();
   const [isVisible, setVisible] = useState(false);
 
   return (
     <View style={styles.container}>
+      <View style={{ marginTop: 40, marginLeft: 15 }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold' }}>
+          휴대폰 번호 인증
+        </Text>
+      </View>
       <Text style={styles.title}>변경할 휴대폰 번호를 입력하세요</Text>
 
       <Input
-        placeholder="예) 0101234567"
+        placeholder="핸드폰 번호를 - 없이 입력해주세요"
         containerStyle={styles.TextViewStyle}
         underlineColorAndroid="transparent"
         onChangeText={(text): void => {
@@ -76,7 +81,17 @@ function Mobile(props: Props): JSX.Element {
       />
       <Button
         title="인증번호 발송"
-        buttonStyle={styles.ButtonViewStyle}
+        titleStyle={{ color: userPhoneNum.length === 11 ? 'purple' : '#fff' }}
+        buttonStyle={{
+          backgroundColor: userPhoneNum.length === 11 ? '#fff' : '#D1D1D1',
+          borderColor: userPhoneNum.length === 11 ? 'purple' : '#dfe4ea',
+          borderWidth: 1,
+          marginBottom: 30,
+          marginLeft: 20,
+          marginRight: 20,
+          padding: 10,
+          width: '90%',
+        }}
         onPress={(): void => {
           setPhoneNumErr('');
           axiosInstance
@@ -95,9 +110,9 @@ function Mobile(props: Props): JSX.Element {
             });
         }}
       />
-
+      <View style={{ marginTop: 30 }} />
       <Input
-        placeholder="인증번호 입력 예) 1234"
+        placeholder="인증번호를 입력해주세요 예) 1234"
         containerStyle={styles.TextViewStyle}
         underlineColorAndroid="transparent"
         onChangeText={(text): void => {
@@ -107,8 +122,18 @@ function Mobile(props: Props): JSX.Element {
         errorStyle={{ alignSelf: 'center' }}
       />
       <Button
-        title="확인"
-        buttonStyle={styles.ButtonViewStyle}
+        title="인증번호 확인"
+        titleStyle={{ color: userVerifyNum.length === 4 ? 'purple' : '#fff' }}
+        buttonStyle={{
+          backgroundColor: userVerifyNum.length === 4 ? '#fff' : '#D1D1D1',
+          borderColor: userVerifyNum.length === 4 ? 'purple' : '#dfe4ea',
+          borderWidth: 1,
+          marginBottom: 30,
+          marginLeft: 20,
+          marginRight: 20,
+          padding: 10,
+          width: '90%',
+        }}
         onPress={(): void => {
           axiosInstance
             .post('auth/verify', {

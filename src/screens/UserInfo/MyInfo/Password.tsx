@@ -44,25 +44,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1,
   },
-  title: {
-    fontSize: 15,
-    marginBottom: 15,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 20,
-  },
 });
 
 function Password(props: Props): JSX.Element {
   const { navigation } = props;
   const params = navigation.getParam('key');
   const { email, name, birth, mobile, gender } = params;
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState('');
   const [passwordErr, setPasswordErr] = useState();
   const [isVisible, setVisible] = useState(false);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>비밀번호</Text>
+      <View style={{ marginTop: 40, marginLeft: 15 }}>
+        <Text style={{ fontSize: 26, fontWeight: 'bold' }}>비밀번호 변경</Text>
+      </View>
+      <View style={{ marginTop: 25 }} />
       <Input
         placeholder="영문, 숫자, 특수기호 혼합 8자리 이상 입력"
         containerStyle={styles.TextViewStyle}
@@ -75,7 +71,17 @@ function Password(props: Props): JSX.Element {
       />
       <Button
         title="확인"
-        buttonStyle={styles.ButtonViewStyle}
+        titleStyle={{ color: password.length >= 8 ? 'purple' : '#fff' }}
+        buttonStyle={{
+          backgroundColor: password.length >= 8 ? '#fff' : '#D1D1D1',
+          borderColor: password.length >= 8 ? 'purple' : '#dfe4ea',
+          borderWidth: 1,
+          marginBottom: 30,
+          marginLeft: 20,
+          marginRight: 20,
+          padding: 10,
+          width: '90%',
+        }}
         onPress={(): void => {
           setPasswordErr('');
           axiosInstance

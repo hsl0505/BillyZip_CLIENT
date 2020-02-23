@@ -26,6 +26,16 @@ function NormalResult(props: Props): JSX.Element {
   const { data } = props;
   return (
     <View>
+      <Text
+        style={{
+          marginTop: 40,
+          marginLeft: 15,
+          fontWeight: 'bold',
+          fontSize: 26,
+        }}
+      >
+        검색 결과
+      </Text>
       {data.length > 0 ? (
         <FlatList
           data={data}

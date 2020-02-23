@@ -56,7 +56,7 @@ function NormalSearchForm(props: Props): JSX.Element {
           inputContainerStyle={{ marginHorizontal: 15 }}
         />
       </View>
-      <View style={{ marginTop: 30, marginLeft: 15 }}>
+      <View style={{ marginTop: 30, marginLeft: 15, marginRight: 15 }}>
         <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 15 }}>
           검색 옵션
         </Text>

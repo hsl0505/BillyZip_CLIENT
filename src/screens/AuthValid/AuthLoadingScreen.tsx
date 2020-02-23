@@ -28,7 +28,7 @@ function AuthLoadingScreen(
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgb(102,051,204)',
+        backgroundColor: '#fff',
       }}
     >
       <StatusBar hidden />
