@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+
 import {
   withNavigation,
   NavigationScreenProp,
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Overlay, Button } from 'react-native-elements';
 import { Feather } from '@expo/vector-icons';
-import axiosInstance from '../../util/axiosInstance';
 
+import axiosInstance from '../../util/axiosInstance';
 interface Props {
   navigation: NavigationScreenProp<
     NavigationRoute<NavigationParams>,
@@ -30,23 +31,39 @@ function Application(props: Props): JSX.Element {
   // 액시오스 받아서 셋스테이트하기
   // 스테이를 맵으로 렌더링하기
   // 리스트아이템 활용
+
+
+
+
+
+
+
   const [applications, setApplications] = useState([]);
+  const [isVisible, setVisible] = useState(true);
 
   useEffect(() => {
-    axiosInstance.get('application/my-application').then((res) => {
-      console.log('신청리스트', res.data);
-      setApplications(res.data);
-    });
+    axiosInstance
+      .get('application/my-application')
+      .then((res) => {
+        console.log('신청리스트', res.data);
+        setApplications(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setApplications([]);
+      });
   }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
+
       <View style={{ marginTop: 40, marginLeft: 15 }}>
         <Text style={{ fontWeight: 'bold', fontSize: 26, marginBottom: 10 }}>
           매물 신청 현황
         </Text>
       </View>
-      {applications.map((application: Application) => (
+      {applications.length > 0 ? (
+        applications.map((application: Application) => (
         <ListItem
           key={application.id}
           leftIcon={
@@ -66,12 +83,44 @@ function Application(props: Props): JSX.Element {
             });
           }}
         />
-      ))}
+      )) 
+    ) : (
+ <View>
+          <Overlay
+            isVisible={isVisible}
+            height={100}
+            width={280}
+          >
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{ alignSelf: 'center', fontSize: 15, marginTop: 10 }}
+              >
+                신청한 매물이 존재하지 않습니다.
+              </Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  alignItems: 'flex-end',
+                  justifyContent: 'space-around',
+                }}
+              >
+                <Button
+                  title="확인"
+                  onPress={(): void => {
+                    setVisible(false);
+                    props.navigation.navigate('UserInfo');
+                  }}
+                  type="clear"
+                />
+              </View>
+            </View>
+          </Overlay>
+        </View>
+      )}
+
     </View>
   );
 }
 
 export default withNavigation(Application);
-
-// 서버에서 리스트 받아서 렌더링하기
-// 매물 title / status, 누르면 매물로 이동하기
