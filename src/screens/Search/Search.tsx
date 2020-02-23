@@ -1,9 +1,12 @@
 import React from 'react';
+import { View } from 'react-native';
 import SelectSearch from '../../components/Search/SelectSearch';
 
 function Search(): JSX.Element {
   return (
-    <SelectSearch />
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <SelectSearch />
+    </View>
   );
 }
 

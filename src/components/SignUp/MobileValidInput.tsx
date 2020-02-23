@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, StatusBar } from 'react-native';
 import { Input, Button, Overlay } from 'react-native-elements';
 
 import {
@@ -18,16 +18,6 @@ interface Props {
   >;
 }
 const styles = StyleSheet.create({
-  ButtonViewStyle: {
-    backgroundColor: '#D1D1D1',
-    borderColor: '#dfe4ea',
-    borderWidth: 1,
-    marginBottom: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    padding: 10,
-    width: '90%',
-  },
   TextViewStyle: {
     backgroundColor: '#F9F9F9',
     borderColor: '#dfe4ea',
@@ -40,86 +30,114 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   title: {
-    fontSize: 15,
+    fontSize: 26,
+    fontWeight: 'bold',
     marginBottom: 15,
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 20,
+    marginTop: 50,
   },
 });
 
 function MobileValidInput(props: Props): JSX.Element {
-  const [userPhoneNum, setuserPhoneNum] = useState();
+  const [userPhoneNum, setuserPhoneNum] = useState('');
   const [PhoneNumErr, setPhoneNumErr] = useState();
-  const [userVerifyNum, setuserVerifyNum] = useState();
+  const [userVerifyNum, setuserVerifyNum] = useState('');
   const [userVerifyNumErr, setuserVerifyNumErr] = useState();
   const [isVisible, setVisible] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <Text style={styles.title}>휴대폰 번호 인증</Text>
+      <StatusBar hidden={false} />
+      <View>
+        <Text style={styles.title}>휴대폰 번호 인증</Text>
+      </View>
+      <View style={{ marginTop: 20 }}>
+        <Input
+          placeholder="핸드폰 번호를 - 없이 입력해주세요"
+          multiline
+          containerStyle={styles.TextViewStyle}
+          underlineColorAndroid="transparent"
+          onChangeText={(text): void => {
+            setuserPhoneNum(text);
+          }}
+          errorMessage={PhoneNumErr}
+          errorStyle={{ alignSelf: 'center' }}
+        />
+        <Button
+          title="인증번호 발송"
+          titleStyle={{ color: userPhoneNum.length === 11 ? 'purple' : '#fff' }}
+          buttonStyle={{
+            backgroundColor: userPhoneNum.length === 11 ? '#fff' : '#D1D1D1',
+            borderColor: userPhoneNum.length === 11 ? 'purple' : '#dfe4ea',
+            borderWidth: 1,
+            marginBottom: 30,
+            marginLeft: 20,
+            marginRight: 20,
+            padding: 10,
+            width: '90%',
+          }}
+          onPress={(): void => {
+            axiosInstance
+              .post('auth', {
+                userPhoneNum,
+              })
+              .then((res) => {
+                if (res.status === 200) {
+                  Alert.alert('인증번호가 발송되었습니다');
+                }
+              })
+              .catch((err) => {
+                if (err.response.status === 400) {
+                  setPhoneNumErr(err.response.data);
+                }
+              });
+          }}
+        />
+      </View>
 
-      <Input
-        placeholder="예) 01012345678"
-        containerStyle={styles.TextViewStyle}
-        underlineColorAndroid="transparent"
-        onChangeText={(text): void => {
-          setuserPhoneNum(text);
-        }}
-        errorMessage={PhoneNumErr}
-        errorStyle={{ alignSelf: 'center' }}
-      />
-      <Button
-        title="인증번호 발송"
-        buttonStyle={styles.ButtonViewStyle}
-        onPress={(): void => {
-          axiosInstance
-            .post('auth', {
-              userPhoneNum,
-            })
-            .then((res) => {
-              if (res.status === 200) {
-                Alert.alert('인증번호가 발송되었습니다');
-              }
-            })
-            .catch((err) => {
-              if (err.response.status === 400) {
-                setPhoneNumErr(err.response.data);
-              }
-            });
-        }}
-      />
-
-      <Input
-        placeholder="예) 1234"
-        containerStyle={styles.TextViewStyle}
-        underlineColorAndroid="transparent"
-        onChangeText={(text): void => {
-          setuserVerifyNum(text);
-        }}
-        errorMessage={userVerifyNumErr}
-        errorStyle={{ alignSelf: 'center' }}
-      />
-      <Button
-        title="인증번호 확인"
-        buttonStyle={styles.ButtonViewStyle}
-        onPress={(): void => {
-          axiosInstance
-            .post('auth/verify', {
-              userVerifyNum,
-              userPhoneNum,
-            })
-            .then((res) => {
-              if (res.status === 200) {
-                setVisible(true);
-              }
-            })
-            .catch((err) => {
-              if (err.response.status === 400) {
-                setuserVerifyNumErr(err.response.data);
-              }
-            });
-        }}
-      />
+      <View style={{ marginTop: 30 }}>
+        <Input
+          placeholder="인증번호를 입력해주세요 예) 1234"
+          containerStyle={styles.TextViewStyle}
+          underlineColorAndroid="transparent"
+          onChangeText={(text): void => {
+            setuserVerifyNum(text);
+          }}
+          errorMessage={userVerifyNumErr}
+          errorStyle={{ alignSelf: 'center' }}
+        />
+        <Button
+          title="인증번호 확인"
+          titleStyle={{ color: userVerifyNum.length === 4 ? 'purple' : '#fff' }}
+          buttonStyle={{
+            backgroundColor: userVerifyNum.length === 4 ? '#fff' : '#D1D1D1',
+            borderColor: userVerifyNum.length === 4 ? 'purple' : '#dfe4ea',
+            borderWidth: 1,
+            marginBottom: 30,
+            marginLeft: 20,
+            marginRight: 20,
+            padding: 10,
+            width: '90%',
+          }}
+          onPress={(): void => {
+            axiosInstance
+              .post('auth/verify', {
+                userVerifyNum,
+                userPhoneNum,
+              })
+              .then((res) => {
+                if (res.status === 200) {
+                  setVisible(true);
+                }
+              })
+              .catch((err) => {
+                if (err.response.status === 400) {
+                  setuserVerifyNumErr(err.response.data);
+                }
+              });
+          }}
+        />
+      </View>
 
       <Overlay
         isVisible={isVisible}

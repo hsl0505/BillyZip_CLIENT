@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import {
   withNavigation,
   NavigationScreenProp,
@@ -19,6 +19,7 @@ interface Props {
 function FavorScreen(props: Props): JSX.Element {
   const { navigation } = props;
   const [favHouses, setFavHouses] = useState();
+  const [isReady, setReady] = useState(false);
 
   useEffect(() => {
     if (!favHouses) {
@@ -26,6 +27,7 @@ function FavorScreen(props: Props): JSX.Element {
         .get('favs')
         .then((res) => {
           setFavHouses(res.data);
+          setReady(true);
         })
         .catch((err) => console.log(err));
     }
@@ -35,6 +37,7 @@ function FavorScreen(props: Props): JSX.Element {
         .get('favs')
         .then((res) => {
           setFavHouses(res.data);
+          setReady(true);
         })
         .catch((err) => console.log(err));
     });
@@ -52,18 +55,32 @@ function FavorScreen(props: Props): JSX.Element {
         marginTop: 20,
       }}
     >
-      <Text
-        style={{
-          marginLeft: 15,
-          marginTop: 25,
-          marginBottom: 10,
-          fontSize: 26,
-          fontWeight: 'bold',
-        }}
-      >
-        즐겨찾기
-      </Text>
-      {favHouses ? <MoreListEntry favHouses={favHouses} isFav="f" /> : <View />}
+      {isReady ? (
+        <View>
+          <Text
+            style={{
+              marginLeft: 15,
+              marginTop: 25,
+              marginBottom: 10,
+              fontSize: 26,
+              fontWeight: 'bold',
+            }}
+          >
+            즐겨찾기
+          </Text>
+          {favHouses ? (
+            <MoreListEntry favHouses={favHouses} isFav="f" />
+          ) : (
+            <View />
+          )}
+        </View>
+      ) : (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      )}
     </View>
   );
 }

@@ -561,7 +561,8 @@ function HouseDetailContent(props: Props): JSX.Element {
         </Text>
         <Button
           title="리뷰 모두 보기"
-          containerStyle={{ alignSelf: 'center' }}
+          type="clear"
+          containerStyle={{ marginTop: 10 }}
           onPress={(): void => {
             props.navigation.navigate(
               isFav === 'f' ? 'FavorReview' : 'ReviewScreen',
@@ -570,7 +571,7 @@ function HouseDetailContent(props: Props): JSX.Element {
           }}
         />
       </View>
-      <View style={{ flex: 1, marginTop: 70 }}>
+      <View style={{ flex: 1, marginTop: 40 }}>
         <Text
           style={{
             fontSize: 25,
@@ -586,7 +587,8 @@ function HouseDetailContent(props: Props): JSX.Element {
         </Text>
         <Button
           title="포럼 참가"
-          containerStyle={{ alignSelf: 'center' }}
+          type="clear"
+          containerStyle={{ marginTop: 10 }}
           onPress={(): void => {
             props.navigation.navigate('Room', { hostId: id });
           }}
@@ -595,6 +597,14 @@ function HouseDetailContent(props: Props): JSX.Element {
       <View style={{ flex: 1, marginTop: 40 }}>
         <Button
           title="신청하기"
+          titleStyle={{ color: 'purple' }}
+          buttonStyle={{
+            borderWidth: 1,
+            borderColor: 'purple',
+            width: 200,
+            alignSelf: 'center',
+          }}
+          type="outline"
           onPress={(): void => {
             axiosInstance
               .post('application', {

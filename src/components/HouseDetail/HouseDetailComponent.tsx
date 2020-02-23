@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dimensions, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { FontAwesome } from '@expo/vector-icons';
@@ -22,6 +22,12 @@ function HouseDetailComponent(props: Props): JSX.Element {
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [isFavsNow, setFavsNow] = useState(favsNow);
+
+  const [isReady, setReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setReady(true), 500);
+  }, []);
 
   return (
     <View>
@@ -61,24 +67,28 @@ function HouseDetailComponent(props: Props): JSX.Element {
           }
         }}
       />
-      <Pagination
-        activeDotIndex={activeSlide}
-        dotsLength={imgLength}
-        dotStyle={{
-          width: 30,
-          height: 6,
-          backgroundColor: '#fff',
-        }}
-        inactiveDotScale={0.8}
-        inactiveDotStyle={{ backgroundColor: '#848484' }}
-        containerStyle={{
-          flex: 1,
-          height: 70,
-          marginTop: -65,
-          marginBottom: -5,
-          alignSelf: 'center',
-        }}
-      />
+      {isReady ? (
+        <Pagination
+          activeDotIndex={activeSlide}
+          dotsLength={imgLength}
+          dotStyle={{
+            width: 30,
+            height: 6,
+            backgroundColor: '#fff',
+          }}
+          inactiveDotScale={0.8}
+          inactiveDotStyle={{ backgroundColor: '#848484' }}
+          containerStyle={{
+            flex: 1,
+            height: 70,
+            marginTop: -65,
+            marginBottom: -5,
+            alignSelf: 'center',
+          }}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 }

@@ -4,7 +4,7 @@ import LoginInput from '../../components/Login/LoginInput';
 
 function LoginScreen(): JSX.Element {
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ flex: 1 }}>
       <LoginInput />
     </View>
   );

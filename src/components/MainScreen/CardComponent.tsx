@@ -50,6 +50,7 @@ function CardComponent(props: Props): JSX.Element {
       onPress={(): void => {
         props.navigation.navigate('HouseDetail', { houseId: id });
       }}
+      activeOpacity={0.9}
     >
       <Card
         image={{
@@ -59,6 +60,7 @@ function CardComponent(props: Props): JSX.Element {
           height: RecommendOrHouses === 'R' ? 300 : 190,
           width: RecommendOrHouses === 'R' ? 300 : 200,
           marginBottom: 15,
+          borderRadius: RecommendOrHouses === 'R' ? 30 : 20,
         }}
         imageStyle={{
           height: RecommendOrHouses === 'R' ? 200 : 120,
@@ -67,6 +69,14 @@ function CardComponent(props: Props): JSX.Element {
         imageProps={{
           resizeMode: 'cover',
           PlaceholderContent: <ActivityIndicator />,
+          placeholderStyle: {
+            backgroundColor: '#fff',
+            borderTopLeftRadius: RecommendOrHouses === 'R' ? 30 : 20,
+            borderTopRightRadius: RecommendOrHouses === 'R' ? 30 : 20,
+            width: RecommendOrHouses === 'R' ? 298 : 198,
+          },
+          borderTopLeftRadius: RecommendOrHouses === 'R' ? 30 : 20,
+          borderTopRightRadius: RecommendOrHouses === 'R' ? 30 : 20,
         }}
       >
         <View>

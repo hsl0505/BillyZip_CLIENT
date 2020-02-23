@@ -15,6 +15,9 @@ function DetailImageComponent(props: Props): JSX.Element {
         style={{ width, height: 275, resizeMode: 'cover' }}
         source={{ uri: img }}
         PlaceholderContent={<ActivityIndicator />}
+        placeholderStyle={{
+          backgroundColor: '#fff',
+        }}
       />
     </View>
   );
