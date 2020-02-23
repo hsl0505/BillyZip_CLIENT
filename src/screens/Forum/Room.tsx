@@ -1,104 +1,179 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, AsyncStorage } from 'react-native';
-import { Input } from 'react-native-elements';
-import { withNavigation } from 'react-navigation';
+import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Input, Avatar } from 'react-native-elements';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
+import { AntDesign } from '@expo/vector-icons';
 import socket from '../../util/socket';
 import axiosInstance from '../../util/axiosInstance';
 
-let key = 0;
-let myId: any;
-let myName: any;
+interface Props {
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
+}
 
-function Room(props: any): JSX.Element {
+interface Msg {
+  name: string;
+  msg: string;
+}
+
+function Room(props: Props): JSX.Element {
   // ! 매물상세에서 send a message를 눌러 이 컴포넌트로 들어올 때 props로 호스트의 hostId를 받는다.
   const { navigation } = props;
-  const hostId = navigation ? navigation.getParam('hostId') : undefined;
 
-  // hostId = 1;
-  console.log('hostId ?? ', hostId);
-  console.log('navigation ?? ', navigation); //   "detailHostId": 3,  "footerHostId": 1
+  const hostId = navigation.getParam('hostId');
+  const myId = navigation.getParam('myId');
+  const myName = navigation.getParam('myName');
 
   const [chat, setChat] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Msg[]>([]);
+
+  console.log('여긴가..?', messages);
 
   useEffect(() => {
-    axiosInstance
-      .post('forum/room', {
-        hostId,
-      })
-      .then((res) => {
-        setMessages(JSON.parse(res.data.forumLog));
-      })
-      .catch((err) => console.log('로그가 존재하지 않습니다.', err));
+    if (messages.length === 0) {
+      // console.log('포스트?');
+      axiosInstance
+        .post('forum/room', {
+          hostId,
+        })
+        .then((res) => {
+          if (JSON.parse(res.data.forumLog).length !== 0) {
+            setMessages(JSON.parse(res.data.forumLog));
+          } else {
+            setMessages([{ name: '', msg: '' }]);
+          }
+        })
+        .catch((err) => console.log('로그가 존재하지 않습니다.', err));
+    }
 
-    const getMyId = async (): Promise<void> => {
-      myId = await AsyncStorage.getItem('userId');
-      myName = await AsyncStorage.getItem('userName');
-      socket.emit('joinRoom', myId);
-    };
-    getMyId();
+    socket.emit('joinRoom', myId);
 
     if (hostId) {
       socket.emit('joinRoom', hostId);
     }
 
-    socket.on('chat', (msg: any) => {
-      console.log(msg);
-      // const message = `${name}: ${msg}`;
-      setMessages((prev) => {
-        return prev.concat(msg);
-      });
+    socket.on('chat', (msg: ConcatArray<never>) => {
+      setMessages(messages.concat(msg));
     });
-  }, [hostId]);
+
+    const handleBlur = navigation.addListener('didBlur', () => {
+      // console.log('디드 블러?');
+      axiosInstance
+        .post('forum', {
+          messages,
+          myId,
+          hostId,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log('전송 성공');
+          }
+        })
+        .catch((err) => console.error(err));
+    });
+
+    return (): void => {
+      handleBlur.remove();
+    };
+  }, [hostId, messages, myId, navigation]);
 
   const handleMessageToHost = (roomId: number): void => {
     socket.emit('chat', roomId, chat, myName);
-    setChat('');
   };
 
   return (
-    <View>
-      {messages.map((message: any) => (
-        // eslint-disable-next-line no-plusplus
-        <Text key={key++}>{message}</Text>
-      ))}
-      <Input
-        placeholder={`${myName}님의 의견을 여기에 적어 주세요.`}
-        clearButtonMode="always"
-        onChangeText={(text): void => {
-          setChat(text);
-        }}
-        value={chat}
-      />
-      <Button
-        title="전송"
-        onPress={(): any => {
-          handleMessageToHost(hostId || myId);
-          axiosInstance
-            .post('forum', {
-              messages,
-              myId,
-              hostId,
-            })
-            .then((res) => {
-              if (res.status === 200) {
-                console.log('전송 성공');
-              }
-            })
-            .catch((err) => console.error(err));
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <KeyboardAvoidingView behavior="position">
+        <ScrollView keyboardShouldPersistTaps="always">
+          <Text
+            style={{
+              marginTop: 40,
+              paddingTop: 15,
+              fontSize: 26,
+              fontWeight: 'bold',
+              marginLeft: 15,
+            }}
+          >
+            포럼 현황
+          </Text>
+          {messages.map((message) => (
+            <View
+              style={{
+                flexDirection: 'row',
+                marginLeft: 30,
+                marginTop: 15,
+              }}
+            >
+              <View style={{ flexDirection: 'column' }}>
+                <Avatar rounded icon={{ name: 'user', type: 'font-awesome' }} />
 
-        }}
-      />
-      <Button
-        title="포럼 이용규칙"
-        onPress={(): any => {
-          props.navigation.navigate('ForumNotice');
-          // 공지 오버레이 띄우기
-        }}
-      />
+                <Text style={{ alignSelf: 'center', fontWeight: 'bold' }}>
+                  {message.name}
+                </Text>
+              </View>
+              <View
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#BDBDBD',
+                  borderRadius: 25,
+                  width: 250,
+                  height: 80,
+                  marginLeft: 10,
+                  backgroundColor:
+                    message.name === myName ? 'rgb(102,051,204)' : '#BDBDBD',
+                  padding: 5,
+                }}
+              >
+                <Text
+                  style={{
+                    margin: 5,
+                    fontWeight: 'bold',
+                    color: message.name === myName ? '#fff' : 'black',
+                  }}
+                >
+                  {message.msg}
+                </Text>
+              </View>
+            </View>
+          ))}
+
+          <Input
+            placeholder={`${myName} 님의 의견을 여기에 적어 주세요.`}
+            clearButtonMode="always"
+            onChangeText={(text): void => {
+              setChat(text);
+            }}
+            value={chat}
+            containerStyle={{
+              marginTop: 10,
+              marginHorizontal: 20,
+              alignSelf: 'center',
+              paddingBottom: 60,
+            }}
+            inputContainerStyle={{ marginHorizontal: 5 }}
+            rightIcon={
+              <AntDesign
+                name="upcircleo"
+                size={28}
+                style={{ marginRight: 8 }}
+                onPress={(): void => {
+                  handleMessageToHost(hostId || myId);
+                  setChat('');
+                }}
+              />
+            }
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 }
 
-export default withNavigation(Room);
-// export default React.memo(Room);
+export default React.memo(withNavigation(Room));

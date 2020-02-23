@@ -1,57 +1,89 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, AsyncStorage } from 'react-native';
-// import ForumEntry from '../../components/Forum/ForumEntry';
+import { View, AsyncStorage, Text, ActivityIndicator } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { withNavigation } from 'react-navigation';
+import {
+  withNavigation,
+  NavigationScreenProp,
+  NavigationRoute,
+  NavigationParams,
+} from 'react-navigation';
 import axiosInstance from '../../util/axiosInstance';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+interface Props {
+  navigation: NavigationScreenProp<
+    NavigationRoute<NavigationParams>,
+    NavigationParams
+  >;
+}
 
-let myId: any;
+interface Forum {
+  id: number;
+  hostName: string;
+  hostId: number;
+}
 
-function Forum(props: any): JSX.Element {
+function Forum(props: Props): JSX.Element {
   const [forums, setForums] = useState([]);
+  const [myId, setMyId] = useState();
+  const [myName, setMyName] = useState();
+  const [isReady, setReady] = useState(false);
 
   useEffect(() => {
     const getMyId = async (): Promise<void> => {
-      myId = await AsyncStorage.getItem('userId');
+      const getmyId = await AsyncStorage.getItem('userId');
+      const getmyName = await AsyncStorage.getItem('userName');
 
       axiosInstance
         .post('forum/list', {
-          myId,
+          myId: getmyId,
         })
         .then((res) => {
-          console.log('포럼리스트', res.data);
           setForums(res.data);
+          setMyId(getmyId);
+          setMyName(getmyName);
+          setReady(true);
         });
     };
 
     getMyId();
-
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View>
-        {forums.map((forum: any, i: number) => (
-          <ListItem
-            key={i.toString()}
-            title={`'${forum.hostName}' 호스트의 포럼입니다.`}
-            // leftIcon={<SimpleLineIcons name={forum.icon} size={28} />}
-            bottomDivider
-            chevron
-            onPress={(): void => {
-              // hostId 넣어주기
-              props.navigation.navigate('Room', {hostId: forum.hostId});
-            }}
-          />
-        ))}
-      </View>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      {isReady ? (
+        <View style={{ flex: 1 }}>
+          <View style={{ marginTop: 40, marginLeft: 15 }}>
+            <Text style={{ fontWeight: 'bold', fontSize: 26 }}>
+              참가중인 포럼 목록
+            </Text>
+          </View>
+          <View style={{ marginTop: 20 }}>
+            {forums.map((forum: Forum) => (
+              <ListItem
+                key={forum.id}
+                title={`'${forum.hostName}' 호스트의 포럼입니다.`}
+                bottomDivider
+                topDivider
+                chevron
+                onPress={(): void => {
+                  // hostId 넣어주기
+                  props.navigation.navigate('Room', {
+                    hostId: forum.hostId,
+                    myId,
+                    myName,
+                  });
+                }}
+              />
+            ))}
+          </View>
+        </View>
+      ) : (
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      )}
     </View>
   );
 }

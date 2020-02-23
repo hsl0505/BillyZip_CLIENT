@@ -17,6 +17,7 @@ const ForumScreen = createStackNavigator(
   },
   {
     initialRouteName: 'Forum',
+    headerMode: 'none',
   },
 );
 
