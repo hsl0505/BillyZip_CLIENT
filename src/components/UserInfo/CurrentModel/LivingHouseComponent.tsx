@@ -51,7 +51,7 @@ function LivingHouseComponenet(props: Props): JSX.Element {
       icon: 'message-alert',
     },
     {
-      name: '상세 정보 확인하기',
+      name: '살고 있는 집 자세히 보기',
       icon: 'comment-search-outline',
     },
   ];
@@ -62,7 +62,9 @@ function LivingHouseComponenet(props: Props): JSX.Element {
         <ListItem
           key={i.toString()}
           title={l.name}
-          leftIcon={<MaterialCommunityIcons name={l.icon} size={28} />}
+          leftIcon={
+            <MaterialCommunityIcons name={l.icon} size={28} color="purple" />
+          }
           bottomDivider
           onPress={(): void => {
             if (l.icon === 'comment-search-outline') {

@@ -31,26 +31,49 @@ interface Props {
 
 function CurrentPlan(props: Props): JSX.Element {
   const { subscribedHouses } = props;
-  console.log('현재 구독 모델 페이지 :: ', subscribedHouses);
+  // console.log('현재 구독 모델 페이지 :: ', subscribedHouses);
   const { livingHouse, currentPlan } = subscribedHouses;
+  // console.log('리빙하우스 :: ', livingHouse);
 
   return (
     <View>
-      <Text>현구 구독 모델 페이지</Text>
-      <Text>
-        {currentPlan === null ? '구독 플랜 미신청' : `${currentPlan}만원/달`}
-      </Text>
-      <Text>현재 살고 있는 집</Text>
-      <View>
-        {livingHouse === undefined ? (
-          <Text>현재 살고 있는 집이 없습니다</Text>
-        ) : (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          marginTop: 50,
+        }}
+      >
+        <Text
+          style={{
+            fontWeight: 'bold',
+          }}
+        >
+          현재 구독 중인 플랜 :
+        </Text>
+        <Text>
+          {currentPlan === null ? '구독 플랜 미신청' : `${currentPlan}만원/월`}
+        </Text>
+      </View>
+      <View
+        style={{
+          marginTop: 50,
+        }}
+      >
+        <Text>현재 살고 있는 집</Text>
+        <View>
           <View>
-            {livingHouse.map((ele) => (
-              <LivingHouseComponent key={ele.id} ele={ele} />
-            ))}
+            {livingHouse === undefined || livingHouse.length < 1 ? (
+              <Text>현재 살고 있는 집은 없습니다</Text>
+            ) : (
+              <View>
+                {livingHouse.map((ele) => (
+                  <LivingHouseComponent key={ele.id} ele={ele} />
+                ))}
+              </View>
+            )}
           </View>
-        )}
+        </View>
       </View>
     </View>
   );
