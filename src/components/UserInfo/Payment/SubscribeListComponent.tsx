@@ -42,7 +42,7 @@ function SubscribeListComponent(props: Props): JSX.Element {
         >
           <AntDesign name="frowno" size={80} color="purple" />
           <Text style={{ fontSize: 20, marginTop: 50 }}>
-            현재 구독중인 플랜이 없습니다
+            현재 구독 중인 플랜이 없습니다
           </Text>
           <Text style={{ fontSize: 20, marginTop: 5 }}>
             다양한 플랜을 확인해보세요
