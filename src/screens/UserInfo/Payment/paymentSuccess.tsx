@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, Button } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { Card, Divider } from 'react-native-elements';
 
 import {
@@ -11,7 +11,6 @@ import {
 
 import numberWithCommas from './numberWithCommas';
 import getDate from './GetDate';
-import SubscribeList from './SubscribeList';
 
 interface Props {
   navigation: NavigationScreenProp<
@@ -33,89 +32,84 @@ function PaymentSuccess(props: Props): JSX.Element {
   console.log('유저네임:: ', userName);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} removeClippedSubviews>
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <Card containerStyle={{ borderColor: 'purple' }}>
-          <Text
-            style={{
-              fontSize: 20,
-              textAlign: 'center',
-              fontWeight: 'bold',
-              marginLeft: 20,
-              marginRight: 20,
-            }}
-          >
-            {userName} 님, 결제가 완료되었습니다
-          </Text>
-        </Card>
-
-        <Card
-          containerStyle={{ borderColor: 'purple' }}
-          title="결제정보"
-          dividerStyle={{ borderColor: 'purple', borderWidth: 0.5 }}
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <Card containerStyle={{ borderColor: 'purple' }}>
+        <Text
+          style={{
+            fontSize: 20,
+            textAlign: 'center',
+            fontWeight: 'bold',
+            marginLeft: 20,
+            marginRight: 20,
+          }}
         >
-          <View
-            style={{
-              marginBottom: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>결제일시</Text>
-            <Text>{getDate(paymentValues[0])}</Text>
-          </View>
-          <View
-            style={{
-              marginBottom: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>결제수단</Text>
-            <Text>{paymentValues[1]}</Text>
-          </View>
-          <View
-            style={{
-              marginBottom: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>구독플랜</Text>
-            <Text>{paymentValues[2]}만원/월</Text>
-          </View>
-          <Divider
-            style={{
-              borderColor: 'purple',
-              borderWidth: 0.5,
-              marginBottom: 20,
-            }}
-          />
-          <View
-            style={{
-              marginBottom: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
-              총 결제금액
-            </Text>
-            <Text>{numberWithCommas(amount)} 원</Text>
-          </View>
-          <Button
-            title="확인"
-            color="purple"
-            onPress={(): void => {
-              if (props.navigation) {
-                props.navigation.navigate('UserInfo');
-              }
-            }}
-          />
-        </Card>
-        <SubscribeList />
-      </View>
-    </ScrollView>
+          {userName} 님, 결제가 완료되었습니다
+        </Text>
+      </Card>
+
+      <Card
+        containerStyle={{ borderColor: 'purple' }}
+        title="결제정보"
+        dividerStyle={{ borderColor: 'purple', borderWidth: 0.5 }}
+      >
+        <View
+          style={{
+            marginBottom: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>결제일시</Text>
+          <Text>{getDate(paymentValues[0])}</Text>
+        </View>
+        <View
+          style={{
+            marginBottom: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>결제수단</Text>
+          <Text>{paymentValues[1]}</Text>
+        </View>
+        <View
+          style={{
+            marginBottom: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>구독플랜</Text>
+          <Text>{paymentValues[2]}만원/월</Text>
+        </View>
+        <Divider
+          style={{
+            borderColor: 'purple',
+            borderWidth: 0.5,
+            marginBottom: 20,
+          }}
+        />
+        <View
+          style={{
+            marginBottom: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>총 결제금액</Text>
+          <Text>{numberWithCommas(amount)} 원</Text>
+        </View>
+        <Button
+          title="확인"
+          color="purple"
+          onPress={(): void => {
+            if (props.navigation) {
+              props.navigation.navigate('UserInfo');
+            }
+          }}
+        />
+      </Card>
+    </View>
   );
 }
 

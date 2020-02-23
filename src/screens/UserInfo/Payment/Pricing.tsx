@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
 
 function Pricing(props: Partial<NavigationInjectedProps>): JSX.Element {
   const planList = ['30', '50', '70', '100', '150'];
+
   return (
     <View style={styles.container}>
       <Text
@@ -57,6 +58,15 @@ function Pricing(props: Partial<NavigationInjectedProps>): JSX.Element {
           </View>
         </Card>
       ))}
+      <Button
+        title="구독한 플랜 목록 확인하기"
+        color="purple"
+        onPress={(): void => {
+          if (props.navigation) {
+            props.navigation.navigate('SubscribeList');
+          }
+        }}
+      />
     </View>
   );
 }

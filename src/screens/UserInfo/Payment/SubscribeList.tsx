@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { Card } from 'react-native-elements';
+import { ScrollView, View } from 'react-native';
 
 import axiosInstance from '../../../util/axiosInstance';
 
@@ -17,30 +16,26 @@ function SubscribeList(): JSX.Element {
         setPaymentList(res.data);
         setReady(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setPaymentList([]);
+          setReady(true);
+        }
+      });
   }, []);
-  console.log('페이먼트리스트 :: ', paymentList);
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {ready === false ? (
         <View />
       ) : (
         <View>
-          <Card containerStyle={{ borderColor: 'purple' }}>
-            <Text
-              style={{
-                fontSize: 20,
-                textAlign: 'center',
-                fontWeight: 'bold',
-                marginLeft: 20,
-                marginRight: 20,
-              }}
-            >
-              신청한 구독 리스트를 확인해보세요!
-            </Text>
-          </Card>
-
-          <SubscribeListComponent paymentList={paymentList} />
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            removeClippedSubviews
+          >
+            <SubscribeListComponent paymentList={paymentList} />
+          </ScrollView>
         </View>
       )}
     </View>

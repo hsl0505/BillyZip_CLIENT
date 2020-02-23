@@ -37,7 +37,7 @@ function SubscribeListComponentCard(props: Props): JSX.Element {
     subscribePlan.length > 3 ? `${subscribePlan}00000` : `${subscribePlan}0000`; // 구독 플랜 예) 30 => 300000 / 150 => 1500000 (숫자 0 붙여주기)
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View style={{ backgroundColor: '#fff' }}>
       <Card
         containerStyle={{ borderColor: 'purple' }}
         title="결제정보"
@@ -74,7 +74,11 @@ function SubscribeListComponentCard(props: Props): JSX.Element {
           <Text>{subscribePlan}만원/월</Text>
         </View>
         <Divider
-          style={{ borderColor: 'purple', borderWidth: 0.5, marginBottom: 20 }}
+          style={{
+            borderColor: 'purple',
+            borderWidth: 0.5,
+            marginBottom: 20,
+          }}
         />
         <View
           style={{
