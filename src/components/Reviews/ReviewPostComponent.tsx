@@ -82,7 +82,7 @@ function ReviewPostComponent(props: Props): JSX.Element {
           buttonStyle={{ borderWidth: 1, borderColor: 'purple' }}
           onPress={(): void => {
             axiosInstance
-              .post(`houses/${houseId}/reivew`, {
+              .post(`houses/${houseId}/review`, {
                 comment,
                 rating,
               })
