@@ -24,7 +24,7 @@ const IconsList = [
   },
   {
     title: '매물 신청 현황',
-    icon: 'user',
+    icon: 'list',
     routeName: 'Application',
   },
   {
