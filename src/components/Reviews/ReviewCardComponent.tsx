@@ -120,7 +120,7 @@ function ReviewCardComponent(props: Props): JSX.Element {
               type="clear"
               onPress={(): void => {
                 axiosInstance
-                  .delete(`houses/${houseId}/reivew/${reviewId}`)
+                  .delete(`houses/${houseId}/review/${reviewId}`)
                   .then(() => {
                     setVisible(false);
                     Alert.alert('리뷰가 삭제 되었습니다');
