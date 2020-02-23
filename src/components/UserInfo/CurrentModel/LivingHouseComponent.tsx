@@ -27,7 +27,6 @@ interface Props {
 function LivingHouseComponenet(props: Props): JSX.Element {
   const { ele } = props;
   const { id, type, year, access, adminDistrict, houseRule } = ele;
-  console.log('id :: ', id);
 
   const list = [
     {
