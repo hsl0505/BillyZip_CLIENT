@@ -635,7 +635,7 @@ function HouseDetailContent(props: Props): JSX.Element {
               title="확인"
               onPress={(): void => {
                 setVisible(false);
-                props.navigation.navigate('Home');
+                props.navigation.navigate('Application');
               }}
               type="clear"
             />
