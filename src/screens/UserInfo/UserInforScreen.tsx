@@ -15,6 +15,8 @@ import HostingEditScreen from './Hosting/HostingEditScreen';
 import Payment from './Payment/Payment';
 import PaymentSuccess from './Payment/paymentSuccess';
 import HostingApplyScreen from './Hosting/HostingApplyScreen';
+import SubscribeList from './Payment/SubscribeList';
+
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
@@ -100,6 +102,10 @@ const UserInfoScreenStackNav = createStackNavigator(
     },
     PaymentSuccess: {
       screen: PaymentSuccess,
+    },
+
+    SubscribeList: {
+      screen: SubscribeList,
     },
   },
 

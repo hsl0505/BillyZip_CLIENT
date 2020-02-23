@@ -53,7 +53,7 @@ function CurrentPlan(props: Props): JSX.Element {
         >
           <AntDesign name="frowno" size={80} color="purple" />
           <Text style={{ fontSize: 20, marginTop: 50 }}>
-            현재 구독중인 모델이 없습니다
+            현재 구독중인 플랜이 없습니다
           </Text>
         </View>
       )}

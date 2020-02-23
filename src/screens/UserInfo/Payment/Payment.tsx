@@ -77,7 +77,6 @@ function Payment(props: Props): JSX.Element {
                 })
                 .then((res) => {
                   if (res.status === 200) {
-                    console.log(res.data.name);
                     setVisible(true);
                     setUserName(res.data.name);
                   }

@@ -11,6 +11,8 @@ import {
 
 import asyncStorageHelper from '../../../util/asyncStorageHelper';
 
+import axiosInstance from '../../../util/axiosInstance';
+
 interface Props {
   myInfo: {
     email?: string;
@@ -104,12 +106,32 @@ function MyInfoList(props: Props): JSX.Element {
           ******** <Entypo name="chevron-thin-right" size={15} />
         </Text>
       </TouchableOpacity>
-      <View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          marginTop: 20,
+        }}
+      >
         <Button
           title="로그아웃"
-          // buttonStyle={styles.ButtonViewStyle}
           onPress={(): void => {
             asyncStorageHelper.clear();
+            props.navigation.navigate('LoginScreen');
+          }}
+        />
+        <Button
+          title="회원탈퇴"
+          onPress={(): void => {
+            axiosInstance
+              .delete('users/myInfo')
+              .then((res) => {
+                if (res.status === 200) {
+                  asyncStorageHelper.clear();
+                }
+              })
+              .catch((err) => console.log(err));
+
             props.navigation.navigate('LoginScreen');
           }}
         />
