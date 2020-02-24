@@ -38,7 +38,7 @@ function Room(props: Props): JSX.Element {
 
   useEffect(() => {
     if (messages.length === 0) {
-      // console.log('포스트?');
+      console.log('포스트?');
       axiosInstance
         .post('forum/room', {
           hostId,
@@ -60,11 +60,12 @@ function Room(props: Props): JSX.Element {
     }
 
     socket.on('chat', (msg: ConcatArray<never>) => {
+      console.log('소켓???');
       setMessages(messages.concat(msg));
     });
 
     const handleBlur = navigation.addListener('didBlur', () => {
-      // console.log('디드 블러?');
+      console.log('디드 블러?');
       axiosInstance
         .post('forum', {
           messages,
@@ -105,7 +106,7 @@ function Room(props: Props): JSX.Element {
           </Text>
           {messages.map((message) => (
             <View
-              key={`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}${new Date().getMilliseconds()}`}
+              // key={`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}${new Date().getMilliseconds()}`}
               style={{
                 flexDirection: 'row',
                 marginLeft: 30,

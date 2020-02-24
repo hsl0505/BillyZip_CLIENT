@@ -26,8 +26,11 @@ function Home(props: Props): JSX.Element {
 
   const [isReady, setReady] = useState(false);
 
+  console.log('초기 렌더링');
+
   useEffect(() => {
     if (rankAndRand.rank.length === 0) {
+      console.log('componentDitMount');
       axiosInstance
         .get('houses')
         .then((res) => {
