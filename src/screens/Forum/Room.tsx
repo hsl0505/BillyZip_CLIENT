@@ -105,6 +105,7 @@ function Room(props: Props): JSX.Element {
           </Text>
           {messages.map((message) => (
             <View
+              key={`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}${new Date().getMilliseconds()}`}
               style={{
                 flexDirection: 'row',
                 marginLeft: 30,
