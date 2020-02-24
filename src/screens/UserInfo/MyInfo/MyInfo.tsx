@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 function MyInfo(): JSX.Element {
   const [myInfo, setMyInfo] = useState({});
   useEffect(() => {
+    console.log('최초실행');
     axiosInstance
       .get(`users/myInfo`)
       .then((res) => setMyInfo(res.data))
