@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-// import { Button } from 'react-native-elements';
+import React, { useState } from 'react';
+import { View, Text, Alert } from 'react-native';
+import { Input } from 'react-native-elements';
+
 import {
   withNavigation,
   NavigationScreenProp,
@@ -8,7 +9,7 @@ import {
   NavigationParams,
 } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, Feather } from '@expo/vector-icons';
 
 import axiosInstance from '../../util/axiosInstance';
 
@@ -20,6 +21,7 @@ interface Props {
 }
 
 function SelectSearch(props: Props): JSX.Element {
+  const [searchWord, setWord] = useState();
   return (
     <View
       style={{
@@ -32,6 +34,47 @@ function SelectSearch(props: Props): JSX.Element {
       <Text style={{ marginHorizontal: 15, fontSize: 24, fontWeight: 'bold' }}>
         검색하기
       </Text>
+      <View style={{ marginTop: 40 }}>
+        <Input
+          placeholder={`검색할 내용을 입력해 주세요. ${'\n'}예 : 강남 시티뷰가 좋은 집`}
+          textAlignVertical="top"
+          clearButtonMode="always"
+          label="Quick Search"
+          labelStyle={{
+            marginLeft: 8,
+            color: 'black',
+            fontSize: 24,
+            marginBottom: 10,
+          }}
+          onChangeText={(text): void => setWord(text)}
+          inputContainerStyle={{ marginHorizontal: 15 }}
+          rightIcon={
+            <Feather
+              name="search"
+              size={26}
+              style={{ marginRight: 15 }}
+              onPress={(): void => {
+                axiosInstance
+                  .post('houses/search', {
+                    searchWord,
+                  })
+                  .then((res) => {
+                    props.navigation.navigate('SearchResult', {
+                      data: res.data,
+                    });
+                  })
+                  .catch((err) => {
+                    if (
+                      err.response.data.error === 'houses가 존재하지 않습니다.'
+                    ) {
+                      Alert.alert('검색하신 결과가 존재하지않습니다');
+                    }
+                  });
+              }}
+            />
+          }
+        />
+      </View>
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={(): void => {
