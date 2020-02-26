@@ -34,7 +34,7 @@ function SelectSearch(props: Props): JSX.Element {
       <Text style={{ marginHorizontal: 15, fontSize: 24, fontWeight: 'bold' }}>
         검색하기
       </Text>
-      <View style={{ marginTop: 40 }}>
+      <View>
         <Input
           placeholder={`검색할 내용을 입력해 주세요. ${'\n'}예 : 강남 시티뷰가 좋은 집`}
           textAlignVertical="top"
