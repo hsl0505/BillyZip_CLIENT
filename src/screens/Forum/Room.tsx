@@ -1,5 +1,12 @@
+/* eslint-disable no-plusplus */
 import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Button,
+} from 'react-native';
 import { Input, Avatar } from 'react-native-elements';
 import {
   withNavigation,
@@ -7,7 +14,7 @@ import {
   NavigationRoute,
   NavigationParams,
 } from 'react-navigation';
-import { AntDesign } from '@expo/vector-icons';
+// import { AntDesign } from '@expo/vector-icons';
 import socket from '../../util/socket';
 import axiosInstance from '../../util/axiosInstance';
 
@@ -23,14 +30,17 @@ interface Msg {
   msg: string;
 }
 
+let key = 0;
+const myName = 'Jo';
+const myId = 1;
+
 function Room(props: Props): JSX.Element {
-  // ! 매물상세에서 send a message를 눌러 이 컴포넌트로 들어올 때 props로 호스트의 hostId를 받는다.
   const { navigation } = props;
 
   const hostId = navigation.getParam('hostId');
-  const myId = navigation.getParam('myId');
-  const myName = navigation.getParam('myName');
-  console.log('??', myName);
+  // const myId = navigation.getParam('myId');
+  // const myName = navigation.getParam('myName');
+  // console.log('??', myName);
 
   const [chat, setChat] = useState('');
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -42,11 +52,13 @@ function Room(props: Props): JSX.Element {
           hostId,
         })
         .then((res) => {
-          if (JSON.parse(res.data.forumLog).length !== 0) {
+          // if (JSON.parse(res.data.forumLog).length !== 0) {
+            console.log(res.data.forumLog);
             setMessages(JSON.parse(res.data.forumLog));
-          } else {
-            setMessages([{ name: '', msg: '' }]);
-          }
+          // }
+          // } else {
+          //   setMessages([{ name: '', msg: '' }]);
+          // }
         })
         .catch((err) => console.log('로그가 존재하지 않습니다.', err));
     }
@@ -58,33 +70,34 @@ function Room(props: Props): JSX.Element {
     }
 
     socket.on('chat', (msg: ConcatArray<never>) => {
+      console.log('chat', msg);
       setMessages((prev) => {
         return prev.concat(msg);
       });
     });
 
-    const handleBlur = navigation.addListener('didBlur', () => {
-      axiosInstance
-        .post('forum', {
-          messages,
-          myId,
-          hostId,
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log('전송 성공');
-          }
-        })
-        .catch((err) => console.error(err));
-    });
+    // const handleBlur = navigation.addListener('didBlur', () => {
+    //   axiosInstance
+    //     .post('forum', {
+    //       messages,
+    //       myId,
+    //       hostId,
+    //     })
+    //     .then((res) => {
+    //       if (res.status === 200) {
+    //         console.log('전송 성공');
+    //       }
+    //     })
+    //     .catch((err) => console.error(err));
+    // });
 
-    return (): void => {
-      handleBlur.remove();
-    };
-  }, [hostId, messages, myId, navigation]);
+    // return (): void => {
+    //   handleBlur.remove();
+    // };
+  }, [hostId]);
 
   const handleMessageToHost = (roomId: number): void => {
-    socket.emit('chat', roomId, chat, myName);
+    socket.emit('chat', myId, roomId, chat, myName);
   };
 
   return (
@@ -104,7 +117,8 @@ function Room(props: Props): JSX.Element {
           </Text>
           {messages.map((message) => (
             <View
-              key={`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}${new Date().getMilliseconds()}`}
+              // key={`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}${new Date().getHours()}${new Date().getMinutes()}${new Date().getSeconds()}${new Date().getMilliseconds()}`}
+              key={key++}
               style={{
                 flexDirection: 'row',
                 marginLeft: 30,
@@ -157,18 +171,24 @@ function Room(props: Props): JSX.Element {
               alignSelf: 'center',
               paddingBottom: 60,
             }}
-            inputContainerStyle={{ marginHorizontal: 5 }}
-            rightIcon={
-              <AntDesign
-                name="upcircleo"
-                size={28}
-                style={{ marginRight: 8 }}
-                onPress={(): void => {
-                  handleMessageToHost(hostId || myId);
-                  setChat('');
-                }}
-              />
-            }
+            // inputContainerStyle={{ marginHorizontal: 5 }}
+            // rightIcon={
+            //   <AntDesign
+            //     name="upcircleo"
+            //     size={28}
+            //     style={{ marginRight: 8 }}
+            //     onPress={(): void => {
+            //       handleMessageToHost(hostId || myId);
+            //     }}
+            //   />
+            // }
+          />
+          <Button
+            title="전송"
+            onPress={(): any => {
+              handleMessageToHost(hostId);
+              setChat('');
+            }}
           />
         </ScrollView>
       </KeyboardAvoidingView>
