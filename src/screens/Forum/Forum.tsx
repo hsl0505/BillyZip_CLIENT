@@ -23,6 +23,7 @@ interface Forum {
 }
 
 function Forum(props: Props): JSX.Element {
+  const { navigation } = props;
   const [forums, setForums] = useState([]);
   const [myId, setMyId] = useState();
   const [myName, setMyName] = useState();
@@ -45,8 +46,30 @@ function Forum(props: Props): JSX.Element {
         });
     };
 
-    getMyId();
-  }, []);
+    if (forums.length === 0) {
+      getMyId();
+    }
+
+    const subscribe = navigation.addListener('didFocus', async () => {
+      console.log('디드포커스 실행?');
+      const getmyId = await AsyncStorage.getItem('userId');
+      const getmyName = await AsyncStorage.getItem('userName');
+
+      axiosInstance
+        .post('forum/list', {
+          myId: getmyId,
+        })
+        .then((res) => {
+          setForums(res.data);
+          setMyId(getmyId);
+          setMyName(getmyName);
+          setReady(true);
+        });
+    });
+    return (): void => {
+      subscribe.remove();
+    };
+  }, [forums.length, myId, navigation]);
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
