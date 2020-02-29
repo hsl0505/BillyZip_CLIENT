@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Dimensions, AsyncStorage } from 'react-native';
 import {
   MaterialCommunityIcons,
   Feather,
@@ -51,6 +51,8 @@ function HouseDetailContent(props: Props): JSX.Element {
   const { isFav, house } = props;
   const [isVisible, setVisible] = useState(false);
   const [isVisibleTwo, setVisibleTwo] = useState(false);
+  const [myId, setMyId] = useState();
+  const [myName, setMyName] = useState();
   const houseId = house.id;
 
   const {
@@ -79,6 +81,16 @@ function HouseDetailContent(props: Props): JSX.Element {
       isTrueAmenity.push(ele[0]);
     }
   });
+
+  useEffect(() => {
+    const getMyId = async (): Promise<void> => {
+      const getmyId = await AsyncStorage.getItem('userId');
+      const getmyName = await AsyncStorage.getItem('userName');
+      setMyId(getmyId);
+      setMyName(getmyName);
+    };
+    getMyId();
+  }, []);
 
   return (
     <View style={{ flex: 1, marginHorizontal: 15, marginBottom: 25 }}>
@@ -590,7 +602,7 @@ function HouseDetailContent(props: Props): JSX.Element {
           type="clear"
           containerStyle={{ marginTop: 10 }}
           onPress={(): void => {
-            props.navigation.navigate('Room', { hostId: id });
+            props.navigation.navigate('Room', { hostId: id, myId, myName });
           }}
         />
       </View>
