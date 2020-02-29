@@ -31,37 +31,26 @@ interface Msg {
 }
 
 let key = 0;
-const myName = 'Jo';
-const myId = 1;
 
 function Room(props: Props): JSX.Element {
   const { navigation } = props;
 
   const hostId = navigation.getParam('hostId');
-  // const myId = navigation.getParam('myId');
-  // const myName = navigation.getParam('myName');
-  // console.log('??', myName);
+  const myId = navigation.getParam('myId');
+  const myName = navigation.getParam('myName');
 
   const [chat, setChat] = useState('');
   const [messages, setMessages] = useState<Msg[]>([]);
 
   useEffect(() => {
-    if (messages.length === 0) {
-      axiosInstance
-        .post('forum/room', {
-          hostId,
-        })
-        .then((res) => {
-          // if (JSON.parse(res.data.forumLog).length !== 0) {
-            console.log(res.data.forumLog);
-            setMessages(JSON.parse(res.data.forumLog));
-          // }
-          // } else {
-          //   setMessages([{ name: '', msg: '' }]);
-          // }
-        })
-        .catch((err) => console.log('로그가 존재하지 않습니다.', err));
-    }
+    axiosInstance
+      .post('forum/room', {
+        hostId,
+      })
+      .then((res) => {
+        setMessages(JSON.parse(res.data.forumLog));
+      })
+      .catch((err) => console.log('로그가 존재하지 않습니다.', err));
 
     socket.emit('joinRoom', myId);
 
@@ -75,26 +64,7 @@ function Room(props: Props): JSX.Element {
         return prev.concat(msg);
       });
     });
-
-    // const handleBlur = navigation.addListener('didBlur', () => {
-    //   axiosInstance
-    //     .post('forum', {
-    //       messages,
-    //       myId,
-    //       hostId,
-    //     })
-    //     .then((res) => {
-    //       if (res.status === 200) {
-    //         console.log('전송 성공');
-    //       }
-    //     })
-    //     .catch((err) => console.error(err));
-    // });
-
-    // return (): void => {
-    //   handleBlur.remove();
-    // };
-  }, [hostId]);
+  }, [hostId, myId]);
 
   const handleMessageToHost = (roomId: number): void => {
     socket.emit('chat', myId, roomId, chat, myName);
@@ -185,7 +155,7 @@ function Room(props: Props): JSX.Element {
           />
           <Button
             title="전송"
-            onPress={(): any => {
+            onPress={(): void => {
               handleMessageToHost(hostId);
               setChat('');
             }}
