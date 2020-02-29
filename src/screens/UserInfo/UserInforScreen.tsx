@@ -16,7 +16,7 @@ import Payment from './Payment/Payment';
 import PaymentSuccess from './Payment/paymentSuccess';
 import HostingApplyScreen from './Hosting/HostingApplyScreen';
 import SubscribeList from './Payment/SubscribeList';
-import Application from './Application';
+import Application from './Application/Application';
 
 const UserInfoScreenStackNav = createStackNavigator(
   {
