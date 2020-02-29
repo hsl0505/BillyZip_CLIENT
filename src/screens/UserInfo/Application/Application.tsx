@@ -9,7 +9,7 @@ import {
 } from 'react-navigation';
 import { ListItem, Overlay, Button } from 'react-native-elements';
 import { Feather } from '@expo/vector-icons';
-import axiosInstance from '../../util/axiosInstance';
+import axiosInstance from '../../../util/axiosInstance';
 
 interface Props {
   navigation: NavigationScreenProp<
