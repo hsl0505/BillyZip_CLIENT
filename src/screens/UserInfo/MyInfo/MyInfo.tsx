@@ -16,7 +16,7 @@ function MyInfo(): JSX.Element {
   useEffect(() => {
     console.log('최초실행');
     axiosInstance
-      .get(`users/myInfo`)
+      .get(`users/my-info`)
       .then((res) => setMyInfo(res.data))
       .catch((err) => console.log(err));
   }, []);
