@@ -1,4 +1,4 @@
-![](/home/hyunsung/바탕화면/codestates/BillyZip-client/assets/billyzip_logo.png)
+![billyzip_logo](https://user-images.githubusercontent.com/53073832/75628461-83e6c480-5c1c-11ea-87c4-1d2832142b27.png)
 
 # Billy Zip
 
@@ -100,5 +100,5 @@ ESLint, Prettier를 이용하여 코드 스타일 통일
 
 ### 프로젝트 아키텍쳐
 
-![](/home/hyunsung/바탕화면/아키텍쳐.png)
+![아키텍쳐](https://user-images.githubusercontent.com/53073832/75628466-906b1d00-5c1c-11ea-95e3-289f30a4a9b6.png)
 
