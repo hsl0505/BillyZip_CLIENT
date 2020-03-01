@@ -122,7 +122,7 @@ function MyInfoList(props: Props): JSX.Element {
           titleStyle={{ color: 'purple' }}
           onPress={(): void => {
             axiosInstance
-              .delete('users/myInfo')
+              .delete('users/my-info')
               .then((res) => {
                 if (res.status === 200) {
                   asyncStorageHelper.clear();

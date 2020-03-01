@@ -85,7 +85,7 @@ function Password(props: Props): JSX.Element {
         onPress={(): void => {
           setPasswordErr('');
           axiosInstance
-            .put(`users/myInfo`, {
+            .put(`users/my-info`, {
               email,
               name,
               birth,
