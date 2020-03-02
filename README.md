@@ -134,6 +134,65 @@
 [![이미지 텍스트](https://img.youtube.com/vi/r7AFMYzc3Tc/0.jpg)](https://youtu.be/r7AFMYzc3Tc?t=0s)
 
 </br>
+</br>
 
+# Front-End
+
+### Directory Structure
+```
+Biily-Zip client
+├── App.js
+├── README.md
+├── app.json
+├── assets
+├── babel.config.js
+├── package.json
+├── src
+│   ├── App.tsx
+│   ├── components
+│   │   ├── Forum
+│   │   ├── HouseDetail
+│   │   ├── Login
+│   │   ├── MainScreen
+│   │   │   ├── HouseLIstEntry
+│   │   ├── Reviews
+│   │   ├── Search
+│   │   ├── SignUp
+│   │   └── UserInfo
+│   │       ├── CurrentModel
+│   │       ├── Hosting
+│   │       ├── MyInfo
+│   │       ├── Payment
+│   ├── screens
+│   │   ├── AuthValid
+│   │   ├── Favor
+│   │   ├── Forum
+│   │   ├── HouseDetail
+│   │   ├── LoginScreen
+│   │   ├── MainScreen
+│   │   ├── Search
+│   │   ├── SignUp
+│   │   └── UserInfo
+│   │       ├── Application
+│   │       ├── CurrentHouse
+│   │       ├── Hosting
+│   │       ├── MyInfo
+│   │       ├── Payment
+│   └── util
+└── tsconfig.json
+```
+</br>
+
+### Features
+
+- 앱 구동시 Splash Image / 로그인 화면
+
+<img src="https://user-images.githubusercontent.com/53073832/75661884-7a5b6c00-5cb1-11ea-9c75-74d0a3c3b280.gif" height="400" width="200" >
+
+Animated.view 를 이용하여 초기 렌더링 시 opacity transition
+
+</br>
+
+- 회원가입
 
 
