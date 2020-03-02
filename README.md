@@ -20,14 +20,10 @@
 **프로젝트 참여 인원** : Front-End 1명 / Full-Stack 2명
 
 - *조성철*  (팀장, Full-Stack)
-  - 주요 담당 업무 ?
-  - 사용한 기술?
 - *김보미*  (팀원, Full-Stack)
-  - 주요 담당 업무 ?
-  - 사용한 기술?
 - *임현성*  (팀원, Front-End)
-  - 주요 담당 업무?
-  - 사용한 기술?
+
+프로젝트 발표 문서 : https://www.notion.so/3-Vagabond-BillyZip-5b1ad3bc94c34b0397a2f791cfcf0fbe
 
 **Billy Zip 주요 기능**
 
@@ -38,7 +34,7 @@
 - 구독 신청 및 신청 수락 / 거절
 - 매물 검색 / 상세 검색 / 지도 검색
 - 포럼을 통한 의견 공유
-- 결제 시스템 (테스트 결제??)
+- 개발 테스트용 결제 기능 구축
 
 
 </br>
@@ -108,6 +104,8 @@ ESLint, Prettier를 이용하여 코드 스타일 통일
 ### Billy Zip 시연 영상
 
 [![이미지 텍스트](https://img.youtube.com/vi/r7AFMYzc3Tc/0.jpg)](https://youtu.be/r7AFMYzc3Tc?t=0s)
+
+</br>
 
 
 
