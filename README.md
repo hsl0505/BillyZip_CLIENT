@@ -8,8 +8,7 @@
 
 **Billy Zip**을 이용하면 부동산 또는 집주인과의 번거롭고, 복잡한 계약 관계없이 살고 싶은 곳이 있으면 예약 후 마음 편히 거주할 수 있습니다. **🥰**
 
-
-
+</br>
 
 
 ### 프로젝트 개요
@@ -42,7 +41,7 @@
 - 결제 시스템 (테스트 결제??)
 
 
-
+</br>
 
 
 ### 프로젝트 관리 (여기 피드백 필요)
@@ -60,7 +59,7 @@ dbdiagram.io를 이용하여 데이터베이스 설계
 ESLint, Prettier를 이용하여 코드 스타일 통일
 
 
-
+</br>
 
 
 ### 기술 스택
@@ -95,10 +94,20 @@ ESLint, Prettier를 이용하여 코드 스타일 통일
 - AWS (S3, EC2, RDS)
 
 
-
+</br>
 
 
 ### 프로젝트 아키텍쳐
 
 ![아키텍쳐](https://user-images.githubusercontent.com/53073832/75628466-906b1d00-5c1c-11ea-95e3-289f30a4a9b6.png)
+
+</br>
+
+
+
+### Billy Zip 시연 영상
+
+[![이미지 텍스트](https://img.youtube.com/vi/r7AFMYzc3Tc/0.jpg)](https://youtu.be/r7AFMYzc3Tc?t=0s)
+
+
 
