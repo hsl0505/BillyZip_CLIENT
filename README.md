@@ -197,12 +197,20 @@ Biily-Zip client
 
 **# 로그인 및 로그아웃 / 회원가입 / 회원탈퇴**
 
+[![이미지 텍스트](https://img.youtube.com/vi/UshMfslr0l4/0.jpg)](https://youtu.be/UshMfslr0l4?t=0s)
+
 - Switch navigator를 통해 로그인 시 Home화면으로 이동
+- 로그아웃 시 AsyncStorage clear
 - 회원가입 시 Twilio를 통한 핸드폰 인증
 
 </br>
 
 **# 홈 화면 및 매물 별 리스트 / 각 탭 화면**
+
+
+- 홈 화면 (추천 매물 / 매물 종류별)
+- More 버튼 클릭 시 각 매물 종류별 전체 리스트
+- Bottom Tab navigator를 통한 주요 기능 별 화면으로 이동
 
 
 
