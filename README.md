@@ -43,7 +43,7 @@
 - *임현성*  (팀원, Front-End)
   - 전반적인 클라이언트 구조 및 기능 구현, 전체 디자인 구현
     - 전체 네비게이션 설계 및 구현
-    - 클라이언트 전반적인 UI/UX 설계 및 구현
+    - 클라이언트 전반적인 UI/UX 구현
     - 로그인 / 회원가입 / 로그아웃 기능 구현
     - 홈 화면(추천매물 / 매물 종류별) / 매물 종류별 리스트 화면 구현
     - 즐겨찾기 토글 기능 구현 및 즐겨찾기 화면 구현
@@ -211,6 +211,7 @@ Biily-Zip client
 
 - 홈 화면 (추천 매물 / 매물 종류별)
 - More 버튼 클릭 시 각 매물 종류별 전체 리스트
+- Navigation life cycle (didFocus)를 이용하여 홈 화면 포커싱 시마다 최신 데이터 요청 및 렌더링
 - Bottom Tab navigator를 통한 주요 기능 별 화면으로 이동
 
 </br>
@@ -225,4 +226,9 @@ Biily-Zip client
 
 **# 즐겨찾기 등록 및 삭제**
 
+[![이미지 텍스트](https://img.youtube.com/vi/7EdqItCA4ms/0.jpg)](https://youtu.be/7EdqItCA4ms?t=0s)
+
 - 매물 즐겨찾기 등록 및 삭제
+- Navigation life cycle (didFocus)를 이용하여 즐겨찾기 화면 포커싱 시마다 최신 데이터 요청 및 렌더링
+
+</br>
