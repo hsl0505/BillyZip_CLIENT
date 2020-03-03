@@ -187,9 +187,7 @@ Biily-Zip client
 ---
 **# 앱 구동시 Splash Image 및 로그인 화면 / 자동 로그인**
 
-<img src="https://user-images.githubusercontent.com/53073832/75661884-7a5b6c00-5cb1-11ea-9c75-74d0a3c3b280.gif" height="400" width="200" >  
-
-<img src="https://user-images.githubusercontent.com/53073832/75774643-ba931b00-5d93-11ea-9da3-46fd27d54401.gif" height="400" width="200" >
+<img src="https://user-images.githubusercontent.com/53073832/75661884-7a5b6c00-5cb1-11ea-9c75-74d0a3c3b280.gif" height="400" width="200" > <img src="https://user-images.githubusercontent.com/53073832/75774643-ba931b00-5d93-11ea-9da3-46fd27d54401.gif" height="400" width="200" >
 
 - Animated.view 를 이용하여 초기 렌더링 시 Opacity Transition
 - AsyncStorage, JWT, Switch navigator를 이용한 자동 로그인
