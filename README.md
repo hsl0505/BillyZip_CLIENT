@@ -213,6 +213,16 @@ Biily-Zip client
 - More 버튼 클릭 시 각 매물 종류별 전체 리스트
 - Bottom Tab navigator를 통한 주요 기능 별 화면으로 이동
 
+</br>
 
+**# 매물 상세 화면**
 
+[![이미지 텍스트](https://img.youtube.com/vi/nMNF0vnEutg/0.jpg)](https://youtu.be/nMNF0vnEutg?t=0s)
 
+- Carousel과 Pagination 활용으로 매물의 여러 이미지 보여주기
+
+</br>
+
+**# 즐겨찾기 등록 및 삭제**
+
+- 매물 즐겨찾기 등록 및 삭제
