@@ -207,6 +207,7 @@ Biily-Zip client
 
 **# 홈 화면 및 매물 별 리스트 / 각 탭 화면**
 
+[![이미지 텍스트](https://img.youtube.com/vi/RxhAj-e6898/0.jpg)](https://youtu.be/RxhAj-e6898?t=0s)
 
 - 홈 화면 (추천 매물 / 매물 종류별)
 - More 버튼 클릭 시 각 매물 종류별 전체 리스트
