@@ -264,10 +264,10 @@ Biily-Zip client
 
 **# 매물 검색 (빠른검색 / 상세검색 / 지도검색)**
 
+[![이미지 텍스트](https://img.youtube.com/vi/bUnFrCEqMHI/0.jpg)](https://youtu.be/bUnFrCEqMHI?t=0s)
 
-
-- 검색 알고리즘을 이용하여 검색 (이부분 성철님 수정부탁드려요)
-- Google Maps를 이용한 지도 검색 기능
+- 검색 알고리즘 및 필터링을 이용하여 다양한 검색 기능 (이부분 성철님 수정부탁드려요)
+- Google Maps를 이용하여 지도 검색
 
 </br>
 
