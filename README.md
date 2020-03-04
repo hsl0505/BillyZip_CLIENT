@@ -256,6 +256,9 @@ Biily-Zip client
 
 **# 포럼을 통한 의견 공유**
 
+[![이미지 텍스트](https://img.youtube.com/vi/qobvKBvOA64/0.jpg)](https://youtu.be/qobvKBvOA64?t=0s)
+
+- Soket.io를 이용하여 실시간 포럼 기능을 통해 호스트 및 다른 사용자와 의견 공유
 
 </br>
 
