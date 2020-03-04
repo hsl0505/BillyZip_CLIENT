@@ -280,6 +280,10 @@ Biily-Zip client
 
 **# 내 정보 및 핸드폰 / 비밀번호 변경**
 
+[![이미지 텍스트](https://img.youtube.com/vi/b6DQoTiN2Tk/0.jpg)](https://youtu.be/b6DQoTiN2Tk?t=0s)
+
+- Twilio를 통한 핸드폰 인증으로 핸드폰 정보 변경
+
 </br>
 
 **# 구독 신청하기 / 신청 현황 / 구독 수락 및 거절**
@@ -291,4 +295,4 @@ Biily-Zip client
 <img src="https://user-images.githubusercontent.com/53073832/75891051-935f4b00-5e72-11ea-960c-c390ce5dec5e.gif" height="400" width="200" >
 
 </br>
-
+</br>
