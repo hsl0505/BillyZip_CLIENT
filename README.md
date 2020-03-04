@@ -232,3 +232,11 @@ Biily-Zip client
 - Navigation life cycle (didFocus)를 이용하여 즐겨찾기 화면 포커싱 시마다 최신 데이터 요청 및 렌더링
 
 </br>
+
+**# 리뷰 등록 및 삭제**
+
+[![이미지 텍스트](https://img.youtube.com/vi/IFiedvEzWs0/0.jpg)](https://youtu.be/IFiedvEzWs0?t=0s)
+
+- 매물 리뷰 등록 (별점 평가 및 코멘트) 및 삭제
+
+</br>
