@@ -266,7 +266,7 @@ Biily-Zip client
 
 [![이미지 텍스트](https://img.youtube.com/vi/bUnFrCEqMHI/0.jpg)](https://youtu.be/bUnFrCEqMHI?t=0s)
 
-- 검색 알고리즘 및 필터링을 이용하여 다양한 검색 기능 (이부분 성철님 수정부탁드려요)
+- 검색 알고리즘 및 필터링을 이용하여 다양한 검색 기능
 - Google Maps를 이용하여 지도 검색
 
 </br>
@@ -274,6 +274,8 @@ Biily-Zip client
 **# 현재 구독 플랜 / 살고있는 집 보기**
 
 [![이미지 텍스트](https://img.youtube.com/vi/f4mNh63Z25I/0.jpg)](https://youtu.be/f4mNh63Z25I?t=0s)
+
+- 현재 내가 구독한 플랜 정보 및 현재 살고 있는 집 조회
 
 
 </br>
@@ -288,11 +290,19 @@ Biily-Zip client
 
 **# 구독 신청하기 / 신청 현황 / 구독 수락 및 거절**
 
+[![이미지 텍스트](https://img.youtube.com/vi/nPYtjc6vpzE/0.jpg)](https://youtu.be/nPYtjc6vpzE?t=0s)
+
+- 현재 매물에 구독 신청 현황 보기
+- 현재 구독 플랜과 맞는 매물에 구독 신청
+- 호스트의 구독 신청 수락 또는 거절
+
 </br>
 
 **# 결제하기 (테스트 결제로 구현)**
 
 <img src="https://user-images.githubusercontent.com/53073832/75891051-935f4b00-5e72-11ea-960c-c390ce5dec5e.gif" height="400" width="200" >
+
+- 개발 테스트용 결재 기능
 
 </br>
 </br>
