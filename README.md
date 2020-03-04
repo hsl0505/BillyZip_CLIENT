@@ -273,6 +273,8 @@ Biily-Zip client
 
 **# 현재 구독 플랜 / 살고있는 집 보기**
 
+[![이미지 텍스트](https://img.youtube.com/vi/f4mNh63Z25I/0.jpg)](https://youtu.be/f4mNh63Z25I?t=0s)
+
 
 </br>
 
