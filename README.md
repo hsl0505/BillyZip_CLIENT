@@ -306,3 +306,13 @@ Biily-Zip client
 
 </br>
 </br>
+
+### ETC
+
+![유틸](https://user-images.githubusercontent.com/53073832/75905909-11c6e780-5e89-11ea-9138-43907552710a.png)
+
+- 비동기 처리가 필요한 로직들을 모듈화하여 helper함수 구현
+- Axios instance 모듈화 및 interceptors를 활용하여 매 요청 시 JWT와 필요한 정보를 담아보내 중복코드 최소화 및 필요한 동작 구현
+
+</br>
+</br>
