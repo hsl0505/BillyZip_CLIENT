@@ -9,7 +9,7 @@ function Subscribe(): JSX.Element {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     axiosInstance
-      .get(`users/currentInfo`)
+      .get(`users/current-info`)
       .then((res) => {
         setSubscribedHouses(res.data);
         setReady(true);
