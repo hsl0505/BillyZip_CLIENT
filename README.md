@@ -273,6 +273,7 @@ Biily-Zip client
 
 **# 현재 구독 플랜 / 살고있는 집 보기**
 
+
 </br>
 
 **# 내 정보 및 핸드폰 / 비밀번호 변경**
@@ -284,6 +285,8 @@ Biily-Zip client
 </br>
 
 **# 결제하기 (테스트 결제로 구현)**
+
+<img src="https://user-images.githubusercontent.com/53073832/75891051-935f4b00-5e72-11ea-960c-c390ce5dec5e.gif" height="400" width="200" >
 
 </br>
 
