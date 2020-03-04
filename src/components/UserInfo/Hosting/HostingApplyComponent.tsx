@@ -123,7 +123,13 @@ function HostingApplyComponent(props: Props): JSX.Element {
                             justifyContent: 'center',
                           }}
                         >
-                          <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
+                          <Text
+                            style={{
+                              fontWeight: 'bold',
+                              fontSize: 18,
+                              width: 150,
+                            }}
+                          >
                             {item.house.title}
                           </Text>
                           <Text style={{ marginTop: 2, color: '#A4A4A4' }}>
@@ -199,11 +205,11 @@ function HostingApplyComponent(props: Props): JSX.Element {
                               />
                             </View>
 
-                            <Text style={{ marginTop: 3 }}>
+                            {/* <Text style={{ marginTop: 3 }}>
                               {item.user.mobile.slice(0, 3)}-
                               {item.user.mobile.slice(3, 7)}-
                               {item.user.mobile.slice(7)}
-                            </Text>
+                            </Text> */}
                           </View>
                         </View>
                       </View>
